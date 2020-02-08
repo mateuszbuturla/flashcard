@@ -4,13 +4,18 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import config from './config';
 
 import './reset.css';
+import './mixins.sass';
+
+import Home from './view/Home/Home';
 
 class App extends React.Component {
 
 	render() {
 		return (
 			<div className="App">
-				<p>English Learning App</p>
+				<BrowserRouter>
+					<Home />
+				</BrowserRouter>
 			</div>
 		);
 	}
