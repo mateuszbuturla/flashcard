@@ -7,6 +7,7 @@ import './reset.css';
 import './mixins.sass';
 
 import Home from './view/Home/Home';
+import LoginRegister from './view/LoginRegister/LoginRegister';
 
 class App extends React.Component {
 
@@ -14,7 +15,11 @@ class App extends React.Component {
 		return (
 			<div className="App">
 				<BrowserRouter>
-					<Home />
+					<Switch>
+						<Route path="/register" component={props => <LoginRegister {...props} form='register' />} exact />
+						<Route path="/login" component={props => <LoginRegister {...props} form='login' />} exact />
+						<Route path="/" component={Home} exact />
+					</Switch>
 				</BrowserRouter>
 			</div>
 		);

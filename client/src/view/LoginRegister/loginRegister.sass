@@ -1,0 +1,74 @@
+@import '../../mixins'
+    
+.login-register
+    .login-register-form-container
+        box-shadow: 0px 0px 5px 2px #bababa
+        width: 90vw
+        margin: 0 auto
+        padding: 30px 0px
+        max-width: 300px
+        display: flex
+        justify-content: space-around
+        flex-wrap: wrap
+        .select-form-input
+            background-color: #EEEEEE
+            display: inline-block
+            border-radius: 100px
+            .select-form-input__button
+                padding: 5px 15px
+                border-radius: 100px
+                border: 0
+                background-color: transparent
+                cursor: pointer
+            .select-form-input__button--active
+                color: #fff
+                @include backgroundGradient
+                &:focus,
+                &:active
+                    outline: 0
+        .login-register-form
+            margin-top: 30px
+            width: 100%
+            display: none
+            justify-content: space-around
+            flex-wrap: wrap
+            .login-register-form__input
+                width: 90%
+                border: 0
+                border-bottom: 1px solid #000000
+                padding: 10px 0px
+                font-size: 20px
+                margin-bottom: 20px
+            .login-register-form__submit
+                padding: 10px 40px
+                border: 0
+                border-radius: 100px
+                color: #fff
+                cursor: pointer
+                @include backgroundGradient
+                &:focus,
+                &:active
+                    outline: 0
+        .login-register-form--active
+            display: flex
+
+@media ( min-width: 1600px )
+    .login-register
+        .login-register-form-container
+            max-width: 500px
+            .select-form-input
+                .select-form-input__button
+                    padding: 7px 20px
+                    font-size: 20px
+            .login-register-form
+                margin-top: 50px
+                .login-register-form__input
+                    padding: 15px 0px
+                    font-size: 25px
+                    margin-bottom: 40px
+                .login-register-form__submit
+                    padding: 15px 60px
+                    font-size: 20px
+            .login-register-form--active
+                display: flex
+    
