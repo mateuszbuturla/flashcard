@@ -16,8 +16,8 @@ class App extends React.Component {
 			<div className="App">
 				<BrowserRouter>
 					<Switch>
-						<Route path="/register" component={props => <LoginRegister {...props} form='register' />} exact />
-						<Route path="/login" component={props => <LoginRegister {...props} form='login' />} exact />
+						<Route path="/register" component={props => <LoginRegister {...props} form='register' config={config} />} exact />
+						<Route path="/login" component={props => <LoginRegister {...props} form='login' config={config} />} exact />
 						<Route path="/" component={Home} exact />
 					</Switch>
 				</BrowserRouter>

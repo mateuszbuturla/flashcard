@@ -1,6 +1,7 @@
 @import '../../mixins'
     
 .login-register
+    text-align: left
     .login-register-form-container
         box-shadow: 0px 0px 5px 2px #bababa
         width: 90vw
@@ -38,8 +39,9 @@
                 border-bottom: 1px solid #000000
                 padding: 10px 0px
                 font-size: 20px
-                margin-bottom: 20px
+                margin-bottom: 5px
             .login-register-form__submit
+                margin-top: 20px
                 padding: 10px 40px
                 border: 0
                 border-radius: 100px
@@ -51,6 +53,10 @@
                     outline: 0
         .login-register-form--active
             display: flex
+    .login-register__error
+        width: 90%
+        color: #d11b1b
+        font-size: 13px
 
 @media ( min-width: 1600px )
     .login-register
@@ -65,10 +71,12 @@
                 .login-register-form__input
                     padding: 15px 0px
                     font-size: 25px
-                    margin-bottom: 40px
+                    margin-bottom: 10px
                 .login-register-form__submit
+                    margin-top: 40px
                     padding: 15px 60px
                     font-size: 20px
             .login-register-form--active
                 display: flex
-    
+        .login-register__error
+            font-size: 16px
