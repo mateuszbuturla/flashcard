@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 import './loginRegister.sass';
 
@@ -36,6 +37,7 @@ class LoginRegister extends React.Component {
 
     submitLoginForm(e) {
         e.preventDefault();
+        const cookies = new Cookies();
         const { loginLogin, loginPassword } = this.state;
         const { config } = this.props;
         let loginValid = true, passwordValid = true;
@@ -54,6 +56,8 @@ class LoginRegister extends React.Component {
                     .then(r => r.json())
                     .then(r => {
                         if (r.status === 'correct') {
+                            cookies.set('user', r.user);
+                            this.props.history.push(`/dashboard`);
                             this.setState({ message: 'Zalogowno', loginLogin: '', loginPassword: '' })
                         }
                         else if (r.status === 'incorrect') {
@@ -104,9 +108,14 @@ class LoginRegister extends React.Component {
 
     render() {
         const { currentForm, registerLogin, registerPassword, registerRepeatPassword, registerLoginValid, registerPasswordValid, registerRepeatPasswordValid, loginLogin, loginPassword, loginLoginValid, loginPasswordValid, message } = this.state;
+        const { user } = this.props;
 
         return (
             <>
+                {
+                    user !== undefined &&
+                    <Redirect to='/dashboard' />
+                }
                 <nav className="home-nav">
                     <Link to='/login'>
                         <button className="home-nav__button">Zaloguj się</button>

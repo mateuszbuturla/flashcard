@@ -8,7 +8,7 @@ import flashcardsImg from '../../img/flashcardsImg.png';
 import testsImg from '../../img/testImg.png';
 import grammarImg from '../../img/grammarImg.png';
 
-class App extends React.Component {
+class Home extends React.Component {
 
     render() {
         return (
@@ -54,4 +54,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default Home;
