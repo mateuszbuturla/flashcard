@@ -13,6 +13,10 @@ class LoginRegister extends React.Component {
         registerLoginValid: true,
         registerPasswordValid: true,
         registerRepeatPasswordValid: true,
+        loginLogin: '',
+        loginPassword: '',
+        loginLoginValid: true,
+        loginPasswordValid: true,
         message: ''
     }
 
@@ -32,6 +36,35 @@ class LoginRegister extends React.Component {
 
     submitLoginForm(e) {
         e.preventDefault();
+        const { loginLogin, loginPassword } = this.state;
+        const { config } = this.props;
+        let loginValid = true, passwordValid = true;
+
+        if (loginLogin === '')
+            loginValid = false;
+
+        if (loginPassword === '')
+            passwordValid = false;
+
+        this.setState({ loginLoginValid: loginValid, loginPasswordValid: passwordValid });
+
+        if (loginValid && passwordValid) {
+            try {
+                fetch(`${config.api}/api/user/auth/${loginLogin}/${loginPassword}`, { method: 'POST' })
+                    .then(r => r.json())
+                    .then(r => {
+                        if (r.status === 'correct') {
+                            this.setState({ message: 'Zalogowno', loginLogin: '', loginPassword: '' })
+                        }
+                        else if (r.status === 'incorrect') {
+                            this.setState({ message: 'Nie prawidłowe dane logowania', loginPassword: '' })
+                        }
+                    })
+            }
+            catch {
+                this.setState({ message: 'Wystąpił błąd spróbuj ponownie później' })
+            }
+        }
     }
 
     submitRegisterForm(e) {
@@ -70,7 +103,7 @@ class LoginRegister extends React.Component {
     }
 
     render() {
-        const { currentForm, registerLogin, registerPassword, registerRepeatPassword, registerLoginValid, registerPasswordValid, registerRepeatPasswordValid, message } = this.state;
+        const { currentForm, registerLogin, registerPassword, registerRepeatPassword, registerLoginValid, registerPasswordValid, registerRepeatPasswordValid, loginLogin, loginPassword, loginLoginValid, loginPasswordValid, message } = this.state;
 
         return (
             <>
@@ -90,10 +123,42 @@ class LoginRegister extends React.Component {
                             <button id="register" onClick={this.changeForm.bind(this)} className={`select-form-input__button${currentForm === 'register' ? ' select-form-input__button--active' : ''}`}>Rejestracja</button>
                         </div>
 
+                        {message !== '' && <p className="login-register__message">{message}</p>}
+
                         <form onSubmit={this.submitLoginForm.bind(this)} className={`login-register-form${currentForm === 'login' ? ' login-register-form--active' : ''}`}>
-                            <input type="text" id="login-login" placeholder="Nazwa użytkownika" className="login-register-form__input" />
-                            <input type="password" id="login-password" placeholder="Hasło" className="login-register-form__input" />
-                            <input type="submit" value="Zaloguj się" className="login-register-form__submit" />
+                            <input
+                                type="text"
+                                id="loginLogin"
+                                placeholder="Nazwa użytkownika"
+                                className="login-register-form__input"
+                                onChange={this.handleInputChange.bind(this)}
+                                value={loginLogin}
+                            />
+                            {
+                                loginLoginValid === false &&
+                                <div className="login-register__error">
+                                    <p>To pole jest wymagane</p>
+                                </div>
+                            }
+                            <input
+                                type="password"
+                                id="loginPassword"
+                                placeholder="Hasło"
+                                className="login-register-form__input"
+                                onChange={this.handleInputChange.bind(this)}
+                                value={loginPassword}
+                            />
+                            {
+                                loginPasswordValid === false &&
+                                <div className="login-register__error">
+                                    <p>To pole jest wyamagane</p>
+                                </div>
+                            }
+                            <input
+                                type="submit"
+                                value="Zaloguj się"
+                                className="login-register-form__submit"
+                            />
                         </form>
 
                         <form onSubmit={this.submitRegisterForm.bind(this)} className={`login-register-form${currentForm === 'register' ? ' login-register-form--active' : ''}`}>
