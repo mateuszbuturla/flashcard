@@ -9,6 +9,7 @@ import './mixins.sass';
 
 import Home from './view/Home/Home';
 import LoginRegister from './view/LoginRegister/LoginRegister';
+import Dashboard from './view/Dashboard/Dashboard';
 
 class App extends React.Component {
 
@@ -31,7 +32,7 @@ class App extends React.Component {
 			<div className="App">
 				<BrowserRouter>
 					<Switch>
-						<Route path="/dashboard"><p>Dashboard</p></Route>
+						<Route path="/dashboard" component={Dashboard} />
 						<Route path="/register" component={props => <LoginRegister {...props} form='register' config={config} user={user} />} exact />
 						<Route path="/login" component={props => <LoginRegister {...props} form='login' config={config} user={user} />} exact />
 						<Route path="/" component={props => {
