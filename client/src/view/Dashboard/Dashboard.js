@@ -4,6 +4,7 @@ import { NavLink, Switch, Route } from 'react-router-dom';
 
 import DashboardNav from '../../components/DashboardNav/DashboardNav';
 import DashboardMain from '../DashboardMain/DashboardMain';
+import DashboardCreateKit from '../DashboardCreateKit/DashboardCreateKit';
 
 import './dashboard.sass';
 
@@ -41,11 +42,11 @@ class Dashboard extends React.Component {
                                 <NavLink to="/dashboard" className="aside-nav__link" activeClassName="aside-nav__link--active" exact>
                                     <img src={HomeIcon} alt="Home" className="aside-nav__link-icon" />
                                     Strona główna
-                            </NavLink>
+                                </NavLink>
                                 <NavLink to="/dashboard/createkit" className="aside-nav__link" activeClassName="aside-nav__link--active" exact>
                                     <img src={PlusIcon} alt="Home" className="aside-nav__link-icon" />
                                     Stwórz
-                            </NavLink>
+                                </NavLink>
                             </div>
                             <p className="aside-nav__footer">Mateusz Buturla 2020</p>
                         </div>
@@ -55,7 +56,7 @@ class Dashboard extends React.Component {
                     <div className="dashboard__main">
                         <Switch>
                             <Route path='/dashboard' component={DashboardMain} exact />
-                            <Route path='/dashboard/createkit' component={() => <p>Create</p>} exact />
+                            <Route path='/dashboard/createkit' component={DashboardCreateKit} exact />
                         </Switch>
                     </div>
                     {/* <button onClick={this.logout.bind(this)}>Wyloguj</button> */}
