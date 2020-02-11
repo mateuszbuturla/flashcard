@@ -31,6 +31,7 @@ class Dashboard extends React.Component {
 
     render() {
         const { asideNavOpen } = this.state;
+        const { config, user } = this.props;
         return (
             <>
                 <DashboardNav />
@@ -56,7 +57,7 @@ class Dashboard extends React.Component {
                     <div className="dashboard__main">
                         <Switch>
                             <Route path='/dashboard' component={DashboardMain} exact />
-                            <Route path='/dashboard/createkit' component={DashboardCreateKit} exact />
+                            <Route path='/dashboard/createkit' component={props => <DashboardCreateKit {...props} config={config} user={user} />} exact />
                         </Switch>
                     </div>
                     {/* <button onClick={this.logout.bind(this)}>Wyloguj</button> */}

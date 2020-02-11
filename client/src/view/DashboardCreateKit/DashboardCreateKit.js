@@ -5,7 +5,9 @@ import './dashboardCreateKit.sass';
 class DashboardCreateKit extends React.Component {
 
     state = {
-        name: ''
+        name: '',
+        nameValid: true,
+        message: ''
     }
 
     handleInputChange(e) {
@@ -14,16 +16,53 @@ class DashboardCreateKit extends React.Component {
 
     submitCreateKitForm(e) {
         e.preventDefault();
+        const { name } = this.state;
+        const { config, user } = this.props;
+        if (name !== '') {
+            this.setState({ nameValid: true })
+            try {
+                fetch(`${config.api}/api/dictionary/create/${name}/${user._id}`, { method: 'POST' })
+                    .then(r => r.json())
+                    .then(r => {
+                        if (r.status === 'correct') {
+                            this.setState({ message: 'Twój zestaw został dodany', name: '' })
+                        }
+                        else if (r.status === 'incorrect') {
+                            this.setState({ message: 'Nie prawidłowa nazwa' })
+                        }
+                    })
+            }
+            catch {
+                this.setState({ message: 'Wystąpił błąd spróbuj ponownie później' })
+            }
+        }
+        else {
+            this.setState({ nameValid: false })
+        }
     }
 
     render() {
-        const { name } = this.state;
+        const { name, nameValid, message } = this.state;
 
         return (
             <div className="dashboard-create-kit">
                 <h2 className="dashboard-create-kit__header">Twoje zestawy</h2>
+                {message !== '' && <p className="dashboard-create-kit__message">{message}</p>}
                 <form onSubmit={this.submitCreateKitForm.bind(this)} className="dashboard-create-kit__form">
-                    <input type="text" value={name} onChange={this.handleInputChange.bind(this)} className="dashboard-create-kit__input" placeholder="Nazwa zbioru" id="name" />
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={this.handleInputChange.bind(this)}
+                        className="dashboard-create-kit__input"
+                        placeholder="Nazwa zbioru"
+                        id="name"
+                    />
+                    {
+                        nameValid === false &&
+                        <div className="dashboard-create-kit__error">
+                            <p>To pole jest wymagane</p>
+                        </div>
+                    }
                     <input type="submit" value="Stwórz zestaw" className="dashboard-create-kit__submit" />
                 </form>
             </div>
