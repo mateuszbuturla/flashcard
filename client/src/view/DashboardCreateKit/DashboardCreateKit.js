@@ -46,7 +46,7 @@ class DashboardCreateKit extends React.Component {
 
         return (
             <div className="dashboard-create-kit">
-                <h2 className="dashboard-create-kit__header">Twoje zestawy</h2>
+                <h2 className="dashboard-create-kit__header">Stwórz zestaw</h2>
                 {message !== '' && <p className="dashboard-create-kit__message">{message}</p>}
                 <form onSubmit={this.submitCreateKitForm.bind(this)} className="dashboard-create-kit__form">
                     <input
