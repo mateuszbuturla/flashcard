@@ -56,7 +56,7 @@ class Dashboard extends React.Component {
 
                     <div className="dashboard__main">
                         <Switch>
-                            <Route path='/dashboard' component={DashboardMain} exact />
+                            <Route path='/dashboard' component={props => <DashboardMain {...props} config={config} user={user} />} exact />
                             <Route path='/dashboard/createkit' component={props => <DashboardCreateKit {...props} config={config} user={user} />} exact />
                         </Switch>
                     </div>
