@@ -5,6 +5,7 @@ import { NavLink, Switch, Route } from 'react-router-dom';
 import DashboardNav from '../../components/DashboardNav/DashboardNav';
 import DashboardMain from '../DashboardMain/DashboardMain';
 import DashboardCreateKit from '../DashboardCreateKit/DashboardCreateKit';
+import DashboardDictionaryMain from '../DashboardDictionaryMain/DashboardDictionaryMain';
 
 import './dashboard.sass';
 
@@ -56,6 +57,7 @@ class Dashboard extends React.Component {
 
                     <div className="dashboard__main">
                         <Switch>
+                            <Route path='/dashboard/dictionary/main/:id' component={props => <DashboardDictionaryMain {...props} config={config} user={user} />} exact />
                             <Route path='/dashboard' component={props => <DashboardMain {...props} config={config} user={user} />} exact />
                             <Route path='/dashboard/createkit' component={props => <DashboardCreateKit {...props} config={config} user={user} />} exact />
                         </Switch>

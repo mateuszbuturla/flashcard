@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const KitContainer = styled.div`
     border-radius: 10px;
@@ -53,12 +54,14 @@ const Owner = styled.p`
 class DashboardKit extends React.Component {
 
     render() {
-        const { name, vocabularyCount, owner } = this.props;
+        const { dictionary, owner } = this.props;
         return (
             <KitContainer>
-                <Name>{name}</Name>
-                <Count>{vocabularyCount} pojęć</Count>
-                <Owner>{owner}</Owner>
+                <Link to={`/dashboard/dictionary/main/${dictionary._id}`} style={{ textDecoration: 'none', color: '#000' }}>
+                    <Name>{dictionary.name}</Name>
+                    <Count>{dictionary.vocabulary.length} pojęć</Count>
+                    <Owner>{owner}</Owner>
+                </Link>
             </KitContainer>
         );
     }

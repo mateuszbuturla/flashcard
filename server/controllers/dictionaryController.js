@@ -38,3 +38,19 @@ exports.getDictionaries = async (req, res) => {
         res.status(500).json({ message: 'error' });
     }
 }
+
+exports.getOneDictionary = async (req, res) => {
+    const { id } = req.params;
+    try {
+        if (id) {
+            const findDictionary = await dictionaryModel.find({ _id: id });
+            res.status(200).json({ status: 'correct', dictionary: findDictionary[0] });
+        }
+        else {
+            res.status(200).json({ status: 'incorrect' });
+        }
+    }
+    catch {
+        res.status(500).json({ message: 'error' });
+    }
+}

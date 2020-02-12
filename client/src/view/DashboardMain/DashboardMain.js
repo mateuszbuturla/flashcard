@@ -37,7 +37,7 @@ class DashboardMain extends React.Component {
 
     render() {
         const { dictionaries, userName } = this.state;
-        const _dictionaries = dictionaries.map(dictionary => <Kit key={dictionary._id} name={dictionary.name} vocabularyCount={dictionary.vocabulary.length} owner={userName} />)
+        const _dictionaries = dictionaries.map(dictionary => <Kit key={dictionary._id} dictionary={dictionary} owner={userName} />)
 
         return (
             <div className="dashboard-main">
