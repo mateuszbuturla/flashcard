@@ -4,13 +4,12 @@ import { NavLink, Switch, Route } from 'react-router-dom';
 
 import DashboardNav from '../../components/DashboardNav/DashboardNav';
 import DashboardMain from '../DashboardMain/DashboardMain';
+import DashboardMainAsideNav from './DashboardMainAsideNav/DashboardMainAsideNav';
 import DashboardCreateKit from '../DashboardCreateKit/DashboardCreateKit';
 import DashboardDictionaryMain from '../DashboardDictionaryMain/DashboardDictionaryMain';
+import DashboardDictionaryAsideNav from './DashboardDictionaryAsideNav/DashboardDictionaryAsideNav';
 
 import './dashboard.sass';
-
-import HomeIcon from '../../img/home.png';
-import PlusIcon from '../../img/plus.png';
 
 class Dashboard extends React.Component {
 
@@ -41,14 +40,12 @@ class Dashboard extends React.Component {
                     <aside className={`aside-nav${asideNavOpen === true ? ' aside-nav--active' : ''}`}>
                         <div className="aside-nav__container">
                             <div className="aside-nav__links-container">
-                                <NavLink to="/dashboard" className="aside-nav__link" activeClassName="aside-nav__link--active" exact>
-                                    <img src={HomeIcon} alt="Home" className="aside-nav__link-icon" />
-                                    Strona główna
-                                </NavLink>
-                                <NavLink to="/dashboard/createkit" className="aside-nav__link" activeClassName="aside-nav__link--active" exact>
-                                    <img src={PlusIcon} alt="Home" className="aside-nav__link-icon" />
-                                    Stwórz
-                                </NavLink>
+                                <Switch>
+                                    <Route path='/dashboard/dictionary/edit/:id' component={props => <DashboardDictionaryAsideNav {...props} />} />
+                                    <Route path='/dashboard/dictionary/main/:id' component={props => <DashboardDictionaryAsideNav {...props} />} />
+                                    <Route path='/dashboard/dictionary/test/:id' component={props => <DashboardDictionaryAsideNav {...props} />} />
+                                    <Route path='/dashboard' component={DashboardMainAsideNav} />
+                                </Switch>
                             </div>
                             <p className="aside-nav__footer">Mateusz Buturla 2020</p>
                         </div>
