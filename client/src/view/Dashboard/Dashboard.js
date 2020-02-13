@@ -7,6 +7,7 @@ import DashboardMain from '../DashboardMain/DashboardMain';
 import DashboardMainAsideNav from './DashboardMainAsideNav/DashboardMainAsideNav';
 import DashboardCreateKit from '../DashboardCreateKit/DashboardCreateKit';
 import DashboardDictionaryMain from '../DashboardDictionaryMain/DashboardDictionaryMain';
+import DashboardEditDictionary from '../DashboardEditDictionary/DashboardEditDictionary';
 import DashboardDictionaryAsideNav from './DashboardDictionaryAsideNav/DashboardDictionaryAsideNav';
 
 import './dashboard.sass';
@@ -54,6 +55,7 @@ class Dashboard extends React.Component {
 
                     <div className="dashboard__main">
                         <Switch>
+                            <Route path='/dashboard/dictionary/edit/:id' component={props => <DashboardEditDictionary {...props} config={config} user={user} />} exact />
                             <Route path='/dashboard/dictionary/main/:id' component={props => <DashboardDictionaryMain {...props} config={config} user={user} />} exact />
                             <Route path='/dashboard' component={props => <DashboardMain {...props} config={config} user={user} />} exact />
                             <Route path='/dashboard/createkit' component={props => <DashboardCreateKit {...props} config={config} user={user} />} exact />
