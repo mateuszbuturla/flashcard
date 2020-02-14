@@ -8,7 +8,8 @@ class DashboardEditDictionary extends React.Component {
 
     state = {
         dictionary: null,
-        words: []
+        words: [],
+        message: ''
     }
 
     componentDidMount() {
@@ -63,12 +64,12 @@ class DashboardEditDictionary extends React.Component {
                 })
         }
         catch {
-            this.setState({ message: 'Wystąpił błąd proszę sptóbować ponownie później' })
+            this.setState({ message: 'Wystąpił błąd proszę spróbować ponownie później' })
         }
     }
 
     render() {
-        const { dictionary, words } = this.state;
+        const { dictionary, words, message } = this.state;
         let _words = null;
         if (dictionary !== null) {
             _words = words.map((word, index) => <EditDictionaryField key={index} pl={word.pl} en={word.en} id={index} handleWordChange={this.handleWordChange.bind(this)} />)
@@ -76,6 +77,9 @@ class DashboardEditDictionary extends React.Component {
 
         return (
             <div className="dashboard-edit-dictionary">
+                {message !== '' &&
+                    <p className="dashboard-edit-dictionary__message">{message}</p>
+                }
                 {
                     dictionary !== null &&
                     <>
@@ -83,6 +87,7 @@ class DashboardEditDictionary extends React.Component {
                             {_words}
                         </div>
                         <button className="dashboard-edit-dictionary__add-button" onClick={this.createNewWord.bind(this)}>Dodaj pojęcie</button>
+                        <br />
                         <button className="dashboard-edit-dictionary__add-button" onClick={this.saveDictionary.bind(this)}>Zapisz</button>
                     </>
                 }
