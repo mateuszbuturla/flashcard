@@ -7,12 +7,13 @@ import './dashboardEditDictionaryField.sass';
 class DashboardNav extends React.Component {
 
     render() {
-        const { pl, en } = this.props;
+        const { pl, en, handleWordChange, id } = this.props;
         return (
             <div className="edit-dictionary-field">
                 <div className="edit-citionary-field__content">
-                    <p className="edit-dictionary-field__word">{en}-</p>
-                    <p className="edit-dictionary-field__word">{pl}</p>
+                    <input type="text" value={en} className="edit-dictionary-field__word" onChange={e => handleWordChange(e)} id={id} data-language="en" />
+                    -
+                    <input type="text" value={pl} className="edit-dictionary-field__word" onChange={e => handleWordChange(e)} id={id} data-language="pl" />
                 </div>
                 <img src={BinIcon} alt="bin" className="edit-dictionary-field__bin" />
             </div>

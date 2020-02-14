@@ -7,7 +7,8 @@ import './dashboardEditDictionary.sass';
 class DashboardEditDictionary extends React.Component {
 
     state = {
-        dictionary: null
+        dictionary: null,
+        words: []
     }
 
     componentDidMount() {
@@ -18,7 +19,7 @@ class DashboardEditDictionary extends React.Component {
             fetch(`${config.api}/api/dictionary/getone/${id}`, { method: 'POST' })
                 .then(r => r.json())
                 .then(r => {
-                    this.setState({ dictionary: r.dictionary })
+                    this.setState({ dictionary: r.dictionary, words: r.dictionary.vocabulary })
                 })
         }
         catch {
@@ -26,21 +27,35 @@ class DashboardEditDictionary extends React.Component {
         }
     }
 
+    handleWordChange(e) {
+        e.preventDefault();
+        const { words } = this.state;
+        const language = e.target.dataset.language;
+        let newWords = words;
+        if (language === 'pl')
+            newWords[e.target.id].pl = e.target.value;
+        else if (language === 'en')
+            newWords[e.target.id].en = e.target.value;
+        this.setState({ words: newWords })
+    }
+
     render() {
-        const { dictionary } = this.state;
-        let words = null;
+        const { dictionary, words } = this.state;
+        let _words = null;
         if (dictionary !== null) {
-            const vocabulary = dictionary.vocabulary;
-            words = vocabulary.map((word, index) => <EditDictionaryField key={index} pl={word.pl} en={word.en} />)
+            _words = words.map((word, index) => <EditDictionaryField key={index} pl={word.pl} en={word.en} id={index} handleWordChange={this.handleWordChange.bind(this)} />)
         }
 
         return (
             <div className="dashboard-edit-dictionary">
                 {
                     dictionary !== null &&
-                    <div className="dashboard-edit-dictionary__container">
-                        {words}
-                    </div>
+                    <>
+                        <div className="dashboard-edit-dictionary__container">
+                            {_words}
+                        </div>
+                        <button className="dashboard-edit-dictionary__add-button">Dodaj pojęcie</button>
+                    </>
                 }
             </div>
         );

@@ -1,3 +1,5 @@
+@import '../../mixins'
+    
 .dashboard-edit-dictionary
     width: 100%
     margin: 0 auto
@@ -7,3 +9,18 @@
     .dashboard-edit-dictionary__container
         width: 90%
         margin: 0 auto
+    .dashboard-edit-dictionary__add-button
+        padding: 10px 20px
+        border-radius: 100px
+        font-size: 19px
+        border: 0
+        color: #fff
+        position: relative
+        left: 50%
+        transform: translateX(-50%)
+        cursor: pointer
+        @include backgroundGradient
+        &:focus,
+        &:active
+            outline: 0
+        
