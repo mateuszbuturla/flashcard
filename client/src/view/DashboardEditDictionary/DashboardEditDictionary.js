@@ -45,6 +45,28 @@ class DashboardEditDictionary extends React.Component {
         this.setState({ words: newWords })
     }
 
+    saveDictionary() {
+        const { config } = this.props;
+        const { words } = this.state;
+        const id = this.props.match.params.id;
+
+        try {
+            fetch(`${config.api}/api/dictionary/edit/${id}/${JSON.stringify(words)}`, { method: 'POST' })
+                .then(r => r.json())
+                .then(r => {
+                    if (r.status === 'correct') {
+                        this.setState({ message: 'Twój zbiór został zaktualizowany' })
+                    }
+                    else if (r.status === 'incorrect') {
+                        this.setState({ message: 'Wystąpił błąd' })
+                    }
+                })
+        }
+        catch {
+            this.setState({ message: 'Wystąpił błąd proszę sptóbować ponownie później' })
+        }
+    }
+
     render() {
         const { dictionary, words } = this.state;
         let _words = null;
@@ -61,6 +83,7 @@ class DashboardEditDictionary extends React.Component {
                             {_words}
                         </div>
                         <button className="dashboard-edit-dictionary__add-button" onClick={this.createNewWord.bind(this)}>Dodaj pojęcie</button>
+                        <button className="dashboard-edit-dictionary__add-button" onClick={this.saveDictionary.bind(this)}>Zapisz</button>
                     </>
                 }
             </div>

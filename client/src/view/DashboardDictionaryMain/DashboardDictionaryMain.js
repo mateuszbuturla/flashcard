@@ -42,15 +42,18 @@ class DashboardDictionaryMain extends React.Component {
         return (
             <div className="dashboard-dictionary-main">
                 <div className="dictionary-main-flashcards">
-                    <div className="dictionary-main-flashcards__container">
-                        {
-                            dictionary !== null &&
-                            <>
-                                <p className="dictionary-main-flashcards__first">{dictionary.vocabulary[flashcardsId].en}</p>
-                                <p className="dictionary-main-flashcards__second">{dictionary.vocabulary[flashcardsId].pl}</p>
-                            </>
-                        }
-                    </div>
+                    {
+                        dictionary !== null &&
+                        <div className="dictionary-main-flashcards__container">
+                            {
+                                dictionary.vocabulary.length > 0 &&
+                                <>
+                                    <p className="dictionary-main-flashcards__first">{dictionary.vocabulary[flashcardsId].en}</p>
+                                    <p className="dictionary-main-flashcards__second">{dictionary.vocabulary[flashcardsId].pl}</p>
+                                </>
+                            }
+                        </div>
+                    }
                     <div className="dictionary-main-flashcards__nav">
                         <button className="dictionary-main-flashcard__button" onClick={() => this.changeFlashCardId('subtract')}>{'<'}</button>
                         {

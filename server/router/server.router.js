@@ -12,4 +12,6 @@ module.exports = (app) => {
     app.post('/api/dictionary/get/:owner', dictionaryController.getDictionaries);
 
     app.post('/api/dictionary/getone/:id', dictionaryController.getOneDictionary);
+
+    app.post('/api/dictionary/edit/:id/:newvocabulary', dictionaryController.editDictionary);
 }

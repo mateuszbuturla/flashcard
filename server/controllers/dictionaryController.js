@@ -54,3 +54,24 @@ exports.getOneDictionary = async (req, res) => {
         res.status(500).json({ message: 'error' });
     }
 }
+
+exports.editDictionary = async (req, res) => {
+    const { id, newvocabulary } = req.params;
+    console.log(id, JSON.parse(newvocabulary))
+    try {
+        if (id) {
+            dictionaryModel.updateOne({ _id: id }, { vocabulary: JSON.parse(newvocabulary) }, (err) => {
+                if (err)
+                    return console.log(err)
+
+                res.status(200).json({ status: 'correct' });
+            })
+        }
+        else {
+            res.status(200).json({ status: 'incorrect' });
+        }
+    }
+    catch {
+        res.status(500).json({ message: 'error' });
+    }
+}
