@@ -28,7 +28,6 @@ class DashboardEditDictionary extends React.Component {
     }
 
     handleWordChange(e) {
-        e.preventDefault();
         const { words } = this.state;
         const language = e.target.dataset.language;
         let newWords = words;
@@ -36,6 +35,13 @@ class DashboardEditDictionary extends React.Component {
             newWords[e.target.id].pl = e.target.value;
         else if (language === 'en')
             newWords[e.target.id].en = e.target.value;
+        this.setState({ words: newWords })
+    }
+
+    createNewWord() {
+        const { words } = this.state;
+        let newWords = words;
+        newWords.push({ en: '', pl: '' })
         this.setState({ words: newWords })
     }
 
@@ -54,7 +60,7 @@ class DashboardEditDictionary extends React.Component {
                         <div className="dashboard-edit-dictionary__container">
                             {_words}
                         </div>
-                        <button className="dashboard-edit-dictionary__add-button">Dodaj pojęcie</button>
+                        <button className="dashboard-edit-dictionary__add-button" onClick={this.createNewWord.bind(this)}>Dodaj pojęcie</button>
                     </>
                 }
             </div>
