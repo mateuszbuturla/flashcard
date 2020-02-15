@@ -46,6 +46,13 @@ class DashboardEditDictionary extends React.Component {
         this.setState({ words: newWords })
     }
 
+    removeWord(index) {
+        const { words } = this.state;
+        let newWords = words;
+        newWords.splice(index, 1)
+        this.setState({ words: newWords })
+    }
+
     saveDictionary() {
         const { config } = this.props;
         const { words } = this.state;
@@ -72,7 +79,7 @@ class DashboardEditDictionary extends React.Component {
         const { dictionary, words, message } = this.state;
         let _words = null;
         if (dictionary !== null) {
-            _words = words.map((word, index) => <EditDictionaryField key={index} pl={word.pl} en={word.en} id={index} handleWordChange={this.handleWordChange.bind(this)} />)
+            _words = words.map((word, index) => <EditDictionaryField key={index} pl={word.pl} en={word.en} id={index} handleWordChange={this.handleWordChange.bind(this)} removeWord={() => this.removeWord(index)} />)
         }
 
         return (
