@@ -3,6 +3,23 @@ import { NavLink } from 'react-router-dom';
 
 class DashboardDictionaryAsideNav extends React.Component {
 
+    removeDictionary() {
+        const { config } = this.props;
+        const id = this.props.match.params.id;
+        try {
+            fetch(`${config.api}/api/dictionary/delete/${id}`, { method: 'POST' })
+                .then(r => r.json())
+                .then(r => {
+                    if (r.status === 'correct') {
+                        this.props.history.push('/dashboard');
+                    }
+                })
+        }
+        catch {
+
+        }
+    }
+
     render() {
         const id = this.props.match.params.id;
         return (
@@ -27,7 +44,7 @@ class DashboardDictionaryAsideNav extends React.Component {
                 <ul className="aside-nav__list">
                     Edytuj
                     <li className="aside-nav__list-element">
-                        <p className="aside-nav__link">
+                        <p className="aside-nav__link" onClick={this.removeDictionary.bind(this)}>
                             Usuń zbiór
                         </p>
                     </li>

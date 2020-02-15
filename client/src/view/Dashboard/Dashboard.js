@@ -42,9 +42,9 @@ class Dashboard extends React.Component {
                         <div className="aside-nav__container">
                             <div className="aside-nav__links-container">
                                 <Switch>
-                                    <Route path='/dashboard/dictionary/edit/:id' component={props => <DashboardDictionaryAsideNav {...props} />} />
-                                    <Route path='/dashboard/dictionary/main/:id' component={props => <DashboardDictionaryAsideNav {...props} />} />
-                                    <Route path='/dashboard/dictionary/test/:id' component={props => <DashboardDictionaryAsideNav {...props} />} />
+                                    <Route path='/dashboard/dictionary/edit/:id' component={props => <DashboardDictionaryAsideNav {...props} config={config} />} />
+                                    <Route path='/dashboard/dictionary/main/:id' component={props => <DashboardDictionaryAsideNav {...props} config={config} />} />
+                                    <Route path='/dashboard/dictionary/test/:id' component={props => <DashboardDictionaryAsideNav {...props} config={config} />} />
                                     <Route path='/dashboard' component={DashboardMainAsideNav} />
                                 </Switch>
                             </div>
