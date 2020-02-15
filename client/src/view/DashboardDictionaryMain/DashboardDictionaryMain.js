@@ -39,34 +39,35 @@ class DashboardDictionaryMain extends React.Component {
 
     render() {
         const { dictionary, flashcardsId } = this.state;
-        console.log(dictionary)
         return (
             <>
                 {
                     dictionary !== undefined ?
-                        <div className="dashboard-dictionary-main">
-                            <div className="dictionary-main-flashcards">
-                                <div className="dictionary-main-flashcards__container">
-                                    {
-                                        dictionary.vocabulary.length > 0 &&
-                                        <>
-                                            <p className="dictionary-main-flashcards__first">{dictionary.vocabulary[flashcardsId].en}</p>
-                                            <p className="dictionary-main-flashcards__second">{dictionary.vocabulary[flashcardsId].pl}</p>
-                                        </>
-                                    }
-                                </div>
+                        <>
+                            {
+                                dictionary.vocabulary.length > 0 ?
+                                    <div className="dashboard-dictionary-main">
+                                        <div className="dictionary-main-flashcards">
+                                            <div className="dictionary-main-flashcards__container">
+                                                <p className="dictionary-main-flashcards__first">{dictionary.vocabulary[flashcardsId].en}</p>
+                                                <p className="dictionary-main-flashcards__second">{dictionary.vocabulary[flashcardsId].pl}</p>
+                                            </div>
 
-                                <div className="dictionary-main-flashcards__nav">
-                                    <button className="dictionary-main-flashcard__button" onClick={() => this.changeFlashCardId('subtract')}>{'<'}</button>
-                                    {flashcardsId + 1}/{dictionary.vocabulary.length}
-                                    <button className="dictionary-main-flashcard__button" onClick={() => this.changeFlashCardId('add')}>{'>'}</button>
-                                </div>
-                                }
-                            </div>
-                        </div>
+                                            <div className="dictionary-main-flashcards__nav">
+                                                <button className="dictionary-main-flashcard__button" onClick={() => this.changeFlashCardId('subtract')}>{'<'}</button>
+                                                {flashcardsId + 1}/{dictionary.vocabulary.length}
+                                                <button className="dictionary-main-flashcard__button" onClick={() => this.changeFlashCardId('add')}>{'>'}</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    :
+                                    <p className="dashboard__announcement">Nie posiadasz jeszcze rzadnych słówek w tym zbiorze</p>
+                            }
+                        </>
                         :
                         <>
-                            <p className="">Taki słownik nie istnieje lub nie należy do Ciebie</p>
+                            <p className="dashboard__announcement">Taki słownik nie istnieje lub nie należy do Ciebie</p>
                         </>
                 }
             </>

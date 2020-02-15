@@ -58,7 +58,6 @@ class LoginRegister extends React.Component {
                         if (r.status === 'correct') {
                             cookies.set('user', r.user);
                             getUser();
-                            this.props.history.push(`/`);
                         }
                         else if (r.status === 'incorrect') {
                             this.setState({ message: 'Nie prawidłowe dane logowania', loginPassword: '' })
