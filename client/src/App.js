@@ -32,9 +32,14 @@ class App extends React.Component {
 			<div className="App">
 				<BrowserRouter>
 					<Switch>
-						<Route path="/dashboard" component={props => <Dashboard {...props} config={config} user={user} />} />
+						<Route path="/dashboard" component={props => {
+							if (user === undefined)
+								return (<Redirect to='/login' />)
+							else
+								return (<Dashboard {...props} config={config} user={user} />)
+						}} />
 						<Route path="/register" component={props => <LoginRegister {...props} form='register' config={config} user={user} />} exact />
-						<Route path="/login" component={props => <LoginRegister {...props} form='login' config={config} user={user} />} exact />
+						<Route path="/login" component={props => <LoginRegister {...props} form='login' config={config} user={user} getUser={this.getUser.bind(this)} />} exact />
 						<Route path="/" component={props => {
 							if (user === undefined)
 								return (<Home {...props} user={user} />)

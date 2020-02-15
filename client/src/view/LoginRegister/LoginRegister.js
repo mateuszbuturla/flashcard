@@ -39,7 +39,7 @@ class LoginRegister extends React.Component {
         e.preventDefault();
         const cookies = new Cookies();
         const { loginLogin, loginPassword } = this.state;
-        const { config } = this.props;
+        const { config, getUser } = this.props;
         let loginValid = true, passwordValid = true;
 
         if (loginLogin === '')
@@ -57,8 +57,8 @@ class LoginRegister extends React.Component {
                     .then(r => {
                         if (r.status === 'correct') {
                             cookies.set('user', r.user);
-                            this.props.history.push(`/dashboard`);
-                            this.setState({ message: 'Zalogowno', loginLogin: '', loginPassword: '' })
+                            getUser();
+                            this.props.history.push(`/`);
                         }
                         else if (r.status === 'incorrect') {
                             this.setState({ message: 'Nie prawidłowe dane logowania', loginPassword: '' })
