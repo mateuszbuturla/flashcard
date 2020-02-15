@@ -5,7 +5,7 @@ import './dashboardDictionaryMain.sass'
 class DashboardDictionaryMain extends React.Component {
 
     state = {
-        dictionary: null,
+        dictionary: undefined,
         flashcardsId: 0
     }
 
@@ -39,33 +39,37 @@ class DashboardDictionaryMain extends React.Component {
 
     render() {
         const { dictionary, flashcardsId } = this.state;
+        console.log(dictionary)
         return (
-            <div className="dashboard-dictionary-main">
-                <div className="dictionary-main-flashcards">
-                    {
-                        dictionary !== null &&
-                        <div className="dictionary-main-flashcards__container">
-                            {
-                                dictionary.vocabulary.length > 0 &&
-                                <>
-                                    <p className="dictionary-main-flashcards__first">{dictionary.vocabulary[flashcardsId].en}</p>
-                                    <p className="dictionary-main-flashcards__second">{dictionary.vocabulary[flashcardsId].pl}</p>
-                                </>
-                            }
+            <>
+                {
+                    dictionary !== undefined ?
+                        <div className="dashboard-dictionary-main">
+                            <div className="dictionary-main-flashcards">
+                                <div className="dictionary-main-flashcards__container">
+                                    {
+                                        dictionary.vocabulary.length > 0 &&
+                                        <>
+                                            <p className="dictionary-main-flashcards__first">{dictionary.vocabulary[flashcardsId].en}</p>
+                                            <p className="dictionary-main-flashcards__second">{dictionary.vocabulary[flashcardsId].pl}</p>
+                                        </>
+                                    }
+                                </div>
+
+                                <div className="dictionary-main-flashcards__nav">
+                                    <button className="dictionary-main-flashcard__button" onClick={() => this.changeFlashCardId('subtract')}>{'<'}</button>
+                                    {flashcardsId + 1}/{dictionary.vocabulary.length}
+                                    <button className="dictionary-main-flashcard__button" onClick={() => this.changeFlashCardId('add')}>{'>'}</button>
+                                </div>
+                                }
+                            </div>
                         </div>
-                    }
-                    <div className="dictionary-main-flashcards__nav">
-                        <button className="dictionary-main-flashcard__button" onClick={() => this.changeFlashCardId('subtract')}>{'<'}</button>
-                        {
-                            dictionary !== null &&
-                            <>
-                                {flashcardsId + 1}/{dictionary.vocabulary.length}
-                            </>
-                        }
-                        <button className="dictionary-main-flashcard__button" onClick={() => this.changeFlashCardId('add')}>{'>'}</button>
-                    </div>
-                </div>
-            </div>
+                        :
+                        <>
+                            <p className="">Taki słownik nie istnieje lub nie należy do Ciebie</p>
+                        </>
+                }
+            </>
         );
     }
 }
