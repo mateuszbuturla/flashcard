@@ -10,6 +10,8 @@ import DashboardDictionaryMain from '../DashboardDictionaryMain/DashboardDiction
 import DashboardEditDictionary from '../DashboardEditDictionary/DashboardEditDictionary';
 import DashboardDictionaryAsideNav from './DashboardDictionaryAsideNav/DashboardDictionaryAsideNav';
 
+import ArrowIcon from '../../img/ArrowIcon.png';
+
 import './dashboard.sass';
 
 class Dashboard extends React.Component {
@@ -50,7 +52,7 @@ class Dashboard extends React.Component {
                             </div>
                             <p className="aside-nav__footer">Mateusz Buturla 2020</p>
                         </div>
-                        <button className="aside-nav__open-button" onClick={this.onClickAsideNavButton.bind(this)}></button>
+                        <button className="aside-nav__open-button" onClick={this.onClickAsideNavButton.bind(this)}><img src={ArrowIcon} alt="arrow icon" className="aside-nav__button-arrow-icon" /></button>
                     </aside>
 
                     <div className="dashboard__main">
