@@ -6,13 +6,14 @@ import ArrowIcon from '../../../img/arrow_back.png';
 class DashboardDictionaryAsideNav extends React.Component {
 
     removeDictionary() {
-        const { config } = this.props;
+        const { config, hideAsideNav } = this.props;
         const id = this.props.match.params.id;
         try {
             fetch(`${config.api}/api/dictionary/delete/${id}`, { method: 'POST' })
                 .then(r => r.json())
                 .then(r => {
                     if (r.status === 'correct') {
+                        hideAsideNav();
                         this.props.history.push('/dashboard');
                     }
                 })
@@ -24,9 +25,10 @@ class DashboardDictionaryAsideNav extends React.Component {
 
     render() {
         const id = this.props.match.params.id;
+        const { hideAsideNav } = this.props;
         return (
             <>
-                <NavLink to="/dashboard" className="aside-nav__link" activeClassName="aside-nav__link--active" exact>
+                <NavLink to="/dashboard" className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
                     <img src={ArrowIcon} alt="Home" className="aside-nav__link-icon" />
                     Powrót
                 </NavLink>
@@ -34,12 +36,12 @@ class DashboardDictionaryAsideNav extends React.Component {
                 <ul className="aside-nav__list">
                     Ucz się
                     <li className="aside-nav__list-element">
-                        <NavLink to={`/dashboard/dictionary/main/${id}`} className="aside-nav__link" activeClassName="aside-nav__link--active" exact>
+                        <NavLink to={`/dashboard/dictionary/main/${id}`} className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
                             Fiszki
                         </NavLink>
                     </li>
                     <li className="aside-nav__list-element">
-                        <NavLink to={`/dashboard/dictionary/test/${id}`} className="aside-nav__link" activeClassName="aside-nav__link--active" exact>
+                        <NavLink to={`/dashboard/dictionary/test/${id}`} className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
                             Sprawdź się
                         </NavLink>
                     </li>
@@ -52,7 +54,7 @@ class DashboardDictionaryAsideNav extends React.Component {
                         </p>
                     </li>
                     <li className="aside-nav__list-element">
-                        <NavLink to={`/dashboard/dictionary/edit/${id}`} className="aside-nav__link" activeClassName="aside-nav__link--active" exact>
+                        <NavLink to={`/dashboard/dictionary/edit/${id}`} className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
                             Dodaj pojęcia
                         </NavLink>
                     </li>
