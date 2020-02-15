@@ -75,3 +75,23 @@ exports.editDictionary = async (req, res) => {
         res.status(500).json({ message: 'error' });
     }
 }
+
+exports.deleteDictionary = async (req, res) => {
+    const { id } = req.params;
+    console.log(id)
+    try {
+        if (id) {
+            dictionaryModel.deleteOne({ _id: id }, (err) => {
+                if (err)
+                    return console.log(err)
+
+                res.status(200).json({ status: 'correct' });
+            })
+        }
+        else {
+            res.status(200).json({ status: 'incorrect' });
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
