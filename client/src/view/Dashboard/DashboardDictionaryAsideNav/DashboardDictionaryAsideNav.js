@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import ArrowIcon from '../../../img/arrow_back.png';
+
 class DashboardDictionaryAsideNav extends React.Component {
 
     removeDictionary() {
@@ -25,6 +27,7 @@ class DashboardDictionaryAsideNav extends React.Component {
         return (
             <>
                 <NavLink to="/dashboard" className="aside-nav__link" activeClassName="aside-nav__link--active" exact>
+                    <img src={ArrowIcon} alt="Home" className="aside-nav__link-icon" />
                     Powrót
                 </NavLink>
                 <h2 className="aside-nav__header">Angielski Słówka</h2>
