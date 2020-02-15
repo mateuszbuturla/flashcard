@@ -8,7 +8,7 @@ import './dashboardMain.sass';
 class DashboardMain extends React.Component {
 
     state = {
-        dictionaries: [],
+        dictionaries: null,
         userName: ''
     }
 
@@ -25,9 +25,7 @@ class DashboardMain extends React.Component {
             fetch(`${config.api}/api/dictionary/get/${user._id}`, { method: 'POST' })
                 .then(r => r.json())
                 .then(r => {
-                    if (r.dictionaries.length > 0) {
-                        this.setState({ dictionaries: r.dictionaries, userName: r.userName })
-                    }
+                    this.setState({ dictionaries: r.dictionaries, userName: r.userName })
                 })
         }
         catch {
@@ -37,11 +35,21 @@ class DashboardMain extends React.Component {
 
     render() {
         const { dictionaries, userName } = this.state;
-        const _dictionaries = dictionaries.map(dictionary => <Kit key={dictionary._id} dictionary={dictionary} owner={userName} />)
+        let _dictionaries = null;
+        if (dictionaries !== null)
+            _dictionaries = dictionaries.map(dictionary => <Kit key={dictionary._id} dictionary={dictionary} owner={userName} />)
 
         return (
             <div className="dashboard-main">
                 <h2 className="dashboard-main__header">Twoje zestawy</h2>
+                {
+                    dictionaries !== null &&
+                    <>
+                        {
+                            dictionaries.length === 0 && <p className="dashboard-main__no-dictionaries">Nie posiadasz jeszcze żadnych zbiorów słówek</p>
+                        }
+                    </>
+                }
                 <div className="dashboard-main__kit-container">
                     {_dictionaries}
                 </div>
