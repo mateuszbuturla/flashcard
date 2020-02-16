@@ -43,7 +43,7 @@ class Dashboard extends React.Component {
         const { config, user } = this.props;
         return (
             <>
-                <DashboardNav logout={this.logout.bind(this)} />
+                <DashboardNav logout={this.logout.bind(this)} user={user} />
 
                 <section className="dashboard">
                     <aside className={`aside-nav${asideNavOpen === true ? ' aside-nav--active' : ''}`}>
