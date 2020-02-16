@@ -62,15 +62,21 @@ exports.getOneDictionary = async (req, res) => {
 }
 
 exports.editDictionary = async (req, res) => {
-    const { id, newvocabulary } = req.params;
+    const { id, newvocabulary, userid, login } = req.params;
     try {
-        if (id) {
-            dictionaryModel.updateOne({ _id: id }, { vocabulary: JSON.parse(newvocabulary) }, (err) => {
-                if (err)
-                    return console.log(err)
+        if (id && userid && login) {
+            const findUser = await userModel.find({ _id: userid, login: login });
+            if (findUser.length > 0) {
+                dictionaryModel.updateOne({ _id: id }, { vocabulary: JSON.parse(newvocabulary) }, (err) => {
+                    if (err)
+                        return console.log(err)
 
-                res.status(200).json({ status: 'correct' });
-            })
+                    res.status(200).json({ status: 'correct' });
+                })
+            }
+            else {
+                res.status(500).json({ message: 'error' });
+            }
         }
         else {
             res.status(200).json({ status: 'incorrect' });

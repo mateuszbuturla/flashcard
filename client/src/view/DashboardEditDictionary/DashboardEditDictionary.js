@@ -54,12 +54,12 @@ class DashboardEditDictionary extends React.Component {
     }
 
     saveDictionary() {
-        const { config } = this.props;
+        const { config, user } = this.props;
         const { words } = this.state;
         const id = this.props.match.params.id;
 
         try {
-            fetch(`${config.api}/api/dictionary/edit/${id}/${JSON.stringify(words)}`, { method: 'POST' })
+            fetch(`${config.api}/api/dictionary/edit/${id}/${JSON.stringify(words)}/${user._id}/${user.login}`, { method: 'POST' })
                 .then(r => r.json())
                 .then(r => {
                     if (r.status === 'correct') {
