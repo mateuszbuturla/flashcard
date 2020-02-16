@@ -9,12 +9,12 @@ class DashboardDictionaryAsideNav extends React.Component {
         const { config, hideAsideNav } = this.props;
         const id = this.props.match.params.id;
         try {
+            this.props.history.push('/dashboard');
             fetch(`${config.api}/api/dictionary/delete/${id}`, { method: 'POST' })
                 .then(r => r.json())
                 .then(r => {
                     if (r.status === 'correct') {
                         hideAsideNav();
-                        this.props.history.push('/dashboard');
                     }
                 })
         }
