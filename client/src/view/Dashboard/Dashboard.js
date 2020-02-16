@@ -50,9 +50,9 @@ class Dashboard extends React.Component {
                         <div className="aside-nav__container">
                             <div className="aside-nav__links-container">
                                 <Switch>
-                                    <Route path='/dashboard/dictionary/edit/:id' component={props => <DashboardDictionaryAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} />} />
-                                    <Route path='/dashboard/dictionary/main/:id' component={props => <DashboardDictionaryAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} />} />
-                                    <Route path='/dashboard/dictionary/test/:id' component={props => <DashboardDictionaryAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} />} />
+                                    <Route path='/dashboard/dictionary/edit/:id' component={props => <DashboardDictionaryAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} user={user} />} />
+                                    <Route path='/dashboard/dictionary/main/:id' component={props => <DashboardDictionaryAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} user={user} />} />
+                                    <Route path='/dashboard/dictionary/test/:id' component={props => <DashboardDictionaryAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} user={user} />} />
                                     <Route path='/dashboard' component={props => <DashboardMainAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} />} />
                                 </Switch>
                             </div>

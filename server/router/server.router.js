@@ -15,5 +15,5 @@ module.exports = (app) => {
 
     app.post('/api/dictionary/edit/:id/:newvocabulary', dictionaryController.editDictionary);
 
-    app.post('/api/dictionary/delete/:id', dictionaryController.deleteDictionary);
+    app.post('/api/dictionary/delete/:id/:userid/:login', dictionaryController.deleteDictionary);
 }

@@ -6,11 +6,11 @@ import ArrowIcon from '../../../img/arrow_back.png';
 class DashboardDictionaryAsideNav extends React.Component {
 
     removeDictionary() {
-        const { config, hideAsideNav } = this.props;
+        const { config, hideAsideNav, user } = this.props;
         const id = this.props.match.params.id;
         try {
             this.props.history.push('/dashboard');
-            fetch(`${config.api}/api/dictionary/delete/${id}`, { method: 'POST' })
+            fetch(`${config.api}/api/dictionary/delete/${id}/${user._id}/${user.login}`, { method: 'POST' })
                 .then(r => r.json())
                 .then(r => {
                     if (r.status === 'correct') {
