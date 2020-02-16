@@ -21,7 +21,7 @@ class DashboardCreateKit extends React.Component {
         if (name !== '') {
             this.setState({ nameValid: true })
             try {
-                fetch(`${config.api}/api/dictionary/create/${name}/${user._id}`, { method: 'POST' })
+                fetch(`${config.api}/api/dictionary/create/${name}/${user._id}/${user.login}`, { method: 'POST' })
                     .then(r => r.json())
                     .then(r => {
                         if (r.status === 'correct') {

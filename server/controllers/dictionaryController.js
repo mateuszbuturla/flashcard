@@ -3,15 +3,21 @@ const userModel = require('../models/userModel');
 const mongoose = require('mongoose');
 
 exports.dictionaryCreate = async (req, res) => {
-    const { name, owner } = req.params;
+    const { name, owner, login } = req.params;
     try {
-        if (name.length && owner) {
-            dictionaryModel.create({ _id: mongoose.Types.ObjectId(), name: name, owner: owner, vocabulary: [] }, (err) => {
-                if (err)
-                    return console.log(err)
+        if (name.length && owner && login) {
+            const findUser = await userModel.find({ _id: owner, login: login });
+            if (findUser.length > 0) {
+                dictionaryModel.create({ _id: mongoose.Types.ObjectId(), name: name, owner: owner, vocabulary: [] }, (err) => {
+                    if (err)
+                        return console.log(err)
 
-                res.status(200).json({ status: 'correct' });
-            })
+                    res.status(200).json({ status: 'correct' });
+                })
+            }
+            else {
+                res.status(500).json({ message: 'error' });
+            }
         }
         else {
             res.status(200).json({ status: 'incorrect' });

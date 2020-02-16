@@ -7,7 +7,7 @@ module.exports = (app) => {
 
     app.post('/api/user/auth/:login/:password', usersController.userAuth);
 
-    app.post('/api/dictionary/create/:name/:owner', dictionaryController.dictionaryCreate);
+    app.post('/api/dictionary/create/:name/:owner/:login', dictionaryController.dictionaryCreate);
 
     app.post('/api/dictionary/get/:owner', dictionaryController.getDictionaries);
 
