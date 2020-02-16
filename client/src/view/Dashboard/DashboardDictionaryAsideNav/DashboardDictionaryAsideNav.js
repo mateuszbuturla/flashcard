@@ -5,6 +5,26 @@ import ArrowIcon from '../../../img/arrow_back.png';
 
 class DashboardDictionaryAsideNav extends React.Component {
 
+    state = {
+        dictionary: undefined,
+    }
+
+    componentDidMount() {
+        const { config } = this.props;
+        const id = this.props.match.params.id;
+
+        try {
+            fetch(`${config.api}/api/dictionary/getone/${id}`, { method: 'POST' })
+                .then(r => r.json())
+                .then(r => {
+                    this.setState({ dictionary: r.dictionary })
+                })
+        }
+        catch {
+
+        }
+    }
+
     removeDictionary() {
         const { config, hideAsideNav, user } = this.props;
         const id = this.props.match.params.id;
@@ -25,6 +45,7 @@ class DashboardDictionaryAsideNav extends React.Component {
 
     render() {
         const id = this.props.match.params.id;
+        const { dictionary } = this.state;
         const { hideAsideNav } = this.props;
         return (
             <>
@@ -32,7 +53,7 @@ class DashboardDictionaryAsideNav extends React.Component {
                     <img src={ArrowIcon} alt="Home" className="aside-nav__link-icon" />
                     Powrót
                 </NavLink>
-                <h2 className="aside-nav__header">Angielski Słówka</h2>
+                <h2 className="aside-nav__header">{dictionary !== undefined && dictionary.name}</h2>
                 <ul className="aside-nav__list">
                     Ucz się
                     <li className="aside-nav__list-element">
