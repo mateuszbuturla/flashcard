@@ -23,7 +23,10 @@ class App extends React.Component {
 
 	getUser() {
 		const cookies = new Cookies();
-		this.setState({ user: cookies.get('user') })
+		if (cookies.get('user'))
+			this.setState({ user: cookies.get('user') })
+		else
+			this.setState({ user: undefined })
 	}
 
 	render() {
@@ -36,7 +39,7 @@ class App extends React.Component {
 							if (user === undefined)
 								return (<Redirect to='/login' />)
 							else
-								return (<Dashboard {...props} config={config} user={user} />)
+								return (<Dashboard {...props} config={config} user={user} getUser={this.getUser.bind(this)} />)
 						}} />
 						<Route path="/register" component={props => <LoginRegister {...props} form='register' config={config} user={user} />} exact />
 						<Route path="/login" component={props => <LoginRegister {...props} form='login' config={config} user={user} getUser={this.getUser.bind(this)} />} exact />

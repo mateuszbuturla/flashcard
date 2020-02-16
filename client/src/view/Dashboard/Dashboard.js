@@ -21,9 +21,11 @@ class Dashboard extends React.Component {
     }
 
     logout() {
+        const { getUser } = this.props;
         const cookies = new Cookies();
         cookies.remove('user');
-        this.props.history.push('/');
+        getUser();
+        this.props.history.push('/')
     }
 
     onClickAsideNavButton(e) {
@@ -41,7 +43,7 @@ class Dashboard extends React.Component {
         const { config, user } = this.props;
         return (
             <>
-                <DashboardNav />
+                <DashboardNav logout={this.logout.bind(this)} />
 
                 <section className="dashboard">
                     <aside className={`aside-nav${asideNavOpen === true ? ' aside-nav--active' : ''}`}>
@@ -67,7 +69,6 @@ class Dashboard extends React.Component {
                             <Route path='/dashboard/createkit' component={props => <DashboardCreateKit {...props} config={config} user={user} />} exact />
                         </Switch>
                     </div>
-                    {/* <button onClick={this.logout.bind(this)}>Wyloguj</button> */}
                 </section>
             </>
         );
