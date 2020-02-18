@@ -46,7 +46,7 @@ class DashboardDictionaryAsideNav extends React.Component {
     render() {
         const id = this.props.match.params.id;
         const { dictionary } = this.state;
-        const { hideAsideNav } = this.props;
+        const { hideAsideNav, changeLanguage } = this.props;
         return (
             <>
                 <NavLink to="/dashboard" className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
@@ -65,6 +65,11 @@ class DashboardDictionaryAsideNav extends React.Component {
                         <NavLink to={`/dashboard/dictionary/test/${id}`} className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
                             Sprawdź się
                         </NavLink>
+                    </li>
+                    <li className="aside-nav__list-element">
+                        <p className="aside-nav__link" onClick={changeLanguage}>
+                            Przełącz język
+                        </p>
                     </li>
                 </ul>
                 <ul className="aside-nav__list">

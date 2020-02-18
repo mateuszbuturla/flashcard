@@ -18,6 +18,7 @@ class Dashboard extends React.Component {
 
     state = {
         asideNavOpen: false,
+        secondLanguage: 'en'
     }
 
     logout() {
@@ -38,6 +39,14 @@ class Dashboard extends React.Component {
         this.setState({ asideNavOpen: false });
     }
 
+    changeSecondLanguage() {
+        const { secondLanguage } = this.state;
+        if (secondLanguage === 'pl')
+            this.setState({ secondLanguage: 'en' })
+        else if (secondLanguage === 'en')
+            this.setState({ secondLanguage: 'pl' })
+    }
+
     render() {
         const { asideNavOpen } = this.state;
         const { config, user } = this.props;
@@ -50,9 +59,36 @@ class Dashboard extends React.Component {
                         <div className="aside-nav__container">
                             <div className="aside-nav__links-container">
                                 <Switch>
-                                    <Route path='/dashboard/dictionary/edit/:id' component={props => <DashboardDictionaryAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} user={user} />} />
-                                    <Route path='/dashboard/dictionary/main/:id' component={props => <DashboardDictionaryAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} user={user} />} />
-                                    <Route path='/dashboard/dictionary/test/:id' component={props => <DashboardDictionaryAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} user={user} />} />
+                                    <Route
+                                        path='/dashboard/dictionary/edit/:id'
+                                        component={props =>
+                                            <DashboardDictionaryAsideNav {...props}
+                                                config={config}
+                                                hideAsideNav={this.hideAsideNav.bind(this)}
+                                                user={user}
+                                                changeLanguage={this.changeSecondLanguage.bind(this)}
+                                            />
+                                        }
+                                    />
+                                    <Route path='/dashboard/dictionary/main/:id'
+                                        component={props => <DashboardDictionaryAsideNav {...props}
+                                            config={config}
+                                            hideAsideNav={this.hideAsideNav.bind(this)}
+                                            user={user}
+                                            changeLanguage={this.changeSecondLanguage.bind(this)}
+                                        />
+                                        }
+                                    />
+                                    <Route
+                                        path='/dashboard/dictionary/test/:id'
+                                        component={props => <DashboardDictionaryAsideNav {...props}
+                                            config={config}
+                                            hideAsideNav={this.hideAsideNav.bind(this)}
+                                            user={user}
+                                            changeLanguage={this.changeSecondLanguage.bind(this)}
+                                        />
+                                        }
+                                    />
                                     <Route path='/dashboard' component={props => <DashboardMainAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} />} />
                                 </Switch>
                             </div>
