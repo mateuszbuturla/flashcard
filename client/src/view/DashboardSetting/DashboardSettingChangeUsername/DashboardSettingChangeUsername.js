@@ -11,6 +11,11 @@ const Form = styled.form`
     margin-bottom: 30px;
 `;
 
+const H2 = styled.h2`
+    font-size: 25px;
+    margin-bottom: 20px
+`;
+
 const Input = styled.input`
     border: 0;
     border-bottom: 1px solid #000000;
@@ -48,23 +53,21 @@ class DashboardSettingChangeUsername extends React.Component {
 
         return (
             <Form className="change-username-form">
+                <H2>Zmiana nazwy użytkownika</H2>
                 <Input type="text"
                     placeholder="Nowa nazwa"
-                    className="change-username-form__input"
                     value={newUsername}
                     onChange={this.handleInputChange.bind(this)}
                     id="newUsername"
                 />
                 <Input type="password"
                     placeholder="Hasło"
-                    className="change-username-form__input"
                     value={password}
                     onChange={this.handleInputChange.bind(this)}
                     id="password"
                 />
                 <Button type="submit"
                     value="Zapisz zmiany"
-                    className="change-username-form__button"
                 />
             </Form>
         );
