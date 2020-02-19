@@ -31,7 +31,7 @@ class DashboardNav extends React.Component {
                                 <img src={SettingIcon} alt="logout icon" className="user-box-nav__icon" />
                                 Ustawienia
                             </Link>
-                            <button className="user-box-nav__button">
+                            <button className="user-box-nav__button" onClick={logout}>
                                 <img src={LogoutIcon} alt="logout icon" className="user-box-nav__icon" />
                                 Wyloguj
                             </button>
