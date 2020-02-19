@@ -9,10 +9,11 @@ import './dashboardSetting.sass';
 class DashboardSetting extends React.Component {
 
     render() {
+        const { user } = this.props;
 
         return (
             <div className="dashboard-setting">
-                <h2 className="dashboard-setting__header">Witaj</h2>
+                <h2 className="dashboard-setting__header">Witaj {user.login}</h2>
                 <Link to='/dashboard/setting/changeusername'>
                     <p>Zmień nazwę użytkownika</p>
                 </Link>
