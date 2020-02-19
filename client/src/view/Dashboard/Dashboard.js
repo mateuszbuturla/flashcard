@@ -103,7 +103,7 @@ class Dashboard extends React.Component {
 
                     <div className="dashboard__main">
                         <Switch>
-                            <Route path='/dashboard/setting' component={props => <DashboardSetting {...props} config={config} user={user} />} exact />
+                            <Route path='/dashboard/setting' component={props => <DashboardSetting {...props} config={config} user={user} />} />
                             <Route path='/dashboard/dictionary/edit/:id' component={props => <DashboardEditDictionary {...props} config={config} user={user} />} exact />
                             <Route path='/dashboard/dictionary/main/:id' component={props => <DashboardDictionaryMain {...props} config={config} user={user} secondLanguage={secondLanguage} />} exact />
                             <Route path='/dashboard' component={props => <DashboardMain {...props} config={config} user={user} />} exact />
