@@ -9,7 +9,7 @@ import DashboardCreateKit from '../DashboardCreateKit/DashboardCreateKit';
 import DashboardDictionaryMain from '../DashboardDictionaryMain/DashboardDictionaryMain';
 import DashboardEditDictionary from '../DashboardEditDictionary/DashboardEditDictionary';
 import DashboardDictionaryAsideNav from './DashboardDictionaryAsideNav/DashboardDictionaryAsideNav';
-import DashboardSetting from '../DashboardSetting/DashboardMain';
+import DashboardSetting from '../DashboardSetting/DashboardSetting';
 
 import ArrowIcon from '../../img/ArrowIcon.png';
 
