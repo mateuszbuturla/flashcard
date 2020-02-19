@@ -15,6 +15,17 @@
         position: relative
         cursor: pointer
         margin-right: 50px
+        &::before
+            content: ''
+            position: absolute
+            top: 50%
+            left: -20px
+            transform: translateY(-50%)
+            width: 0
+            height: 0
+            border-style: solid
+            border-width: 5px 5px 0 5px
+            border-color: #fff transparent transparent transparent
         .user-box-nav
             position: absolute
             left: 50%
