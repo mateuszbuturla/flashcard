@@ -48,7 +48,7 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        const { asideNavOpen } = this.state;
+        const { asideNavOpen, secondLanguage } = this.state;
         const { config, user } = this.props;
         return (
             <>
@@ -100,7 +100,7 @@ class Dashboard extends React.Component {
                     <div className="dashboard__main">
                         <Switch>
                             <Route path='/dashboard/dictionary/edit/:id' component={props => <DashboardEditDictionary {...props} config={config} user={user} />} exact />
-                            <Route path='/dashboard/dictionary/main/:id' component={props => <DashboardDictionaryMain {...props} config={config} user={user} />} exact />
+                            <Route path='/dashboard/dictionary/main/:id' component={props => <DashboardDictionaryMain {...props} config={config} user={user} secondLanguage={secondLanguage} />} exact />
                             <Route path='/dashboard' component={props => <DashboardMain {...props} config={config} user={user} />} exact />
                             <Route path='/dashboard/createkit' component={props => <DashboardCreateKit {...props} config={config} user={user} />} exact />
                         </Switch>

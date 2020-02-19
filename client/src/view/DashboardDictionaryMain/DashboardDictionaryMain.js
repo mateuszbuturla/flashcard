@@ -39,6 +39,7 @@ class DashboardDictionaryMain extends React.Component {
 
     render() {
         const { dictionary, flashcardsId } = this.state;
+        const { secondLanguage } = this.props;
         return (
             <>
                 {
@@ -49,8 +50,19 @@ class DashboardDictionaryMain extends React.Component {
                                     <div className="dashboard-dictionary-main">
                                         <div className="dictionary-main-flashcards">
                                             <div className="dictionary-main-flashcards__container">
-                                                <p className="dictionary-main-flashcards__first">{dictionary.vocabulary[flashcardsId].en}</p>
-                                                <p className="dictionary-main-flashcards__second">{dictionary.vocabulary[flashcardsId].pl}</p>
+                                                {
+                                                    secondLanguage === 'en' ?
+                                                        <>
+                                                            <p className="dictionary-main-flashcards__first">{dictionary.vocabulary[flashcardsId].en}</p>
+                                                            <p className="dictionary-main-flashcards__second">{dictionary.vocabulary[flashcardsId].pl}</p>
+                                                        </>
+                                                        :
+                                                        <>
+                                                            <p className="dictionary-main-flashcards__first">{dictionary.vocabulary[flashcardsId].pl}</p>
+                                                            <p className="dictionary-main-flashcards__second">{dictionary.vocabulary[flashcardsId].en}</p>
+                                                        </>
+                                                }
+
                                             </div>
 
                                             <div className="dictionary-main-flashcards__nav">
