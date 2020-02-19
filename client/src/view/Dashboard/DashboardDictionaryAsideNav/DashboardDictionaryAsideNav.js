@@ -46,7 +46,7 @@ class DashboardDictionaryAsideNav extends React.Component {
     render() {
         const id = this.props.match.params.id;
         const { dictionary } = this.state;
-        const { hideAsideNav, changeLanguage } = this.props;
+        const { hideAsideNav, changeLanguage, secondLanguage } = this.props;
         return (
             <>
                 <NavLink to="/dashboard" className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
@@ -68,7 +68,10 @@ class DashboardDictionaryAsideNav extends React.Component {
                     </li>
                     <li className="aside-nav__list-element">
                         <p className="aside-nav__link" onClick={changeLanguage}>
-                            Przełącz język
+                            Przełącz na
+                            {
+                                secondLanguage === 'en' ? ' Polski' : ' Angielski'
+                            }
                         </p>
                     </li>
                 </ul>

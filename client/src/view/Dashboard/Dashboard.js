@@ -67,6 +67,7 @@ class Dashboard extends React.Component {
                                                 hideAsideNav={this.hideAsideNav.bind(this)}
                                                 user={user}
                                                 changeLanguage={this.changeSecondLanguage.bind(this)}
+                                                secondLanguage={secondLanguage}
                                             />
                                         }
                                     />
@@ -76,6 +77,7 @@ class Dashboard extends React.Component {
                                             hideAsideNav={this.hideAsideNav.bind(this)}
                                             user={user}
                                             changeLanguage={this.changeSecondLanguage.bind(this)}
+                                            secondLanguage={secondLanguage}
                                         />
                                         }
                                     />
@@ -86,6 +88,7 @@ class Dashboard extends React.Component {
                                             hideAsideNav={this.hideAsideNav.bind(this)}
                                             user={user}
                                             changeLanguage={this.changeSecondLanguage.bind(this)}
+                                            secondLanguage={secondLanguage}
                                         />
                                         }
                                     />
