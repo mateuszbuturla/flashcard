@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import LogoutIcon from '../../img/LogoutIcon.png';
+import SettingIcon from '../../img/SettingIcon.png';
 
 import './dashboardNav.sass';
 
@@ -25,7 +27,11 @@ class DashboardNav extends React.Component {
                     <p className="dashboard-nav__username" onClick={this.onClickShowUserBoxButton.bind(this)}>
                         {user.login}
                         <div className={`user-box-nav${showUserBox === true ? ' user-box-nav--active' : ''}`}>
-                            <button className="user-box-nav__button" onClick={logout}>
+                            <Link to='/dashboard/setting' className="user-box-nav__button">
+                                <img src={SettingIcon} alt="logout icon" className="user-box-nav__icon" />
+                                Ustawienia
+                            </Link>
+                            <button className="user-box-nav__button">
                                 <img src={LogoutIcon} alt="logout icon" className="user-box-nav__icon" />
                                 Wyloguj
                             </button>
