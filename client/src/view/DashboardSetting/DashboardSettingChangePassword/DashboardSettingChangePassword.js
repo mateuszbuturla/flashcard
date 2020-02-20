@@ -41,6 +41,12 @@ const Message = styled.p`
     margin-bottom: 20px;
 `;
 
+const ErrorLabel = styled.div`
+    margin-bottom: 20px;
+    margin-top: -20px;
+    color: #d11b1b;
+`;
+
 class DashboardSettingChangePassword extends React.Component {
 
     state = {
@@ -49,6 +55,7 @@ class DashboardSettingChangePassword extends React.Component {
         password: '',
         newPasswordValid: true,
         newPasswordRepeatValiad: true,
+        passwordValid: true,
         message: ''
     }
 
@@ -60,15 +67,19 @@ class DashboardSettingChangePassword extends React.Component {
         e.preventDefault();
         const { newPassword, newPasswordRepeat, password } = this.state;
         const { config, user } = this.props;
-        let newPasswordValid = true, newPasswordRepeatValiad = true;
+        let newPasswordValid = true, newPasswordRepeatValiad = true, passwordValid = true;
 
         if (newPassword.length < 8)
             newPasswordValid = false;
 
-        if (newPasswordRepeat.length < 8)
+        if (newPassword !== newPasswordRepeat)
             newPasswordRepeatValiad = false;
 
-        this.setState({ newPasswordValid, newPasswordRepeatValiad });
+        if (password === '')
+            passwordValid = false;
+
+
+        this.setState({ newPasswordValid, newPasswordRepeatValiad, passwordValid });
 
         if (newPasswordValid && newPasswordRepeatValiad) {
             try {
@@ -90,7 +101,7 @@ class DashboardSettingChangePassword extends React.Component {
     }
 
     render() {
-        const { newPassword, newPasswordRepeat, password, message } = this.state;
+        const { newPassword, newPasswordRepeat, password, message, newPasswordValid, newPasswordRepeatValiad, passwordValid } = this.state;
 
         return (
             <Form onSubmit={this.submitChangePasswordForm.bind(this)}>
@@ -102,18 +113,36 @@ class DashboardSettingChangePassword extends React.Component {
                     onChange={this.handleInputChange.bind(this)}
                     id="newPassword"
                 />
+                {
+                    newPasswordValid === false &&
+                    <ErrorLabel>
+                        <p>Za krótkie hasło</p>
+                    </ErrorLabel>
+                }
                 <Input type="password"
                     placeholder="Powtórz hasło"
                     value={newPasswordRepeat}
                     onChange={this.handleInputChange.bind(this)}
                     id="newPasswordRepeat"
                 />
+                {
+                    newPasswordRepeatValiad === false &&
+                    <ErrorLabel>
+                        <p>Hasła nie są identyczne</p>
+                    </ErrorLabel>
+                }
                 <Input type="password"
                     placeholder="Hasło"
                     value={password}
                     onChange={this.handleInputChange.bind(this)}
                     id="password"
                 />
+                {
+                    passwordValid === false &&
+                    <ErrorLabel>
+                        <p>To pole nie może być puste</p>
+                    </ErrorLabel>
+                }
                 <Button type="submit"
                     value="Zapisz zmiany"
                 />
