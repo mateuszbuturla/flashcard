@@ -9,7 +9,7 @@ import './dashboardSetting.sass';
 class DashboardSetting extends React.Component {
 
     render() {
-        const { user } = this.props;
+        const { user, config } = this.props;
 
         return (
             <div className="dashboard-setting">
@@ -21,8 +21,11 @@ class DashboardSetting extends React.Component {
                     <p>Zmień hasło</p>
                 </Link>
                 <Switch>
-                    <Route path='/dashboard/setting/changeusername' component={DashboardSettingChangeUsername} exact />
-                    <Route path='/dashboard/setting/changepassword' component={DashboardSettingChangePassword} exact />
+                    <Route path='/dashboard/setting/changeusername' component={props =>
+                        <DashboardSettingChangeUsername {...props} config={config} user={user} />
+                    } exact />
+                    <Route path='/dashboard/setting/changepassword' component={props =>
+                        <DashboardSettingChangePassword {...props} config={config} user={user} />} exact />
                 </Switch>
             </div>
         );

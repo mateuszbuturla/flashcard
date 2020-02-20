@@ -37,24 +37,65 @@ const Button = styled.input`
     }
 `;
 
+const Message = styled.p`
+    margin-bottom: 20px;
+`;
+
 class DashboardSettingChangePassword extends React.Component {
 
     state = {
         newPassword: '',
         newPasswordRepeat: '',
-        password: ''
+        password: '',
+        newPasswordValid: true,
+        newPasswordRepeatValiad: true,
+        message: ''
     }
 
     handleInputChange(e) {
         this.setState({ [e.target.id]: e.target.value });
     }
 
-    render() {
+    submitChangePasswordForm(e) {
+        e.preventDefault();
         const { newPassword, newPasswordRepeat, password } = this.state;
+        const { config, user } = this.props;
+        let newPasswordValid = true, newPasswordRepeatValiad = true;
+
+        if (newPassword.length < 8)
+            newPasswordValid = false;
+
+        if (newPasswordRepeat.length < 8)
+            newPasswordRepeatValiad = false;
+
+        this.setState({ newPasswordValid, newPasswordRepeatValiad });
+
+        if (newPasswordValid && newPasswordRepeatValiad) {
+            try {
+                fetch(`${config.api}/api/user/changepassword/${user._id}/${password}/${newPassword}`, { method: 'POST' })
+                    .then(r => r.json())
+                    .then(r => {
+                        if (r.status === 'correct') {
+                            this.setState({ message: 'Hasło zostało zmienione', newPassword: '', newPasswordRepeat: '', password: '' })
+                        }
+                        else if (r.status === 'incorrect') {
+                            this.setState({ message: 'Nie prawidłowe dane', password: '' })
+                        }
+                    })
+            }
+            catch {
+                this.setState({ message: 'Wystąpił problem po stronie serwera proszę spróbować ponownie później' })
+            }
+        }
+    }
+
+    render() {
+        const { newPassword, newPasswordRepeat, password, message } = this.state;
 
         return (
-            <Form className="change-username-form">
+            <Form onSubmit={this.submitChangePasswordForm.bind(this)}>
                 <H2>Zmiana hasła</H2>
+                {message !== '' && <Message>{message}</Message>}
                 <Input type="password"
                     placeholder="Nowe hasło"
                     value={newPassword}
