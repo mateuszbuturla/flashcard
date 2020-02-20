@@ -41,18 +41,55 @@ class DashboardSettingChangeUsername extends React.Component {
 
     state = {
         newUsername: '',
-        password: ''
+        password: '',
+        newUsernameValid: true,
+        passwordValid: true,
+        message: ''
     }
 
     handleInputChange(e) {
         this.setState({ [e.target.id]: e.target.value });
     }
 
+    submitChangeUsernameForm(e) {
+        e.preventDefault();
+        const { newUsername, password } = this.state;
+        const { config, user } = this.props;
+        let newUsernameValid = true, passwordValid = true;
+
+        if (newUsername.length < 5)
+            newUsernameValid = false;
+
+        if (password === '')
+            passwordValid = false;
+
+
+        this.setState({ newUsernameValid, passwordValid });
+
+        if (newUsernameValid && passwordValid) {
+            try {
+                fetch(`${config.api}/api/user/changeusername/${user._id}/${password}/${newUsername}`, { method: 'POST' })
+                    .then(r => r.json())
+                    .then(r => {
+                        if (r.status === 'correct') {
+                            this.setState({ message: 'Nazwa uytkownika została zmieniona', newUsername: '', password: '' })
+                        }
+                        else if (r.status === 'incorrect') {
+                            this.setState({ message: 'Nie prawidłowe dane', password: '' })
+                        }
+                    })
+            }
+            catch {
+                this.setState({ message: 'Wystąpił problem po stronie serwera proszę spróbować ponownie później' })
+            }
+        }
+    }
+
     render() {
         const { newUsername, password } = this.state;
 
         return (
-            <Form className="change-username-form">
+            <Form className="change-username-form" onSubmit={this.submitChangeUsernameForm.bind(this)}>
                 <H2>Zmiana nazwy użytkownika</H2>
                 <Input type="text"
                     placeholder="Nowa nazwa"
