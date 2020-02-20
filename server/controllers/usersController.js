@@ -39,3 +39,28 @@ exports.userAuth = async (req, res) => {
         res.status(500).json({ message: 'error' });
     }
 }
+
+exports.changePassword = async (req, res) => {
+    const { userid, password, newpassword } = req.params;
+    try {
+        if (userid && password && newpassword.length >= 8) {
+            const findUser = await userModel.find({ _id: userid, password: password });
+            if (findUser.length > 0) {
+                userModel.updateOne({ _id: userid }, { password: newpassword }, (err) => {
+                    if (err)
+                        return console.log(err)
+
+                    res.status(200).json({ status: 'correct' });
+                })
+            }
+            else {
+                res.status(200).json({ status: 'incorrect' });
+            }
+        }
+        else {
+            res.status(200).json({ status: 'incorrect' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'error' });
+    }
+}
