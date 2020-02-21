@@ -99,7 +99,7 @@ class DashboardSettingChangeUsername extends React.Component {
         const { newUsername, password, message, passwordValid, newUsernameValid } = this.state;
 
         return (
-            <Form className="change-username-form" onSubmit={this.submitChangeUsernameForm.bind(this)}>
+            <Form onSubmit={this.submitChangeUsernameForm.bind(this)}>
                 <H2>Zmiana nazwy użytkownika</H2>
                 {message !== '' && <Message>{message}</Message>}
                 <Input type="text"
