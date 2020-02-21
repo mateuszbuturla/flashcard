@@ -14,10 +14,10 @@ class DashboardSetting extends React.Component {
         return (
             <div className="dashboard-setting">
                 <h2 className="dashboard-setting__header">Witaj {user.login}</h2>
-                <Link to='/dashboard/setting/changeusername'>
+                <Link to='/dashboard/setting/changeusername' className="dashboard-setting__link">
                     <p>Zmień nazwę użytkownika</p>
                 </Link>
-                <Link to='/dashboard/setting/changepassword'>
+                <Link to='/dashboard/setting/changepassword' className="dashboard-setting__link">
                     <p>Zmień hasło</p>
                 </Link>
                 <Switch>
