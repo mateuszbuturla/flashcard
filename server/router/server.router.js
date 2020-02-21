@@ -11,6 +11,8 @@ module.exports = (app) => {
 
     app.post('/api/user/changeusername/:userid/:password/:newusername', usersController.changeUsername);
 
+    app.post('/api/user/usernameisexist/:username', usersController.usernameIsExist);
+
     app.post('/api/dictionary/create/:name/:owner/:login', dictionaryController.dictionaryCreate);
 
     app.post('/api/dictionary/get/:owner', dictionaryController.getDictionaries);

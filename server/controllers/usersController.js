@@ -89,3 +89,23 @@ exports.changeUsername = async (req, res) => {
         res.status(500).json({ message: 'error' });
     }
 }
+
+exports.usernameIsExist = async (req, res) => {
+    const { username } = req.params;
+    try {
+        if (username) {
+            const findUser = await userModel.find({ login: username });
+            if (findUser.length > 0) {
+                res.status(200).json({ exist: true });
+            }
+            else {
+                res.status(200).json({ exist: false });
+            }
+        }
+        else {
+            res.status(200).json({ status: 'incorrect' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'error' });
+    }
+}
