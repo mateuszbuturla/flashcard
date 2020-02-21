@@ -41,6 +41,12 @@ const Message = styled.p`
     margin-bottom: 20px;
 `;
 
+const ErrorLabel = styled.div`
+    margin-bottom: 20px;
+    margin-top: -20px;
+    color: #d11b1b;
+`;
+
 class DashboardSettingChangeUsername extends React.Component {
 
     state = {
@@ -90,7 +96,7 @@ class DashboardSettingChangeUsername extends React.Component {
     }
 
     render() {
-        const { newUsername, password, message } = this.state;
+        const { newUsername, password, message, passwordValid, newUsernameValid } = this.state;
 
         return (
             <Form className="change-username-form" onSubmit={this.submitChangeUsernameForm.bind(this)}>
@@ -102,12 +108,24 @@ class DashboardSettingChangeUsername extends React.Component {
                     onChange={this.handleInputChange.bind(this)}
                     id="newUsername"
                 />
+                {
+                    newUsernameValid === false &&
+                    <ErrorLabel>
+                        <p>Za krótkia nazwa użytkownika</p>
+                    </ErrorLabel>
+                }
                 <Input type="password"
                     placeholder="Hasło"
                     value={password}
                     onChange={this.handleInputChange.bind(this)}
                     id="password"
                 />
+                {
+                    passwordValid === false &&
+                    <ErrorLabel>
+                        <p>To pole nie może być puste</p>
+                    </ErrorLabel>
+                }
                 <Button type="submit"
                     value="Zapisz zmiany"
                 />
