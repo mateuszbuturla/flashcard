@@ -53,17 +53,37 @@ class DashboardSettingChangeUsername extends React.Component {
         newUsername: '',
         password: '',
         newUsernameValid: true,
+        newUsernameIsExistValid: true,
         passwordValid: true,
         message: ''
     }
 
-    handleInputChange(e) {
-        this.setState({ [e.target.id]: e.target.value });
+    usernameValid(username) {
+        const { config } = this.props;
+        try {
+            if (username) {
+                fetch(`${config.api}/api/user/usernameisexist/${username}`, { method: 'POST' })
+                    .then(r => r.json())
+                    .then(r => {
+                        this.setState({ newUsernameIsExistValid: !r.exist })
+                    })
+            }
+        }
+        catch {
+            this.setState({ message: 'Wystąpił problem po stronie serwera proszę spróbować ponownie później' })
+        }
     }
 
-    submitChangeUsernameForm(e) {
+    handleInputChange(e) {
+        this.setState({ [e.target.id]: e.target.value });
+        if (e.target.id === 'newUsername') {
+            this.usernameValid(e.target.value)
+        }
+    }
+
+    async submitChangeUsernameForm(e) {
         e.preventDefault();
-        const { newUsername, password } = this.state;
+        const { newUsername, password, newUsernameIsExistValid } = this.state;
         const { config, user } = this.props;
         let newUsernameValid = true, passwordValid = true;
 
@@ -73,10 +93,9 @@ class DashboardSettingChangeUsername extends React.Component {
         if (password === '')
             passwordValid = false;
 
-
         this.setState({ newUsernameValid, passwordValid });
 
-        if (newUsernameValid && passwordValid) {
+        if (newUsernameValid && passwordValid && newUsernameIsExistValid) {
             try {
                 fetch(`${config.api}/api/user/changeusername/${user._id}/${password}/${newUsername}`, { method: 'POST' })
                     .then(r => r.json())
@@ -96,7 +115,7 @@ class DashboardSettingChangeUsername extends React.Component {
     }
 
     render() {
-        const { newUsername, password, message, passwordValid, newUsernameValid } = this.state;
+        const { newUsername, password, message, passwordValid, newUsernameValid, newUsernameIsExistValid } = this.state;
 
         return (
             <Form onSubmit={this.submitChangeUsernameForm.bind(this)}>
@@ -112,6 +131,12 @@ class DashboardSettingChangeUsername extends React.Component {
                     newUsernameValid === false &&
                     <ErrorLabel>
                         <p>Za krótkia nazwa użytkownika</p>
+                    </ErrorLabel>
+                }
+                {
+                    newUsernameIsExistValid === false &&
+                    <ErrorLabel>
+                        <p>Podana nazwa użytkownika jest zajęta</p>
                     </ErrorLabel>
                 }
                 <Input type="password"
