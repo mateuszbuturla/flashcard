@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import PasswordValidation from '../../../validation/PasswordValidation';
+import RepeatPasswordValidation from '../../../validation/RepeatPasswordValidation';
+
 const Form = styled.form`
     margin-top: 20px;
     width: 90%;
@@ -59,29 +62,36 @@ class DashboardSettingChangePassword extends React.Component {
         message: ''
     }
 
+    async validInput(inputId, inputValue) {
+        switch (inputId) {
+            case 'newPassword':
+                const { newPasswordRepeat } = this.state;
+                this.setState({ newPasswordValid: PasswordValidation(inputValue) })
+                this.setState({ newPasswordRepeatValiad: RepeatPasswordValidation(inputValue, newPasswordRepeat) })
+                break;
+            case 'newPasswordRepeat':
+                const { newPassword } = this.state;
+                this.setState({ newPasswordRepeatValiad: RepeatPasswordValidation(inputValue, newPassword) })
+                break;
+            case 'password':
+                this.setState({ passwordValid: inputValue.length > 0 ? true : false })
+                break;
+            default:
+                break;
+        }
+    }
+
     handleInputChange(e) {
         this.setState({ [e.target.id]: e.target.value });
+        this.validInput(e.target.id, e.target.value);
     }
 
     submitChangePasswordForm(e) {
         e.preventDefault();
-        const { newPassword, newPasswordRepeat, password } = this.state;
+        const { newPassword, password, newPasswordValid, newPasswordRepeatValiad, passwordValid } = this.state;
         const { config, user } = this.props;
-        let newPasswordValid = true, newPasswordRepeatValiad = true, passwordValid = true;
 
-        if (newPassword.length < 8)
-            newPasswordValid = false;
-
-        if (newPassword !== newPasswordRepeat)
-            newPasswordRepeatValiad = false;
-
-        if (password === '')
-            passwordValid = false;
-
-
-        this.setState({ newPasswordValid, newPasswordRepeatValiad, passwordValid });
-
-        if (newPasswordValid && newPasswordRepeatValiad) {
+        if (newPasswordValid && newPasswordRepeatValiad && passwordValid) {
             try {
                 fetch(`${config.api}/api/user/changepassword/${user._id}/${password}/${newPassword}`, { method: 'POST' })
                     .then(r => r.json())
