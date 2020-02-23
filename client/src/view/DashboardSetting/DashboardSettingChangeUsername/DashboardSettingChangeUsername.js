@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import UsernameValidation from '../../../validation/UsernameValidation';
+
 const Form = styled.form`
     margin-top: 20px;
     width: 90%;
@@ -58,7 +60,21 @@ class DashboardSettingChangeUsername extends React.Component {
         message: ''
     }
 
-    usernameValid(username) {
+    async validInput(inputId, inputValue) {
+        switch (inputId) {
+            case 'newUsername':
+                this.setState({ newUsernameValid: UsernameValidation(inputValue) })
+                this.validUserNameIsExist(inputValue)
+                break;
+            case 'password':
+                this.setState({ passwordValid: inputValue.length > 0 ? true : false })
+                break;
+            default:
+                break;
+        }
+    }
+
+    validUserNameIsExist(username) {
         const { config } = this.props;
         try {
             if (username) {
@@ -76,24 +92,13 @@ class DashboardSettingChangeUsername extends React.Component {
 
     handleInputChange(e) {
         this.setState({ [e.target.id]: e.target.value });
-        if (e.target.id === 'newUsername') {
-            this.usernameValid(e.target.value)
-        }
+        this.validInput(e.target.id, e.target.value)
     }
 
-    async submitChangeUsernameForm(e) {
+    submitChangeUsernameForm(e) {
         e.preventDefault();
-        const { newUsername, password, newUsernameIsExistValid } = this.state;
+        const { newUsername, password, newUsernameIsExistValid, newUsernameValid, passwordValid } = this.state;
         const { config, user } = this.props;
-        let newUsernameValid = true, passwordValid = true;
-
-        if (newUsername.length < 5)
-            newUsernameValid = false;
-
-        if (password === '')
-            passwordValid = false;
-
-        this.setState({ newUsernameValid, passwordValid });
 
         if (newUsernameValid && passwordValid && newUsernameIsExistValid) {
             try {
