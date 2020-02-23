@@ -92,7 +92,6 @@ exports.changeUsername = async (req, res) => {
 
 exports.usernameIsExist = async (req, res) => {
     const { username } = req.params;
-    console.log(username)
     try {
         if (username) {
             const findUser = await userModel.find({ login: username });
