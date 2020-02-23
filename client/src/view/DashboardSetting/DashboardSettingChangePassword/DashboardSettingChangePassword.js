@@ -57,7 +57,7 @@ class DashboardSettingChangePassword extends React.Component {
         newPasswordRepeat: '',
         password: '',
         newPasswordValid: true,
-        newPasswordRepeatValiad: true,
+        newPasswordRepeatValid: true,
         passwordValid: true,
         message: ''
     }
@@ -67,11 +67,11 @@ class DashboardSettingChangePassword extends React.Component {
             case 'newPassword':
                 const { newPasswordRepeat } = this.state;
                 this.setState({ newPasswordValid: PasswordValidation(inputValue) })
-                this.setState({ newPasswordRepeatValiad: RepeatPasswordValidation(inputValue, newPasswordRepeat) })
+                this.setState({ newPasswordRepeatValid: RepeatPasswordValidation(inputValue, newPasswordRepeat) })
                 break;
             case 'newPasswordRepeat':
                 const { newPassword } = this.state;
-                this.setState({ newPasswordRepeatValiad: RepeatPasswordValidation(inputValue, newPassword) })
+                this.setState({ newPasswordRepeatValid: RepeatPasswordValidation(inputValue, newPassword) })
                 break;
             case 'password':
                 this.setState({ passwordValid: inputValue.length > 0 ? true : false })
@@ -88,10 +88,10 @@ class DashboardSettingChangePassword extends React.Component {
 
     submitChangePasswordForm(e) {
         e.preventDefault();
-        const { newPassword, password, newPasswordValid, newPasswordRepeatValiad, passwordValid } = this.state;
+        const { newPassword, password, newPasswordValid, newPasswordRepeatValid, passwordValid } = this.state;
         const { config, user } = this.props;
 
-        if (newPasswordValid && newPasswordRepeatValiad && passwordValid) {
+        if (newPasswordValid && newPasswordRepeatValid && passwordValid) {
             try {
                 fetch(`${config.api}/api/user/changepassword/${user._id}/${password}/${newPassword}`, { method: 'POST' })
                     .then(r => r.json())
@@ -111,7 +111,7 @@ class DashboardSettingChangePassword extends React.Component {
     }
 
     render() {
-        const { newPassword, newPasswordRepeat, password, message, newPasswordValid, newPasswordRepeatValiad, passwordValid } = this.state;
+        const { newPassword, newPasswordRepeat, password, message, newPasswordValid, newPasswordRepeatValid, passwordValid } = this.state;
 
         return (
             <Form onSubmit={this.submitChangePasswordForm.bind(this)}>
@@ -136,7 +136,7 @@ class DashboardSettingChangePassword extends React.Component {
                     id="newPasswordRepeat"
                 />
                 {
-                    newPasswordRepeatValiad === false &&
+                    newPasswordRepeatValid === false &&
                     <ErrorLabel>
                         <p>Hasła nie są identyczne</p>
                     </ErrorLabel>
