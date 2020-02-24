@@ -94,7 +94,7 @@ class DashboardDictionaryTest extends React.Component {
                                                     <p>Wynik:</p>
                                                     <p>Poprawne: {correctAnswers}</p>
                                                     <p>Nieprawidłowe: {incorrectAnswers}</p>
-                                                    <p>{dictionary.vocabulary.length / correctAnswers * 10}%</p>
+                                                    <p>{correctAnswers / dictionary.vocabulary.length * 100}%</p>
                                                 </>
                                                 :
                                                 <>
