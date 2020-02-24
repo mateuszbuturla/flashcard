@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './dashboardDictionaryTest.sass';
+
 class DashboardDictionaryTest extends React.Component {
 
     state = {
@@ -84,10 +86,10 @@ class DashboardDictionaryTest extends React.Component {
             <>
                 {
                     dictionary !== undefined ?
-                        <>
+                        <div className="dashboard-dictionary-test">
                             {
                                 dictionary.vocabulary.length > 0 ?
-                                    <div className="dashboard-dictionary-test">
+                                    <>
                                         {
                                             finishResult === true ?
                                                 <>
@@ -100,8 +102,8 @@ class DashboardDictionaryTest extends React.Component {
                                                 <>
                                                     {
                                                         showWordResult === false ?
-                                                            <>
-                                                                <p>
+                                                            <div className="dictionary-test">
+                                                                <p className="dictionary-test__word">
                                                                     {
                                                                         secondLanguage === 'en' ?
                                                                             dictionary.vocabulary[currentVocabulary].en
@@ -115,10 +117,14 @@ class DashboardDictionaryTest extends React.Component {
                                                                         value={answerInput}
                                                                         onChange={this.handleInputChange.bind(this)}
                                                                         id="answerInput"
+                                                                        className="dictionary-test__answer-input"
                                                                     />
-                                                                    <input type="submit" value="Zatwierdź" />
+                                                                    <input type="submit"
+                                                                        value="Zatwierdź"
+                                                                        className="dictionary-test__submit"
+                                                                    />
                                                                 </form>
-                                                            </>
+                                                            </div>
                                                             :
                                                             <>
                                                                 <p>
@@ -144,11 +150,11 @@ class DashboardDictionaryTest extends React.Component {
                                                     }
                                                 </>
                                         }
-                                    </div>
+                                    </>
                                     :
                                     <p className="dashboard__announcement">Nie posiadasz jeszcze rzadnych słówek w tym zbiorze</p>
                             }
-                        </>
+                        </div>
                         :
                         <>
                             <p className="dashboard__announcement">Taki słownik nie istnieje lub nie należy do Ciebie</p>
