@@ -7,6 +7,7 @@ import DashboardMain from '../DashboardMain/DashboardMain';
 import DashboardMainAsideNav from './DashboardMainAsideNav/DashboardMainAsideNav';
 import DashboardCreateKit from '../DashboardCreateKit/DashboardCreateKit';
 import DashboardDictionaryMain from '../DashboardDictionaryMain/DashboardDictionaryMain';
+import DashboardDictionaryTest from '../DashboardDictionaryTest/DashboardDictionaryTest';
 import DashboardEditDictionary from '../DashboardEditDictionary/DashboardEditDictionary';
 import DashboardDictionaryAsideNav from './DashboardDictionaryAsideNav/DashboardDictionaryAsideNav';
 import DashboardSetting from '../DashboardSetting/DashboardSetting';
@@ -104,6 +105,7 @@ class Dashboard extends React.Component {
                     <div className="dashboard__main">
                         <Switch>
                             <Route path='/dashboard/setting' component={props => <DashboardSetting {...props} config={config} user={user} />} />
+                            <Route path='/dashboard/dictionary/test/:id' component={props => <DashboardDictionaryTest {...props} config={config} user={user} secondLanguage={secondLanguage} />} exact />
                             <Route path='/dashboard/dictionary/edit/:id' component={props => <DashboardEditDictionary {...props} config={config} user={user} />} exact />
                             <Route path='/dashboard/dictionary/main/:id' component={props => <DashboardDictionaryMain {...props} config={config} user={user} secondLanguage={secondLanguage} />} exact />
                             <Route path='/dashboard' component={props => <DashboardMain {...props} config={config} user={user} />} exact />
