@@ -9,7 +9,8 @@ class DashboardDictionaryTest extends React.Component {
         showWordResult: false,
         lastAnswerCorrect: false,
         correctAnswers: 0,
-        incorrectAnswers: 0
+        incorrectAnswers: 0,
+        finishResult: false
     }
 
     handleInputChange(e) {
@@ -70,11 +71,14 @@ class DashboardDictionaryTest extends React.Component {
             if (prevState.currentVocabulary < prevState.dictionary.vocabulary.length - 1) {
                 return { currentVocabulary: prevState.currentVocabulary + 1, showWordResult: false }
             }
+            else {
+                return { finishResult: true }
+            }
         })
     }
 
     render() {
-        const { dictionary, currentVocabulary, answerInput, showWordResult, lastAnswerCorrect } = this.state;
+        const { dictionary, currentVocabulary, answerInput, showWordResult, lastAnswerCorrect, finishResult, correctAnswers, incorrectAnswers } = this.state;
         const { secondLanguage } = this.props;
         return (
             <>
@@ -85,47 +89,59 @@ class DashboardDictionaryTest extends React.Component {
                                 dictionary.vocabulary.length > 0 ?
                                     <div className="dashboard-dictionary-test">
                                         {
-                                            showWordResult === false ?
+                                            finishResult === true ?
                                                 <>
-                                                    <p>
-                                                        {
-                                                            secondLanguage === 'en' ?
-                                                                dictionary.vocabulary[currentVocabulary].en
-                                                                :
-                                                                dictionary.vocabulary[currentVocabulary].pl
-                                                        }
-                                                    </p>
-                                                    <form onSubmit={this.submitTranslateForm.bind(this)}>
-                                                        <input type="text"
-                                                            placeholder="Tłumaczenie"
-                                                            value={answerInput}
-                                                            onChange={this.handleInputChange.bind(this)}
-                                                            id="answerInput"
-                                                        />
-                                                        <input type="submit" value="Zatwierdź" />
-                                                    </form>
+                                                    <p>Wynik:</p>
+                                                    <p>Poprawne: {correctAnswers}</p>
+                                                    <p>Nieprawidłowe: {incorrectAnswers}</p>
+                                                    <p>{dictionary.vocabulary.length / correctAnswers * 10}%</p>
                                                 </>
                                                 :
                                                 <>
-                                                    <p>
-                                                        {
-                                                            secondLanguage === 'en' ?
-                                                                dictionary.vocabulary[currentVocabulary].en
-                                                                :
-                                                                dictionary.vocabulary[currentVocabulary].pl
-                                                        }
-                                                    </p>
-                                                    <p className="word-result__status">
-                                                        {
-                                                            lastAnswerCorrect === true ?
-                                                                'Dobrze'
-                                                                :
-                                                                'Źle'
-                                                        }
-                                                    </p>
-                                                    <button onClick={this.nextWord.bind(this)}>
-                                                        Następne słowo
+                                                    {
+                                                        showWordResult === false ?
+                                                            <>
+                                                                <p>
+                                                                    {
+                                                                        secondLanguage === 'en' ?
+                                                                            dictionary.vocabulary[currentVocabulary].en
+                                                                            :
+                                                                            dictionary.vocabulary[currentVocabulary].pl
+                                                                    }
+                                                                </p>
+                                                                <form onSubmit={this.submitTranslateForm.bind(this)}>
+                                                                    <input type="text"
+                                                                        placeholder="Tłumaczenie"
+                                                                        value={answerInput}
+                                                                        onChange={this.handleInputChange.bind(this)}
+                                                                        id="answerInput"
+                                                                    />
+                                                                    <input type="submit" value="Zatwierdź" />
+                                                                </form>
+                                                            </>
+                                                            :
+                                                            <>
+                                                                <p>
+                                                                    {
+                                                                        secondLanguage === 'en' ?
+                                                                            dictionary.vocabulary[currentVocabulary].en
+                                                                            :
+                                                                            dictionary.vocabulary[currentVocabulary].pl
+                                                                    }
+                                                                </p>
+                                                                <p className="word-result__status">
+                                                                    {
+                                                                        lastAnswerCorrect === true ?
+                                                                            'Dobrze'
+                                                                            :
+                                                                            'Źle'
+                                                                    }
+                                                                </p>
+                                                                <button onClick={this.nextWord.bind(this)}>
+                                                                    Następne słowo
                                                     </button>
+                                                            </>
+                                                    }
                                                 </>
                                         }
                                     </div>
