@@ -95,7 +95,7 @@ class DashboardEditDictionary extends React.Component {
                         </div>
                         <button className="dashboard-edit-dictionary__add-button" onClick={this.createNewWord.bind(this)}>Dodaj pojęcie</button>
                         <br />
-                        <button className="dashboard-edit-dictionary__add-button" onClick={this.saveDictionary.bind(this)}>Zapisz</button>
+                        <button className="dashboard-edit-dictionary__save-button" onClick={this.saveDictionary.bind(this)}>Zapisz</button>
                     </>
                 }
             </div>
