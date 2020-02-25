@@ -126,8 +126,8 @@ class DashboardDictionaryTest extends React.Component {
                                                                 </form>
                                                             </div>
                                                             :
-                                                            <>
-                                                                <p>
+                                                            <div className="dictionary-word-result">
+                                                                <p className="dictionary-word-result__word-in-second-language">
                                                                     {
                                                                         secondLanguage === 'en' ?
                                                                             dictionary.vocabulary[currentVocabulary].en
@@ -135,7 +135,15 @@ class DashboardDictionaryTest extends React.Component {
                                                                             dictionary.vocabulary[currentVocabulary].pl
                                                                     }
                                                                 </p>
-                                                                <p className="word-result__status">
+                                                                <p className="dictionary-word-result__word-in-translate-language">
+                                                                    {
+                                                                        secondLanguage === 'en' ?
+                                                                            dictionary.vocabulary[currentVocabulary].pl
+                                                                            :
+                                                                            dictionary.vocabulary[currentVocabulary].en
+                                                                    }
+                                                                </p>
+                                                                <p className="dictionary-word-result__status">
                                                                     {
                                                                         lastAnswerCorrect === true ?
                                                                             'Dobrze'
@@ -143,10 +151,10 @@ class DashboardDictionaryTest extends React.Component {
                                                                             'Źle'
                                                                     }
                                                                 </p>
-                                                                <button onClick={this.nextWord.bind(this)}>
+                                                                <button onClick={this.nextWord.bind(this)} className="dictionary-word-result__button">
                                                                     Następne słowo
-                                                    </button>
-                                                            </>
+                                                                </button>
+                                                            </div>
                                                     }
                                                 </>
                                         }
