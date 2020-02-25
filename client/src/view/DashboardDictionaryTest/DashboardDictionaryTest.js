@@ -143,7 +143,9 @@ class DashboardDictionaryTest extends React.Component {
                                                                             dictionary.vocabulary[currentVocabulary].en
                                                                     }
                                                                 </p>
-                                                                <p className="dictionary-word-result__status">
+                                                                <p className={`dictionary-word-result__status  ${lastAnswerCorrect === true && 'dictionary-word-result__status--correct'
+                                                                    }
+                                                            `}>
                                                                     {
                                                                         lastAnswerCorrect === true ?
                                                                             'Dobrze'
