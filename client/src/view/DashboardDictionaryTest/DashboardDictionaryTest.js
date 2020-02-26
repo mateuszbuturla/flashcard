@@ -92,12 +92,12 @@ class DashboardDictionaryTest extends React.Component {
                                     <>
                                         {
                                             finishResult === true ?
-                                                <>
-                                                    <p>Wynik:</p>
-                                                    <p>Poprawne: {correctAnswers}</p>
-                                                    <p>Nieprawidłowe: {incorrectAnswers}</p>
-                                                    <p>{correctAnswers / dictionary.vocabulary.length * 100}%</p>
-                                                </>
+                                                <div className="dictionary-test-result">
+                                                    <p className="dictionary-test-result__header">Wynik:</p>
+                                                    <p className="dictionary-test-result__result dictionary-test-result__result--green">Poprawne: {correctAnswers}</p>
+                                                    <p className="dictionary-test-result__result dictionary-test-result__result--red">Nieprawidłowe: {incorrectAnswers}</p>
+                                                    <p className="dictionary-test-result__result">{correctAnswers / dictionary.vocabulary.length * 100}%</p>
+                                                </div>
                                                 :
                                                 <>
                                                     {
