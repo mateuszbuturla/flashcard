@@ -11,14 +11,14 @@ class DashboardCreateKit extends React.Component {
     }
 
     handleInputChange(e) {
-        this.setState({ [e.target.id]: e.target.value });
+        this.setState({ [e.target.id]: e.target.value, nameValid: e.target.value === '' ? false : true });
     }
 
     submitCreateKitForm(e) {
         e.preventDefault();
-        const { name } = this.state;
+        const { nameValid, name } = this.state;
         const { config, user } = this.props;
-        if (name !== '') {
+        if (nameValid) {
             this.setState({ nameValid: true })
             try {
                 fetch(`${config.api}/api/dictionary/create/${name}/${user._id}/${user.login}`, { method: 'POST' })
@@ -35,9 +35,6 @@ class DashboardCreateKit extends React.Component {
             catch {
                 this.setState({ message: 'Wystąpił błąd spróbuj ponownie później' })
             }
-        }
-        else {
-            this.setState({ nameValid: false })
         }
     }
 
