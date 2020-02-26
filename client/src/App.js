@@ -10,6 +10,7 @@ import './mixins.sass';
 import Home from './view/Home/Home';
 import LoginRegister from './view/LoginRegister/LoginRegister';
 import Dashboard from './view/Dashboard/Dashboard';
+import NoMatch from './view/NoMatch/NoMatch';
 
 class App extends React.Component {
 
@@ -49,6 +50,7 @@ class App extends React.Component {
 							else
 								return (<Redirect to='/dashboard' />)
 						}} exact />
+						<Route component={NoMatch} />
 					</Switch>
 				</BrowserRouter>
 			</div>
