@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 import Nav from '../../components/Home/Nav';
+import SelectFormButton from '../../components/LoginRegister/SelectFormButton';
 import Message from '../../components/LoginRegister/Message';
 import LoginForm from '../../components/LoginRegister/LoginForm';
 import RegisterForm from '../../components/LoginRegister/RegisterForm';
@@ -121,18 +122,11 @@ class LoginRegister extends React.Component {
                     user !== undefined &&
                     <Redirect to='/dashboard' />
                 }
-
                 <Nav />
-
                 <section className="login-register">
                     <div className="login-register-form-container">
-                        <div className="select-form-input">
-                            <button id="login" onClick={this.changeForm.bind(this)} className={`select-form-input__button${currentForm === 'login' ? ' select-form-input__button--active' : ''}`}>Logowanie</button>
-                            <button id="register" onClick={this.changeForm.bind(this)} className={`select-form-input__button${currentForm === 'register' ? ' select-form-input__button--active' : ''}`}>Rejestracja</button>
-                        </div>
-
+                        <SelectFormButton changeForm={this.changeForm.bind(this)} currentForm={currentForm} />
                         <Message message={message} />
-
                         <LoginForm
                             submitLoginForm={this.submitLoginForm.bind(this)}
                             currentForm={currentForm}
@@ -142,7 +136,6 @@ class LoginRegister extends React.Component {
                             loginPassword={loginPassword}
                             loginPasswordValid={loginPasswordValid}
                         />
-
                         <RegisterForm
                             submitRegisterForm={this.submitRegisterForm.bind(this)}
                             currentForm={currentForm}
@@ -154,10 +147,8 @@ class LoginRegister extends React.Component {
                             registerRepeatPassword={registerRepeatPassword}
                             registerRepeatPasswordValid={registerRepeatPasswordValid}
                         />
-
                     </div>
                 </section>
-
                 <Footer />
             </>
         );
