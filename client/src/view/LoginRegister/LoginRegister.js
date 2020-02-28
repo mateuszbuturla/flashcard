@@ -2,6 +2,13 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
+import Nav from '../../components/Home/Nav';
+import SelectFormButton from '../../components/LoginRegister/SelectFormButton';
+import Message from '../../components/LoginRegister/Message';
+import LoginForm from '../../components/LoginRegister/LoginForm';
+import RegisterForm from '../../components/LoginRegister/RegisterForm';
+import Footer from '../../components/FullWidthFooter/Footer';
+
 import './loginRegister.sass';
 
 class LoginRegister extends React.Component {
@@ -115,115 +122,34 @@ class LoginRegister extends React.Component {
                     user !== undefined &&
                     <Redirect to='/dashboard' />
                 }
-                <nav className="home-nav">
-                    <Link to='/login'>
-                        <button className="home-nav__button">Zaloguj się</button>
-                    </Link>
-                    <Link to='/register'>
-                        <button className="home-nav__button home-nav__button--gradient">Zarejestruj się</button>
-                    </Link>
-                </nav>
-
+                <Nav />
                 <section className="login-register">
                     <div className="login-register-form-container">
-                        <div className="select-form-input">
-                            <button id="login" onClick={this.changeForm.bind(this)} className={`select-form-input__button${currentForm === 'login' ? ' select-form-input__button--active' : ''}`}>Logowanie</button>
-                            <button id="register" onClick={this.changeForm.bind(this)} className={`select-form-input__button${currentForm === 'register' ? ' select-form-input__button--active' : ''}`}>Rejestracja</button>
-                        </div>
-
-                        {message !== '' && <p className="login-register__message">{message}</p>}
-
-                        <form onSubmit={this.submitLoginForm.bind(this)} className={`login-register-form${currentForm === 'login' ? ' login-register-form--active' : ''}`}>
-                            <input
-                                type="text"
-                                id="loginLogin"
-                                placeholder="Nazwa użytkownika"
-                                className="login-register-form__input"
-                                onChange={this.handleInputChange.bind(this)}
-                                value={loginLogin}
-                            />
-                            {
-                                loginLoginValid === false &&
-                                <div className="login-register__error">
-                                    <p>To pole jest wymagane</p>
-                                </div>
-                            }
-                            <input
-                                type="password"
-                                id="loginPassword"
-                                placeholder="Hasło"
-                                className="login-register-form__input"
-                                onChange={this.handleInputChange.bind(this)}
-                                value={loginPassword}
-                            />
-                            {
-                                loginPasswordValid === false &&
-                                <div className="login-register__error">
-                                    <p>To pole jest wyamagane</p>
-                                </div>
-                            }
-                            <input
-                                type="submit"
-                                value="Zaloguj się"
-                                className="login-register-form__submit"
-                            />
-                        </form>
-
-                        <form onSubmit={this.submitRegisterForm.bind(this)} className={`login-register-form${currentForm === 'register' ? ' login-register-form--active' : ''}`}>
-                            <input
-                                type="text"
-                                id="registerLogin"
-                                placeholder="Nazwa użytkownika"
-                                className="login-register-form__input"
-                                onChange={this.handleInputChange.bind(this)}
-                                value={registerLogin}
-                            />
-                            {
-                                registerLoginValid === false &&
-                                <div className="login-register__error">
-                                    <p>Za krótka nazwa użytkownika</p>
-                                </div>
-                            }
-                            <input
-                                type="password"
-                                id="registerPassword"
-                                placeholder="Hasło"
-                                className="login-register-form__input"
-                                onChange={this.handleInputChange.bind(this)}
-                                value={registerPassword}
-                            />
-                            {
-                                registerPasswordValid === false &&
-                                <div className="login-register__error">
-                                    <p className="login-register__error">Za krótkie hasło</p>
-                                </div>
-                            }
-                            <input
-                                type="password"
-                                id="registerRepeatPassword"
-                                placeholder="Powtórz hasło"
-                                className="login-register-form__input"
-                                onChange={this.handleInputChange.bind(this)}
-                                value={registerRepeatPassword}
-                            />
-                            {
-                                registerRepeatPasswordValid === false &&
-                                <div className="login-register__error">
-                                    <p className="login-register__error">Podane hasła nie są identyczne</p>
-                                </div>
-                            }
-                            <input
-                                type="submit"
-                                value="Zarejestuj się"
-                                className="login-register-form__submit"
-                            />
-                        </form>
+                        <SelectFormButton changeForm={this.changeForm.bind(this)} currentForm={currentForm} />
+                        <Message message={message} />
+                        <LoginForm
+                            submitLoginForm={this.submitLoginForm.bind(this)}
+                            currentForm={currentForm}
+                            handleInputChange={this.handleInputChange.bind(this)}
+                            loginLogin={loginLogin}
+                            loginLoginValid={loginLoginValid}
+                            loginPassword={loginPassword}
+                            loginPasswordValid={loginPasswordValid}
+                        />
+                        <RegisterForm
+                            submitRegisterForm={this.submitRegisterForm.bind(this)}
+                            currentForm={currentForm}
+                            handleInputChange={this.handleInputChange.bind(this)}
+                            registerLogin={registerLogin}
+                            registerLoginValid={registerLoginValid}
+                            registerPassword={registerPassword}
+                            registerPasswordValid={registerPasswordValid}
+                            registerRepeatPassword={registerRepeatPassword}
+                            registerRepeatPasswordValid={registerRepeatPasswordValid}
+                        />
                     </div>
                 </section>
-
-                <footer className="home-footer">
-                    Mateusz Buturla 2020
-                </footer>
+                <Footer />
             </>
         );
     }
