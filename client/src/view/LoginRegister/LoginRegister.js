@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 import LoginForm from '../../components/LoginRegister/LoginForm';
+import RegisterForm from '../../components/LoginRegister/RegisterForm';
 
 import './loginRegister.sass';
 
@@ -145,55 +146,18 @@ class LoginRegister extends React.Component {
                             loginPasswordValid={loginPasswordValid}
                         />
 
-                        <form onSubmit={this.submitRegisterForm.bind(this)} className={`login-register-form${currentForm === 'register' ? ' login-register-form--active' : ''}`}>
-                            <input
-                                type="text"
-                                id="registerLogin"
-                                placeholder="Nazwa użytkownika"
-                                className="login-register-form__input"
-                                onChange={this.handleInputChange.bind(this)}
-                                value={registerLogin}
-                            />
-                            {
-                                registerLoginValid === false &&
-                                <div className="login-register__error">
-                                    <p>Za krótka nazwa użytkownika</p>
-                                </div>
-                            }
-                            <input
-                                type="password"
-                                id="registerPassword"
-                                placeholder="Hasło"
-                                className="login-register-form__input"
-                                onChange={this.handleInputChange.bind(this)}
-                                value={registerPassword}
-                            />
-                            {
-                                registerPasswordValid === false &&
-                                <div className="login-register__error">
-                                    <p className="login-register__error">Za krótkie hasło</p>
-                                </div>
-                            }
-                            <input
-                                type="password"
-                                id="registerRepeatPassword"
-                                placeholder="Powtórz hasło"
-                                className="login-register-form__input"
-                                onChange={this.handleInputChange.bind(this)}
-                                value={registerRepeatPassword}
-                            />
-                            {
-                                registerRepeatPasswordValid === false &&
-                                <div className="login-register__error">
-                                    <p className="login-register__error">Podane hasła nie są identyczne</p>
-                                </div>
-                            }
-                            <input
-                                type="submit"
-                                value="Zarejestuj się"
-                                className="login-register-form__submit"
-                            />
-                        </form>
+                        <RegisterForm
+                            submitRegisterForm={this.submitRegisterForm.bind(this)}
+                            currentForm={currentForm}
+                            handleInputChange={this.handleInputChange.bind(this)}
+                            registerLogin={registerLogin}
+                            registerLoginValid={registerLoginValid}
+                            registerPassword={registerPassword}
+                            registerPasswordValid={registerPasswordValid}
+                            registerRepeatPassword={registerRepeatPassword}
+                            registerRepeatPasswordValid={registerRepeatPasswordValid}
+                        />
+
                     </div>
                 </section>
 
