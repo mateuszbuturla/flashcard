@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
+import Message from '../../components/LoginRegister/Message';
 import LoginForm from '../../components/LoginRegister/LoginForm';
 import RegisterForm from '../../components/LoginRegister/RegisterForm';
 
@@ -134,7 +135,7 @@ class LoginRegister extends React.Component {
                             <button id="register" onClick={this.changeForm.bind(this)} className={`select-form-input__button${currentForm === 'register' ? ' select-form-input__button--active' : ''}`}>Rejestracja</button>
                         </div>
 
-                        {message !== '' && <p className="login-register__message">{message}</p>}
+                        <Message message={message} />
 
                         <LoginForm
                             submitLoginForm={this.submitLoginForm.bind(this)}
