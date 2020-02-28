@@ -5,6 +5,7 @@ import Cookies from 'universal-cookie';
 import Message from '../../components/LoginRegister/Message';
 import LoginForm from '../../components/LoginRegister/LoginForm';
 import RegisterForm from '../../components/LoginRegister/RegisterForm';
+import Footer from '../../components/FullWidthFooter/Footer';
 
 import './loginRegister.sass';
 
@@ -162,9 +163,7 @@ class LoginRegister extends React.Component {
                     </div>
                 </section>
 
-                <footer className="home-footer">
-                    Mateusz Buturla 2020
-                </footer>
+                <Footer />
             </>
         );
     }
