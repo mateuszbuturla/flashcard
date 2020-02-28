@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
+import LoginForm from '../../components/LoginRegister/LoginForm';
+
 import './loginRegister.sass';
 
 class LoginRegister extends React.Component {
@@ -133,41 +135,15 @@ class LoginRegister extends React.Component {
 
                         {message !== '' && <p className="login-register__message">{message}</p>}
 
-                        <form onSubmit={this.submitLoginForm.bind(this)} className={`login-register-form${currentForm === 'login' ? ' login-register-form--active' : ''}`}>
-                            <input
-                                type="text"
-                                id="loginLogin"
-                                placeholder="Nazwa użytkownika"
-                                className="login-register-form__input"
-                                onChange={this.handleInputChange.bind(this)}
-                                value={loginLogin}
-                            />
-                            {
-                                loginLoginValid === false &&
-                                <div className="login-register__error">
-                                    <p>To pole jest wymagane</p>
-                                </div>
-                            }
-                            <input
-                                type="password"
-                                id="loginPassword"
-                                placeholder="Hasło"
-                                className="login-register-form__input"
-                                onChange={this.handleInputChange.bind(this)}
-                                value={loginPassword}
-                            />
-                            {
-                                loginPasswordValid === false &&
-                                <div className="login-register__error">
-                                    <p>To pole jest wyamagane</p>
-                                </div>
-                            }
-                            <input
-                                type="submit"
-                                value="Zaloguj się"
-                                className="login-register-form__submit"
-                            />
-                        </form>
+                        <LoginForm
+                            submitLoginForm={this.submitLoginForm.bind(this)}
+                            currentForm={currentForm}
+                            handleInputChange={this.handleInputChange.bind(this)}
+                            loginLogin={loginLogin}
+                            loginLoginValid={loginLoginValid}
+                            loginPassword={loginPassword}
+                            loginPasswordValid={loginPasswordValid}
+                        />
 
                         <form onSubmit={this.submitRegisterForm.bind(this)} className={`login-register-form${currentForm === 'register' ? ' login-register-form--active' : ''}`}>
                             <input
