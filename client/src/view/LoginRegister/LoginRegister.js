@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
+import Nav from '../../components/Home/Nav';
 import Message from '../../components/LoginRegister/Message';
 import LoginForm from '../../components/LoginRegister/LoginForm';
 import RegisterForm from '../../components/LoginRegister/RegisterForm';
@@ -120,14 +121,8 @@ class LoginRegister extends React.Component {
                     user !== undefined &&
                     <Redirect to='/dashboard' />
                 }
-                <nav className="home-nav">
-                    <Link to='/login'>
-                        <button className="home-nav__button">Zaloguj się</button>
-                    </Link>
-                    <Link to='/register'>
-                        <button className="home-nav__button home-nav__button--gradient">Zarejestruj się</button>
-                    </Link>
-                </nav>
+
+                <Nav />
 
                 <section className="login-register">
                     <div className="login-register-form-container">
