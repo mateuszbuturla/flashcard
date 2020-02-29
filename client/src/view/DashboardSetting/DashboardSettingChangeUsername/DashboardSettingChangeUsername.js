@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 import UsernameValidation from '../../../validation/UsernameValidation';
 
+import Message from '../../../components/Message';
+import ErrorInputValid from '../../../components/ErrorInputValid';
+
 const Form = styled.form`
     margin-top: 20px;
     width: 90%;
@@ -37,16 +40,6 @@ const Button = styled.input`
     :active {
        outline: 0;
     }
-`;
-
-const Message = styled.p`
-    margin-bottom: 20px;
-`;
-
-const ErrorLabel = styled.div`
-    margin-bottom: 20px;
-    margin-top: -20px;
-    color: #d11b1b;
 `;
 
 class DashboardSettingChangeUsername extends React.Component {
@@ -125,37 +118,22 @@ class DashboardSettingChangeUsername extends React.Component {
         return (
             <Form onSubmit={this.submitChangeUsernameForm.bind(this)}>
                 <H2>Zmiana nazwy użytkownika</H2>
-                {message !== '' && <Message>{message}</Message>}
+                <Message message={message} />
                 <Input type="text"
                     placeholder="Nowa nazwa"
                     value={newUsername}
                     onChange={this.handleInputChange.bind(this)}
                     id="newUsername"
                 />
-                {
-                    newUsernameValid === false &&
-                    <ErrorLabel>
-                        <p>Za krótkia nazwa użytkownika</p>
-                    </ErrorLabel>
-                }
-                {
-                    newUsernameIsExistValid === false &&
-                    <ErrorLabel>
-                        <p>Podana nazwa użytkownika jest zajęta</p>
-                    </ErrorLabel>
-                }
+                <ErrorInputValid valid={newUsernameValid} message="Za krótkia nazwa użytkownika" />
+                <ErrorInputValid valid={newUsernameIsExistValid} message="Podana nazwa użytkownika jest zajęta" />
                 <Input type="password"
                     placeholder="Hasło"
                     value={password}
                     onChange={this.handleInputChange.bind(this)}
                     id="password"
                 />
-                {
-                    passwordValid === false &&
-                    <ErrorLabel>
-                        <p>To pole nie może być puste</p>
-                    </ErrorLabel>
-                }
+                <ErrorInputValid valid={passwordValid} message="To pole nie może być puste" />
                 <Button type="submit"
                     value="Zapisz zmiany"
                 />
