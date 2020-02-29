@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import UsernameValidation from '../../../validation/UsernameValidation';
+import PasswordValidation from '../../validation/PasswordValidation';
+import RepeatPasswordValidation from '../../validation/RepeatPasswordValidation';
 
-import Message from '../../../components/Message';
-import ErrorInputValid from '../../../components/ErrorInputValid';
+import Message from '../Message';
+import ErrorInputValid from '../ErrorInputValid';
 
 const Form = styled.form`
     margin-top: 20px;
@@ -42,22 +43,28 @@ const Button = styled.input`
     }
 `;
 
-class DashboardSettingChangeUsername extends React.Component {
+class ChangePassword extends React.Component {
 
     state = {
-        newUsername: '',
+        newPassword: '',
+        newPasswordRepeat: '',
         password: '',
-        newUsernameValid: true,
-        newUsernameIsExistValid: true,
+        newPasswordValid: true,
+        newPasswordRepeatValid: true,
         passwordValid: true,
         message: ''
     }
 
     async validInput(inputId, inputValue) {
         switch (inputId) {
-            case 'newUsername':
-                this.setState({ newUsernameValid: UsernameValidation(inputValue) })
-                this.validUserNameIsExist(inputValue)
+            case 'newPassword':
+                const { newPasswordRepeat } = this.state;
+                this.setState({ newPasswordValid: PasswordValidation(inputValue) })
+                this.setState({ newPasswordRepeatValid: RepeatPasswordValidation(inputValue, newPasswordRepeat) })
+                break;
+            case 'newPasswordRepeat':
+                const { newPassword } = this.state;
+                this.setState({ newPasswordRepeatValid: RepeatPasswordValidation(inputValue, newPassword) })
                 break;
             case 'password':
                 this.setState({ passwordValid: inputValue.length > 0 ? true : false })
@@ -67,39 +74,23 @@ class DashboardSettingChangeUsername extends React.Component {
         }
     }
 
-    validUserNameIsExist(username) {
-        const { config } = this.props;
-        try {
-            if (username) {
-                fetch(`${config.api}/api/user/usernameisexist/${username}`, { method: 'POST' })
-                    .then(r => r.json())
-                    .then(r => {
-                        this.setState({ newUsernameIsExistValid: !r.exist })
-                    })
-            }
-        }
-        catch {
-            this.setState({ message: 'Wystąpił problem po stronie serwera proszę spróbować ponownie później' })
-        }
-    }
-
     handleInputChange(e) {
         this.setState({ [e.target.id]: e.target.value });
-        this.validInput(e.target.id, e.target.value)
+        this.validInput(e.target.id, e.target.value);
     }
 
-    submitChangeUsernameForm(e) {
+    submitChangePasswordForm(e) {
         e.preventDefault();
-        const { newUsername, password, newUsernameIsExistValid, newUsernameValid, passwordValid } = this.state;
+        const { newPassword, password, newPasswordValid, newPasswordRepeatValid, passwordValid } = this.state;
         const { config, user } = this.props;
 
-        if (newUsernameValid && passwordValid && newUsernameIsExistValid) {
+        if (newPasswordValid && newPasswordRepeatValid && passwordValid) {
             try {
-                fetch(`${config.api}/api/user/changeusername/${user._id}/${password}/${newUsername}`, { method: 'POST' })
+                fetch(`${config.api}/api/user/changepassword/${user._id}/${password}/${newPassword}`, { method: 'POST' })
                     .then(r => r.json())
                     .then(r => {
                         if (r.status === 'correct') {
-                            this.setState({ message: 'Nazwa uytkownika została zmieniona', newUsername: '', password: '' })
+                            this.setState({ message: 'Hasło zostało zmienione', newPassword: '', newPasswordRepeat: '', password: '' })
                         }
                         else if (r.status === 'incorrect') {
                             this.setState({ message: 'Nie prawidłowe dane', password: '' })
@@ -113,20 +104,26 @@ class DashboardSettingChangeUsername extends React.Component {
     }
 
     render() {
-        const { newUsername, password, message, passwordValid, newUsernameValid, newUsernameIsExistValid } = this.state;
+        const { newPassword, newPasswordRepeat, password, message, newPasswordValid, newPasswordRepeatValid, passwordValid } = this.state;
 
         return (
-            <Form onSubmit={this.submitChangeUsernameForm.bind(this)}>
-                <H2>Zmiana nazwy użytkownika</H2>
+            <Form onSubmit={this.submitChangePasswordForm.bind(this)}>
+                <H2>Zmiana hasła</H2>
                 <Message message={message} />
-                <Input type="text"
-                    placeholder="Nowa nazwa"
-                    value={newUsername}
+                <Input type="password"
+                    placeholder="Nowe hasło"
+                    value={newPassword}
                     onChange={this.handleInputChange.bind(this)}
-                    id="newUsername"
+                    id="newPassword"
                 />
-                <ErrorInputValid valid={newUsernameValid} message="Za krótkia nazwa użytkownika" />
-                <ErrorInputValid valid={newUsernameIsExistValid} message="Podana nazwa użytkownika jest zajęta" />
+                <ErrorInputValid valid={newPasswordValid} message="Za krótkie hasło" />
+                <Input type="password"
+                    placeholder="Powtórz hasło"
+                    value={newPasswordRepeat}
+                    onChange={this.handleInputChange.bind(this)}
+                    id="newPasswordRepeat"
+                />
+                <ErrorInputValid valid={newPasswordRepeatValid} message="Hasła nie są identyczne" />
                 <Input type="password"
                     placeholder="Hasło"
                     value={password}
@@ -142,4 +139,4 @@ class DashboardSettingChangeUsername extends React.Component {
     }
 }
 
-export default DashboardSettingChangeUsername;
+export default ChangePassword;

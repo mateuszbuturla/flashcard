@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 
-import DashboardSettingChangeUsername from './DashboardSettingChangeUsername/DashboardSettingChangeUsername';
-import DashboardSettingChangePassword from './DashboardSettingChangePassword/DashboardSettingChangePassword';
+import ChangeUsername from '../../components/ChangeUsername/ChangeUsername';
+import ChangePassword from '../../components/ChangePassword/ChangePassword';
 
 import './dashboardSetting.sass';
 
@@ -22,10 +22,11 @@ class DashboardSetting extends React.Component {
                 </Link>
                 <Switch>
                     <Route path='/dashboard/setting/changeusername' component={props =>
-                        <DashboardSettingChangeUsername {...props} config={config} user={user} />
+                        <ChangeUsername {...props} config={config} user={user} />
                     } exact />
                     <Route path='/dashboard/setting/changepassword' component={props =>
-                        <DashboardSettingChangePassword {...props} config={config} user={user} />} exact />
+                        <ChangePassword {...props} config={config} user={user} />
+                    } exact />
                 </Switch>
             </div>
         );
