@@ -2,9 +2,9 @@ import React from 'react';
 
 import EditDictionaryField from '../../components/DashboardEditDictionary/DashboardEditDictionaryField';
 
-import './dashboardEditDictionary.sass';
+import './dictionaryEdit.sass';
 
-class DashboardEditDictionary extends React.Component {
+class DictionaryEdit extends React.Component {
 
     state = {
         dictionary: null,
@@ -103,4 +103,4 @@ class DashboardEditDictionary extends React.Component {
     }
 }
 
-export default DashboardEditDictionary;
+export default DictionaryEdit;

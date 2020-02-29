@@ -5,9 +5,9 @@ import TestForm from '../../components/DictionaryTest/TestForm';
 import WordResult from '../../components/DictionaryTest/WordResult';
 import DashboardAnnouncement from '../../components/DashboardAnnouncement';
 
-import './dashboardDictionaryTest.sass';
+import './dictionaryTest.sass';
 
-class DashboardDictionaryTest extends React.Component {
+class DictionaryTest extends React.Component {
 
     state = {
         dictionary: undefined,
@@ -138,4 +138,4 @@ class DashboardDictionaryTest extends React.Component {
     }
 }
 
-export default DashboardDictionaryTest;
+export default DictionaryTest;

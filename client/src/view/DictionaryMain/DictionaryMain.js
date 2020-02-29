@@ -4,9 +4,9 @@ import FlashCard from '../../components/DictionaryMain/FlashCard';
 import FlashCardNav from '../../components/DictionaryMain/FlashCardNav';
 import DashboardAnnouncement from '../../components/DashboardAnnouncement';
 
-import './dashboardDictionaryMain.sass'
+import './dictionaryMain.sass'
 
-class DashboardDictionaryMain extends React.Component {
+class DictionaryMain extends React.Component {
 
     state = {
         dictionary: undefined,
@@ -78,4 +78,4 @@ class DashboardDictionaryMain extends React.Component {
     }
 }
 
-export default DashboardDictionaryMain;
+export default DictionaryMain;
