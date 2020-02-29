@@ -1,5 +1,10 @@
 import React from 'react';
 
+import TestResult from '../../components/DictionaryTest/TestResult';
+import TestForm from '../../components/DictionaryTest/TestForm';
+import WordResult from '../../components/DictionaryTest/WordResult';
+import DashboardAnnouncement from '../../components/DashboardAnnouncement';
+
 import './dashboardDictionaryTest.sass';
 
 class DashboardDictionaryTest extends React.Component {
@@ -92,83 +97,41 @@ class DashboardDictionaryTest extends React.Component {
                                     <>
                                         {
                                             finishResult === true ?
-                                                <div className="dictionary-test-result">
-                                                    <p className="dictionary-test-result__header">Wynik:</p>
-                                                    <p className="dictionary-test-result__result dictionary-test-result__result--green">Poprawne: {correctAnswers}</p>
-                                                    <p className="dictionary-test-result__result dictionary-test-result__result--red">Nieprawidłowe: {incorrectAnswers}</p>
-                                                    <p className="dictionary-test-result__result">{correctAnswers / dictionary.vocabulary.length * 100}%</p>
-                                                </div>
+                                                <TestResult
+                                                    correctAnswers={correctAnswers}
+                                                    incorrectAnswers={incorrectAnswers}
+                                                    dictionary={dictionary}
+                                                />
                                                 :
                                                 <>
                                                     {
                                                         showWordResult === false ?
-                                                            <div className="dictionary-test">
-                                                                <p className="dictionary-test__word">
-                                                                    {
-                                                                        secondLanguage === 'en' ?
-                                                                            dictionary.vocabulary[currentVocabulary].en
-                                                                            :
-                                                                            dictionary.vocabulary[currentVocabulary].pl
-                                                                    }
-                                                                </p>
-                                                                <form onSubmit={this.submitTranslateForm.bind(this)}>
-                                                                    <input type="text"
-                                                                        placeholder="Tłumaczenie"
-                                                                        value={answerInput}
-                                                                        onChange={this.handleInputChange.bind(this)}
-                                                                        id="answerInput"
-                                                                        className="dictionary-test__answer-input"
-                                                                    />
-                                                                    <input type="submit"
-                                                                        value="Zatwierdź"
-                                                                        className="dictionary-test__submit"
-                                                                    />
-                                                                </form>
-                                                            </div>
+                                                            <TestForm
+                                                                secondLanguage={secondLanguage}
+                                                                dictionary={dictionary}
+                                                                currentVocabulary={currentVocabulary}
+                                                                submitTranslateForm={this.submitTranslateForm.bind(this)}
+                                                                handleInputChange={this.handleInputChange.bind(this)}
+                                                                answerInput={answerInput}
+                                                            />
                                                             :
-                                                            <div className="dictionary-word-result">
-                                                                <p className="dictionary-word-result__word-in-second-language">
-                                                                    {
-                                                                        secondLanguage === 'en' ?
-                                                                            dictionary.vocabulary[currentVocabulary].en
-                                                                            :
-                                                                            dictionary.vocabulary[currentVocabulary].pl
-                                                                    }
-                                                                </p>
-                                                                <p className="dictionary-word-result__word-in-translate-language">
-                                                                    {
-                                                                        secondLanguage === 'en' ?
-                                                                            dictionary.vocabulary[currentVocabulary].pl
-                                                                            :
-                                                                            dictionary.vocabulary[currentVocabulary].en
-                                                                    }
-                                                                </p>
-                                                                <p className={`dictionary-word-result__status  ${lastAnswerCorrect === true && 'dictionary-word-result__status--correct'
-                                                                    }
-                                                            `}>
-                                                                    {
-                                                                        lastAnswerCorrect === true ?
-                                                                            'Dobrze'
-                                                                            :
-                                                                            'Źle'
-                                                                    }
-                                                                </p>
-                                                                <button onClick={this.nextWord.bind(this)} className="dictionary-word-result__button">
-                                                                    Następne słowo
-                                                                </button>
-                                                            </div>
+                                                            <WordResult
+                                                                secondLanguage={secondLanguage}
+                                                                dictionary={dictionary}
+                                                                currentVocabulary={currentVocabulary}
+                                                                lastAnswerCorrect={lastAnswerCorrect}
+                                                                nextWord={this.nextWord.bind(this)}
+                                                            />
                                                     }
                                                 </>
                                         }
                                     </>
                                     :
-                                    <p className="dashboard__announcement">Nie posiadasz jeszcze rzadnych słówek w tym zbiorze</p>
+                                    <DashboardAnnouncement message="Nie posiadasz jeszcze rzadnych słówek w tym zbiorze" />
                             }
                         </div>
                         :
-                        <>
-                            <p className="dashboard__announcement">Taki słownik nie istnieje lub nie należy do Ciebie</p>
-                        </>
+                        <DashboardAnnouncement message="Taki słownik nie istnieje lub nie należy do Ciebie" />
                 }
             </>
         );
