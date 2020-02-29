@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import PasswordValidation from '../../../validation/PasswordValidation';
 import RepeatPasswordValidation from '../../../validation/RepeatPasswordValidation';
 
+import Message from '../../../components/Message';
+import ErrorInputValid from '../../../components/ErrorInputValid';
+
 const Form = styled.form`
     margin-top: 20px;
     width: 90%;
@@ -38,16 +41,6 @@ const Button = styled.input`
     :active {
        outline: 0;
     }
-`;
-
-const Message = styled.p`
-    margin-bottom: 20px;
-`;
-
-const ErrorLabel = styled.div`
-    margin-bottom: 20px;
-    margin-top: -20px;
-    color: #d11b1b;
 `;
 
 class DashboardSettingChangePassword extends React.Component {
@@ -116,43 +109,28 @@ class DashboardSettingChangePassword extends React.Component {
         return (
             <Form onSubmit={this.submitChangePasswordForm.bind(this)}>
                 <H2>Zmiana hasła</H2>
-                {message !== '' && <Message>{message}</Message>}
+                <Message message={message} />
                 <Input type="password"
                     placeholder="Nowe hasło"
                     value={newPassword}
                     onChange={this.handleInputChange.bind(this)}
                     id="newPassword"
                 />
-                {
-                    newPasswordValid === false &&
-                    <ErrorLabel>
-                        <p>Za krótkie hasło</p>
-                    </ErrorLabel>
-                }
+                <ErrorInputValid valid={newPasswordValid} message="Za krótkie hasło" />
                 <Input type="password"
                     placeholder="Powtórz hasło"
                     value={newPasswordRepeat}
                     onChange={this.handleInputChange.bind(this)}
                     id="newPasswordRepeat"
                 />
-                {
-                    newPasswordRepeatValid === false &&
-                    <ErrorLabel>
-                        <p>Hasła nie są identyczne</p>
-                    </ErrorLabel>
-                }
+                <ErrorInputValid valid={newPasswordRepeatValid} message="Hasła nie są identyczne" />
                 <Input type="password"
                     placeholder="Hasło"
                     value={password}
                     onChange={this.handleInputChange.bind(this)}
                     id="password"
                 />
-                {
-                    passwordValid === false &&
-                    <ErrorLabel>
-                        <p>To pole nie może być puste</p>
-                    </ErrorLabel>
-                }
+                <ErrorInputValid valid={passwordValid} message="To pole nie może być puste" />
                 <Button type="submit"
                     value="Zapisz zmiany"
                 />

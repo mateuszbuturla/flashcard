@@ -1,5 +1,8 @@
 import React from 'react';
 
+import DashboardMessage from '../../components/Message';
+import DictionaryCreateForm from '../../components/DictionaryCreate/DictionaryCreateForm';
+
 import './dashboardCreateKit.sass';
 
 class DashboardCreateKit extends React.Component {
@@ -44,24 +47,13 @@ class DashboardCreateKit extends React.Component {
         return (
             <div className="dashboard-create-kit">
                 <h2 className="dashboard-create-kit__header">Stwórz zestaw</h2>
-                {message !== '' && <p className="dashboard-create-kit__message">{message}</p>}
-                <form onSubmit={this.submitCreateKitForm.bind(this)} className="dashboard-create-kit__form">
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={this.handleInputChange.bind(this)}
-                        className="dashboard-create-kit__input"
-                        placeholder="Nazwa zbioru"
-                        id="name"
-                    />
-                    {
-                        nameValid === false &&
-                        <div className="dashboard-create-kit__error">
-                            <p>To pole jest wymagane</p>
-                        </div>
-                    }
-                    <input type="submit" value="Stwórz zestaw" className="dashboard-create-kit__submit" />
-                </form>
+                <DashboardMessage message={message} />
+                <DictionaryCreateForm
+                    submitCreateKitForm={this.submitCreateKitForm.bind(this)}
+                    name={name}
+                    handleInputChange={this.handleInputChange.bind(this)}
+                    nameValid={nameValid}
+                />
             </div>
         );
     }
