@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import PasswordValidation from '../../../validation/PasswordValidation';
-import RepeatPasswordValidation from '../../../validation/RepeatPasswordValidation';
+import UsernameValidation from '../../validation/UsernameValidation';
 
-import Message from '../../../components/Message';
-import ErrorInputValid from '../../../components/ErrorInputValid';
+import Message from '../../components/Message';
+import ErrorInputValid from '../../components/ErrorInputValid';
 
 const Form = styled.form`
     margin-top: 20px;
@@ -43,28 +42,22 @@ const Button = styled.input`
     }
 `;
 
-class DashboardSettingChangePassword extends React.Component {
+class ChangeUsername extends React.Component {
 
     state = {
-        newPassword: '',
-        newPasswordRepeat: '',
+        newUsername: '',
         password: '',
-        newPasswordValid: true,
-        newPasswordRepeatValid: true,
+        newUsernameValid: true,
+        newUsernameIsExistValid: true,
         passwordValid: true,
         message: ''
     }
 
     async validInput(inputId, inputValue) {
         switch (inputId) {
-            case 'newPassword':
-                const { newPasswordRepeat } = this.state;
-                this.setState({ newPasswordValid: PasswordValidation(inputValue) })
-                this.setState({ newPasswordRepeatValid: RepeatPasswordValidation(inputValue, newPasswordRepeat) })
-                break;
-            case 'newPasswordRepeat':
-                const { newPassword } = this.state;
-                this.setState({ newPasswordRepeatValid: RepeatPasswordValidation(inputValue, newPassword) })
+            case 'newUsername':
+                this.setState({ newUsernameValid: UsernameValidation(inputValue) })
+                this.validUserNameIsExist(inputValue)
                 break;
             case 'password':
                 this.setState({ passwordValid: inputValue.length > 0 ? true : false })
@@ -74,23 +67,39 @@ class DashboardSettingChangePassword extends React.Component {
         }
     }
 
-    handleInputChange(e) {
-        this.setState({ [e.target.id]: e.target.value });
-        this.validInput(e.target.id, e.target.value);
+    validUserNameIsExist(username) {
+        const { config } = this.props;
+        try {
+            if (username) {
+                fetch(`${config.api}/api/user/usernameisexist/${username}`, { method: 'POST' })
+                    .then(r => r.json())
+                    .then(r => {
+                        this.setState({ newUsernameIsExistValid: !r.exist })
+                    })
+            }
+        }
+        catch {
+            this.setState({ message: 'Wystąpił problem po stronie serwera proszę spróbować ponownie później' })
+        }
     }
 
-    submitChangePasswordForm(e) {
+    handleInputChange(e) {
+        this.setState({ [e.target.id]: e.target.value });
+        this.validInput(e.target.id, e.target.value)
+    }
+
+    submitChangeUsernameForm(e) {
         e.preventDefault();
-        const { newPassword, password, newPasswordValid, newPasswordRepeatValid, passwordValid } = this.state;
+        const { newUsername, password, newUsernameIsExistValid, newUsernameValid, passwordValid } = this.state;
         const { config, user } = this.props;
 
-        if (newPasswordValid && newPasswordRepeatValid && passwordValid) {
+        if (newUsernameValid && passwordValid && newUsernameIsExistValid) {
             try {
-                fetch(`${config.api}/api/user/changepassword/${user._id}/${password}/${newPassword}`, { method: 'POST' })
+                fetch(`${config.api}/api/user/changeusername/${user._id}/${password}/${newUsername}`, { method: 'POST' })
                     .then(r => r.json())
                     .then(r => {
                         if (r.status === 'correct') {
-                            this.setState({ message: 'Hasło zostało zmienione', newPassword: '', newPasswordRepeat: '', password: '' })
+                            this.setState({ message: 'Nazwa uytkownika została zmieniona', newUsername: '', password: '' })
                         }
                         else if (r.status === 'incorrect') {
                             this.setState({ message: 'Nie prawidłowe dane', password: '' })
@@ -104,26 +113,20 @@ class DashboardSettingChangePassword extends React.Component {
     }
 
     render() {
-        const { newPassword, newPasswordRepeat, password, message, newPasswordValid, newPasswordRepeatValid, passwordValid } = this.state;
+        const { newUsername, password, message, passwordValid, newUsernameValid, newUsernameIsExistValid } = this.state;
 
         return (
-            <Form onSubmit={this.submitChangePasswordForm.bind(this)}>
-                <H2>Zmiana hasła</H2>
+            <Form onSubmit={this.submitChangeUsernameForm.bind(this)}>
+                <H2>Zmiana nazwy użytkownika</H2>
                 <Message message={message} />
-                <Input type="password"
-                    placeholder="Nowe hasło"
-                    value={newPassword}
+                <Input type="text"
+                    placeholder="Nowa nazwa"
+                    value={newUsername}
                     onChange={this.handleInputChange.bind(this)}
-                    id="newPassword"
+                    id="newUsername"
                 />
-                <ErrorInputValid valid={newPasswordValid} message="Za krótkie hasło" />
-                <Input type="password"
-                    placeholder="Powtórz hasło"
-                    value={newPasswordRepeat}
-                    onChange={this.handleInputChange.bind(this)}
-                    id="newPasswordRepeat"
-                />
-                <ErrorInputValid valid={newPasswordRepeatValid} message="Hasła nie są identyczne" />
+                <ErrorInputValid valid={newUsernameValid} message="Za krótkia nazwa użytkownika" />
+                <ErrorInputValid valid={newUsernameIsExistValid} message="Podana nazwa użytkownika jest zajęta" />
                 <Input type="password"
                     placeholder="Hasło"
                     value={password}
@@ -139,4 +142,4 @@ class DashboardSettingChangePassword extends React.Component {
     }
 }
 
-export default DashboardSettingChangePassword;
+export default ChangeUsername;

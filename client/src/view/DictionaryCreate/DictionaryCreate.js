@@ -3,9 +3,9 @@ import React from 'react';
 import DashboardMessage from '../../components/Message';
 import DictionaryCreateForm from '../../components/DictionaryCreate/DictionaryCreateForm';
 
-import './dashboardCreateKit.sass';
+import './dictionaryCreate.sass';
 
-class DashboardCreateKit extends React.Component {
+class DictionaryCreate extends React.Component {
 
     state = {
         name: '',
@@ -59,4 +59,4 @@ class DashboardCreateKit extends React.Component {
     }
 }
 
-export default DashboardCreateKit;
+export default DictionaryCreate;

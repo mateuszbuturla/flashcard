@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 
 import config from './config';
 
-import './reset.css';
+import './reset.sass';
 import './mixins.sass';
 
 import Home from './view/Home/Home';
