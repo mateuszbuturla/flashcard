@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 
 import Nav from '../../components/Home/Nav';
 import SelectFormButton from '../../components/LoginRegister/SelectFormButton';
-import Message from '../../components/LoginRegister/Message';
+import Message from '../../components/Message';
 import LoginForm from '../../components/LoginRegister/LoginForm';
 import RegisterForm from '../../components/LoginRegister/RegisterForm';
 import Footer from '../../components/FullWidthFooter/Footer';

@@ -1,13 +1,18 @@
 import React from "react"
+import styled from 'styled-components';
 
-const DashboardMessage = ({ message }) => {
+const P = styled.p`
+    margin-top: 20px;
+`;
+
+const Message = ({ message }) => {
     return (
         <>
             {message !== '' &&
-                <p className="dashboard__message">{message}</p>
+                <P>{message}</P>
             }
         </>
     )
 }
 
-export default DashboardMessage
+export default Message
