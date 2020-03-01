@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import HomeIcon from '../../../img/home.png';
-import PlusIcon from '../../../img/plus.png';
+import HomeIcon from '../../img/home.png';
+import PlusIcon from '../../img/plus.png';
 
-class DashboardMainAsideNav extends React.Component {
+class DashboardAsideNav extends React.Component {
 
     render() {
         const { hideAsideNav } = this.props;
@@ -23,4 +23,4 @@ class DashboardMainAsideNav extends React.Component {
     }
 }
 
-export default DashboardMainAsideNav;
+export default DashboardAsideNav;
