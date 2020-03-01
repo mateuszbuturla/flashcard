@@ -1,23 +1,20 @@
 import React from "react"
 
+import ErrorInputValid from '../ErrorInputValid';
+
 const DictionaryCreateForm = ({ submitCreateKitForm, name, handleInputChange, nameValid }) => {
     return (
-        <form onSubmit={submitCreateKitForm.bind(this)} className="dashboard-create-kit__form">
+        <form onSubmit={submitCreateKitForm.bind(this)} className="form">
             <input
                 type="text"
                 value={name}
                 onChange={handleInputChange.bind(this)}
-                className="dashboard-create-kit__input"
+                className="form__input"
                 placeholder="Nazwa zbioru"
                 id="name"
             />
-            {
-                nameValid === false &&
-                <div className="dashboard-create-kit__error">
-                    <p>To pole jest wymagane</p>
-                </div>
-            }
-            <input type="submit" value="Stwórz zestaw" className="dashboard-create-kit__submit" />
+            <ErrorInputValid valid={nameValid} message="To pole jest wymagane" />
+            <input type="submit" value="Stwórz zestaw" className="form__submit button button--gradient" />
         </form>
     )
 }

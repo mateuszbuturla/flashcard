@@ -6,6 +6,7 @@ import config from './config';
 
 import './reset.sass';
 import './mixins.sass';
+import './style.sass';
 
 import Home from './view/Home/Home';
 import LoginRegister from './view/LoginRegister/LoginRegister';

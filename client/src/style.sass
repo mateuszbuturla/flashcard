@@ -1,0 +1,35 @@
+@import './mixins'
+
+.form
+    box-shadow: 0px 0px 5px 2px #bababa
+    width: 90vw
+    padding: 30px 0px
+    max-width: 300px
+    display: flex
+    justify-content: space-around
+    flex-wrap: wrap
+    .form__input
+        width: 90%
+        border: 0
+        border-bottom: 1px solid #000000
+        padding: 10px 0px
+        font-size: 20px
+        margin-bottom: 5px
+    .form__submit
+        margin-top: 20px
+    &.form--none
+        display: none
+    &.form--shadowNone
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0)
+
+.button
+    padding: 10px 40px
+    border: 0
+    border-radius: 100px
+    color: #fff
+    cursor: pointer
+    &:focus,
+    &:active
+        outline: 0
+    &.button--gradient
+        @include backgroundGradient
