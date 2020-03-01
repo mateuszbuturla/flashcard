@@ -2,8 +2,8 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-import Nav from '../../components/Home/Nav';
-import SelectFormButton from '../../components/LoginRegister/SelectFormButton';
+import Nav from '../../components/LogoutNav/Nav';
+import SelectFormButton from '../../components/LoginRegister/SelectFormButton/SelectFormButton';
 import Message from '../../components/Message';
 import LoginForm from '../../components/LoginRegister/LoginForm';
 import RegisterForm from '../../components/LoginRegister/RegisterForm';
@@ -123,8 +123,8 @@ class LoginRegister extends React.Component {
                     <Redirect to='/dashboard' />
                 }
                 <Nav />
-                <section className="login-register">
-                    <div className="login-register-form-container">
+                <section className="login">
+                    <div className="login-container">
                         <SelectFormButton changeForm={this.changeForm.bind(this)} currentForm={currentForm} />
                         <Message message={message} />
                         <LoginForm

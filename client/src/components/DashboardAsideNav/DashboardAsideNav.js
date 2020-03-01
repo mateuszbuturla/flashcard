@@ -10,12 +10,12 @@ class DashboardAsideNav extends React.Component {
         const { hideAsideNav } = this.props;
         return (
             <>
-                <NavLink to="/dashboard" className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
-                    <img src={HomeIcon} alt="Home" className="aside-nav__link-icon" />
+                <NavLink to="/dashboard" className="asideNav__link" activeClassName="asideNav__link--active" onClick={hideAsideNav} exact>
+                    <img src={HomeIcon} alt="Home" className="asideNav__linkIcon" />
                     Strona główna
                 </NavLink>
-                <NavLink to="/dashboard/createkit" className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
-                    <img src={PlusIcon} alt="Home" className="aside-nav__link-icon" />
+                <NavLink to="/dashboard/createkit" className="asideNav__link" activeClassName="asideNav__link--active" onClick={hideAsideNav} exact>
+                    <img src={PlusIcon} alt="Home" className="asideNav__linkIcon" />
                     Stwórz
                 </NavLink>
             </>

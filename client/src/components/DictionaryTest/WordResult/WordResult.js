@@ -1,9 +1,11 @@
 import React from "react"
 
+import './wordResult.sass';
+
 const WordResult = ({ secondLanguage, dictionary, currentVocabulary, lastAnswerCorrect, nextWord }) => {
     return (
-        <div className="dictionary-word-result">
-            <p className="dictionary-word-result__word-in-second-language">
+        <div className="dictionaryWordResult">
+            <p className="dictionaryWordResult__second">
                 {
                     secondLanguage === 'en' ?
                         dictionary.vocabulary[currentVocabulary].en
@@ -11,7 +13,7 @@ const WordResult = ({ secondLanguage, dictionary, currentVocabulary, lastAnswerC
                         dictionary.vocabulary[currentVocabulary].pl
                 }
             </p>
-            <p className="dictionary-word-result__word-in-translate-language">
+            <p className="dictionaryWordResult__translate">
                 {
                     secondLanguage === 'en' ?
                         dictionary.vocabulary[currentVocabulary].pl
@@ -19,7 +21,7 @@ const WordResult = ({ secondLanguage, dictionary, currentVocabulary, lastAnswerC
                         dictionary.vocabulary[currentVocabulary].en
                 }
             </p>
-            <p className={`dictionary-word-result__status  ${lastAnswerCorrect === true && 'dictionary-word-result__status--correct'
+            <p className={`dictionaryWordResult__status  ${lastAnswerCorrect === true && 'dictionaryWordResult__status--correct'
                 }
                                                             `}>
                 {
@@ -29,7 +31,7 @@ const WordResult = ({ secondLanguage, dictionary, currentVocabulary, lastAnswerC
                         'Źle'
                 }
             </p>
-            <button onClick={nextWord.bind(this)} className="dictionary-word-result__button">
+            <button onClick={nextWord.bind(this)} className="dictionaryWordResult__button">
                 Następne słowo
             </button>
         </div>

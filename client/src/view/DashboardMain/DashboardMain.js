@@ -1,6 +1,7 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
 
+import Message from '../../components/Message';
 import Kit from '../../components/DashboardKit/DashboardKit';
 
 import './dashboardMain.sass';
@@ -40,17 +41,18 @@ class DashboardMain extends React.Component {
             _dictionaries = dictionaries.map(dictionary => <Kit key={dictionary._id} dictionary={dictionary} owner={userName} />)
 
         return (
-            <div className="dashboard-main">
-                <h2 className="dashboard-main__header">Twoje zestawy</h2>
+            <div className="dashboardMain">
+                <h2 className="dashboardMain__header">Twoje zestawy</h2>
                 {
                     dictionaries !== null &&
                     <>
                         {
-                            dictionaries.length === 0 && <p className="dashboard-main__no-dictionaries">Nie posiadasz jeszcze żadnych zbiorów słówek</p>
+                            dictionaries.length === 0 &&
+                            <Message message="Nie posiadasz jeszcze żadnych zbiorów słówek" />
                         }
                     </>
                 }
-                <div className="dashboard-main__kit-container">
+                <div className="dashboardMain__dictionaryContainer">
                     {_dictionaries}
                 </div>
             </div>

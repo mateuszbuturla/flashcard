@@ -1,7 +1,7 @@
 import React from 'react';
 
-import FlashCard from '../../components/DictionaryMain/FlashCard';
-import FlashCardNav from '../../components/DictionaryMain/FlashCardNav';
+import FlashCard from '../../components/DictionaryMain/FlashCard/FlashCard';
+import FlashCardNav from '../../components/DictionaryMain/FlashCardNav/FlashCardNav';
 import DashboardAnnouncement from '../../components/DashboardAnnouncement';
 
 import './dictionaryMain.sass'
@@ -51,8 +51,8 @@ class DictionaryMain extends React.Component {
                         <>
                             {
                                 dictionary.vocabulary.length > 0 ?
-                                    <div className="dashboard-dictionary-main">
-                                        <div className="dictionary-main-flashcards">
+                                    <div className="dictionaryMain">
+                                        <div className="flashcards">
                                             <FlashCard
                                                 secondLanguage={secondLanguage}
                                                 dictionary={dictionary}

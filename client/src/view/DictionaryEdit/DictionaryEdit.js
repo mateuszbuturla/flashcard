@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Message from '../../components/Message';
 import EditDictionaryField from '../../components/DashboardEditDictionary/DashboardEditDictionaryField';
 
 import './dictionaryEdit.sass';
@@ -83,19 +84,17 @@ class DictionaryEdit extends React.Component {
         }
 
         return (
-            <div className="dashboard-edit-dictionary">
-                {message !== '' &&
-                    <p className="dashboard-edit-dictionary__message">{message}</p>
-                }
+            <div className="editDictionary">
+                <Message message={message} />
                 {
                     dictionary !== null &&
                     <>
-                        <div className="dashboard-edit-dictionary__container">
+                        <div className="editDictionary__container">
                             {_words}
                         </div>
-                        <button className="dashboard-edit-dictionary__add-button" onClick={this.createNewWord.bind(this)}>Dodaj pojęcie</button>
+                        <button className="button" onClick={this.createNewWord.bind(this)}>Dodaj pojęcie</button>
                         <br />
-                        <button className="dashboard-edit-dictionary__save-button" onClick={this.saveDictionary.bind(this)}>Zapisz</button>
+                        <button className="button button--gradient" onClick={this.saveDictionary.bind(this)}>Zapisz</button>
                     </>
                 }
             </div>

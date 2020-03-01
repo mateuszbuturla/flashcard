@@ -45,8 +45,8 @@ class DictionaryCreate extends React.Component {
         const { name, nameValid, message } = this.state;
 
         return (
-            <div className="dashboard-create-kit">
-                <h2 className="dashboard-create-kit__header">Stwórz zestaw</h2>
+            <div className="createDictionary">
+                <h2 className="createDictionary__header">Stwórz zestaw</h2>
                 <DashboardMessage message={message} />
                 <DictionaryCreateForm
                     submitCreateKitForm={this.submitCreateKitForm.bind(this)}

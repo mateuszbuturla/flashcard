@@ -1,0 +1,62 @@
+@import '../../../mixins'
+
+.homeHeader
+    width: 90vw
+    height: 80vh
+    margin: 0 auto
+    display: flex
+    justify-content: space-around
+    align-items: center
+    flex-wrap: wrap
+    border-radius: 2vw
+    color: #fff
+    padding-top: 30px
+    @include backgroundGradient
+    .homeHeader__text
+        width: 80%
+        .homeHeader__h1
+            font-size: 25px
+            font-weight: lighter
+    .homeHeader__imgContainer
+        width: 90%
+        .homeHeader__img
+            width: 100%
+
+@media (orientation: landscape)
+    .homeHeader
+        box-sizing: border-box
+        height: calc(90vh - 60px)
+        position: relative
+        padding: 0 30px
+        .homeHeader__text
+            width: calc( 45% - 30px )
+            flex-grow: 1
+            .homeHeader__h1
+                font-size: 20px
+        .homeHeader__imgContainer
+            width: 65vh
+
+@media ( min-width: 667px )
+    .homeHeader
+        .homeHeader__text
+            .homeHeader__h1
+                font-size: 28px
+
+@media ( min-width: 667px )
+    .homeHeader
+        .homeHeader__text
+            .homeHeader__h1
+                font-size: 28px
+                
+@media ( min-width: 1024px )
+    .homeHeader
+        .homeHeader__text
+            .homeHeader__h1
+                font-size: 45px
+
+@media ( min-width: 1366px )
+    .homeHeader
+        padding: 0 3vw
+        .homeHeader__text
+            .homeHeader__h1
+                font-size: 3vw

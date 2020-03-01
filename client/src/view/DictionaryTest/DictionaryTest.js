@@ -1,8 +1,8 @@
 import React from 'react';
 
-import TestResult from '../../components/DictionaryTest/TestResult';
-import TestForm from '../../components/DictionaryTest/TestForm';
-import WordResult from '../../components/DictionaryTest/WordResult';
+import TestResult from '../../components/DictionaryTest/TestResult/TestResult';
+import TestForm from '../../components/DictionaryTest/TestForm/TestForm';
+import WordResult from '../../components/DictionaryTest/WordResult/WordResult';
 import DashboardAnnouncement from '../../components/DashboardAnnouncement';
 
 import './dictionaryTest.sass';
@@ -91,7 +91,7 @@ class DictionaryTest extends React.Component {
             <>
                 {
                     dictionary !== undefined ?
-                        <div className="dashboard-dictionary-test">
+                        <div className="dictionaryTestContainer">
                             {
                                 dictionary.vocabulary.length > 0 ?
                                     <>

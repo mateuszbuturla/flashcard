@@ -1,40 +1,32 @@
 import React from "react"
 
+import ErrorInputValid from '../ErrorInputValid';
+
 const LoginForm = ({ submitLoginForm, currentForm, handleInputChange, loginLogin, loginLoginValid, loginPassword, loginPasswordValid }) => {
     return (
-        <form onSubmit={submitLoginForm.bind(this)} className={`login-register-form${currentForm === 'login' ? ' login-register-form--active' : ''}`}>
+        <form onSubmit={submitLoginForm.bind(this)} className={`form form--shadowNone${currentForm === 'login' ? '' : ' form--none'}`}>
             <input
                 type="text"
                 id="loginLogin"
                 placeholder="Nazwa użytkownika"
-                className="login-register-form__input"
+                className="form__input"
                 onChange={handleInputChange.bind(this)}
                 value={loginLogin}
             />
-            {
-                loginLoginValid === false &&
-                <div className="login-register__error">
-                    <p>To pole jest wymagane</p>
-                </div>
-            }
+            <ErrorInputValid valid={loginLoginValid} message="To pole jest wymagane" />
             <input
                 type="password"
                 id="loginPassword"
                 placeholder="Hasło"
-                className="login-register-form__input"
+                className="form__input"
                 onChange={handleInputChange.bind(this)}
                 value={loginPassword}
             />
-            {
-                loginPasswordValid === false &&
-                <div className="login-register__error">
-                    <p>To pole jest wyamagane</p>
-                </div>
-            }
+            <ErrorInputValid valid={loginPasswordValid} message="To pole jest wymagane" />
             <input
                 type="submit"
                 value="Zaloguj się"
-                className="login-register-form__submit"
+                className="form__submit button button--gradient"
             />
         </form>
     )

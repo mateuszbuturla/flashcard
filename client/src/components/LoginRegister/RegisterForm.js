@@ -1,54 +1,41 @@
 import React from "react"
 
+import ErrorInputValid from '../ErrorInputValid';
+
 const RegisterForm = ({ submitRegisterForm, currentForm, handleInputChange, registerLogin, registerLoginValid, registerPassword, registerPasswordValid, registerRepeatPassword, registerRepeatPasswordValid }) => {
     return (
-        <form onSubmit={submitRegisterForm.bind(this)} className={`login-register-form${currentForm === 'register' ? ' login-register-form--active' : ''}`}>
+        <form onSubmit={submitRegisterForm.bind(this)} className={`form form--shadowNone${currentForm === 'register' ? '' : ' form--none'}`}>
             <input
                 type="text"
                 id="registerLogin"
                 placeholder="Nazwa użytkownika"
-                className="login-register-form__input"
+                className="form__input"
                 onChange={handleInputChange.bind(this)}
                 value={registerLogin}
             />
-            {
-                registerLoginValid === false &&
-                <div className="login-register__error">
-                    <p>Za krótka nazwa użytkownika</p>
-                </div>
-            }
+            <ErrorInputValid valid={registerLoginValid} message="Za krótka nazwa użytkownika" />
             <input
                 type="password"
                 id="registerPassword"
                 placeholder="Hasło"
-                className="login-register-form__input"
+                className="form__input"
                 onChange={handleInputChange.bind(this)}
                 value={registerPassword}
             />
-            {
-                registerPasswordValid === false &&
-                <div className="login-register__error">
-                    <p className="login-register__error">Za krótkie hasło</p>
-                </div>
-            }
+            <ErrorInputValid valid={registerPasswordValid} message="Za krótkie hasło" />
             <input
                 type="password"
                 id="registerRepeatPassword"
                 placeholder="Powtórz hasło"
-                className="login-register-form__input"
+                className="form__input"
                 onChange={handleInputChange.bind(this)}
                 value={registerRepeatPassword}
             />
-            {
-                registerRepeatPasswordValid === false &&
-                <div className="login-register__error">
-                    <p className="login-register__error">Podane hasła nie są identyczne</p>
-                </div>
-            }
+            <ErrorInputValid valid={registerRepeatPasswordValid} message="Podane hasła nie są identyczne" />
             <input
                 type="submit"
                 value="Zarejestuj się"
-                className="login-register-form__submit"
+                className="form__submit button button--gradient"
             />
         </form>
     )

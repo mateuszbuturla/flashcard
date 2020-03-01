@@ -1,0 +1,194 @@
+@import './mixins'
+
+//----------Form----------//
+
+.form
+    box-shadow: 0px 0px 5px 2px #bababa
+    width: 90vw
+    padding: 30px 0px
+    max-width: 300px
+    display: flex
+    justify-content: space-around
+    flex-wrap: wrap
+    .form__header
+        width: 90%
+        text-align: left
+    .form__input
+        width: 90%
+        border: 0
+        border-bottom: 1px solid #000000
+        padding: 10px 0px
+        font-size: 20px
+        margin-bottom: 5px
+    .form__submit
+        margin-top: 20px
+    &.form--none
+        display: none
+    &.form--shadowNone
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0)
+
+//----------Form----------//
+
+
+//----------Button----------//
+
+.button
+    padding: 10px 40px
+    border: 0
+    border-radius: 100px
+    color: #000
+    background-color: #fff
+    cursor: pointer
+    &:focus,
+    &:active
+        outline: 0
+    &.button--gradient
+        color: #fff
+        @include backgroundGradient
+
+//----------Button----------//
+
+
+//----------Footer----------//
+
+.footer
+    width: 100vw
+    text-align: center
+    margin: 60px 0 20px 0
+
+@media ( min-width: 1024px )
+    .footer
+        font-size: 20px
+
+//----------Footer----------//
+
+
+//----------Aside Nav----------//
+.asideNav
+    width: 100vw
+    height: 100vh
+    padding: 10px
+    box-shadow: 0px 0px 5px 2px #bababa
+    box-sizing: border-box
+    position: fixed
+    z-index: 3
+    background-color: #fff
+    top: 0
+    left: -101vw
+    transition: .5s
+    .asideNav__container
+        height: 100%
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        .asideNav__linksContainer
+            .asideNav__link
+                margin-top: 20px
+                display: block
+                text-decoration: none
+                color: #000
+                font-size: 20px
+                transition: .3s
+                display: flex
+                align-items: center
+                justify-content: left
+                cursor: pointer
+                &:hover
+                    color: #5C1EDB
+                .asideNav__linkIcon
+                    width: 30px
+                    margin-right: 10px
+            .asideNav__footer
+                text-align: center
+        .asideNav__header
+            margin-top: 20px
+        .asideNav__list
+            list-style: none
+            font-size: 28px
+            margin-top: 20px
+            .asideNav__listElement
+                margin-left: 20px
+        .asideNav__openButton
+            width: 30px
+            height: 100px
+            border: 0
+            position: absolute
+            right: 0
+            top: 50%
+            transform: translate(100%, -50%)
+            transition: .4s
+            @include backgroundGradient
+            &:focus,
+            &:active
+                outline: 0
+            .asideNav__buttonArrowIcon
+                width: 200%
+                position: relative
+                left: 50%
+                transform: translateX(-50%)
+            &::before
+                content: ''
+                position: absolute
+                top: -30px
+                left: 0
+                width: 0
+                height: 0
+                border-style: solid
+                border-width: 30px 0 0 30px
+                border-color: transparent transparent transparent #5C1EDB
+            &::after
+                content: ''
+                position: absolute
+                bottom: -30px
+                left: 0
+                width: 0
+                height: 0
+                border-style: solid
+                border-width: 30px 30px 0 0
+                border-color: #1575BF transparent transparent transparent
+    .asideNav--active
+        left: 0
+        .asideNav__openButton
+            transform: translate(0, -50%)
+            .asideNav__buttonArrowIcon
+                left: -50%
+                transform: rotate(180deg)
+            &::before
+                border-color: transparent transparent transparent #5C1EDB
+                transform: rotate(-90deg)
+            &::after
+                transform: rotate(90deg)
+
+.asideNav__link--active
+    color: #1575BF !important
+    font-weight: bold
+
+@media (orientation: landscape)
+    .asideNav
+        width: 40%
+        height: auto
+        min-height: calc(100vh - 70px)
+        max-width: 250px
+        box-sizing: border-box
+        position: relative
+        top: auto
+        left: auto
+        box-shadow: 0px 5px 5px 2px #bababa
+        .asideNav__openButton
+            display: none
+
+@media (min-width: 1300px)
+    .asideNav
+        width: 40%
+        height: auto
+        min-height: calc(100vh - 70px)
+        max-width: 250px
+        box-sizing: border-box
+        position: relative
+        top: auto
+        left: auto
+        box-shadow: 0px 5px 5px 2px #bababa
+        .aside-nav__open-button
+            display: none
+
+//----------Aside Nav----------//

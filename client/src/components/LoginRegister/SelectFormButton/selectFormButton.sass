@@ -1,0 +1,18 @@
+@import '../../../mixins'
+    
+.toggleButton
+    background-color: #EEEEEE
+    display: inline-block
+    border-radius: 100px
+    .toggleButton__button
+        padding: 5px 15px
+        border-radius: 100px
+        border: 0
+        background-color: transparent
+        cursor: pointer
+    .toggleButton__button--active
+        color: #fff
+        @include backgroundGradient
+        &:focus,
+        &:active
+            outline: 0
