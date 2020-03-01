@@ -1,9 +1,11 @@
 import React from "react"
 
+import './testForm.sass';
+
 const TestForm = ({ secondLanguage, dictionary, currentVocabulary, submitTranslateForm, handleInputChange, answerInput }) => {
     return (
-        <div className="dictionary-test">
-            <p className="dictionary-test__word">
+        <div className="dictionaryTest">
+            <p className="dictionaryTest__word">
                 {
                     secondLanguage === 'en' ?
                         dictionary.vocabulary[currentVocabulary].en
@@ -17,11 +19,11 @@ const TestForm = ({ secondLanguage, dictionary, currentVocabulary, submitTransla
                     value={answerInput}
                     onChange={handleInputChange.bind(this)}
                     id="answerInput"
-                    className="dictionary-test__answer-input"
+                    className="dictionaryTest__answerInput"
                 />
                 <input type="submit"
                     value="Zatwierdź"
-                    className="dictionary-test__submit"
+                    className="dictionaryTest__submit"
                 />
             </form>
         </div>
