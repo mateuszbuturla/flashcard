@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 import Nav from '../../components/Home/Nav';
-import SelectFormButton from '../../components/LoginRegister/SelectFormButton';
+import SelectFormButton from '../../components/LoginRegister/SelectFormButton/SelectFormButton';
 import Message from '../../components/Message';
 import LoginForm from '../../components/LoginRegister/LoginForm';
 import RegisterForm from '../../components/LoginRegister/RegisterForm';
