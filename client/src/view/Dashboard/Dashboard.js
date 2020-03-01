@@ -58,9 +58,9 @@ class Dashboard extends React.Component {
                 <DashboardNav logout={this.logout.bind(this)} user={user} />
 
                 <section className="dashboard">
-                    <aside className={`aside-nav${asideNavOpen === true ? ' aside-nav--active' : ''}`}>
-                        <div className="aside-nav__container">
-                            <div className="aside-nav__links-container">
+                    <aside className={`asideNav${asideNavOpen === true ? ' asideNav--active' : ''}`}>
+                        <div className="asideNav__container">
+                            <div className="asideNav__linksContainer">
                                 <Switch>
                                     <Route
                                         path='/dashboard/dictionary/edit/:id'
@@ -98,9 +98,9 @@ class Dashboard extends React.Component {
                                     <Route path='/dashboard' component={props => <DashboardAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} />} />
                                 </Switch>
                             </div>
-                            <p className="aside-nav__footer">Mateusz Buturla 2020</p>
+                            <p className="asideNav__footer">Mateusz Buturla 2020</p>
                         </div>
-                        <button className="aside-nav__open-button" onClick={this.onClickAsideNavButton.bind(this)}><img src={ArrowIcon} alt="arrow icon" className="aside-nav__button-arrow-icon" /></button>
+                        <button className="asideNav__openButton" onClick={this.onClickAsideNavButton.bind(this)}><img src={ArrowIcon} alt="arrow icon" className="asideNav__buttonArrowIcon" /></button>
                     </aside>
 
                     <div className="dashboard__main">

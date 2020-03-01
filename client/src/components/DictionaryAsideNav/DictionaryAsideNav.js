@@ -49,25 +49,25 @@ class DictionaryAsideNav extends React.Component {
         const { hideAsideNav, changeLanguage, secondLanguage } = this.props;
         return (
             <>
-                <NavLink to="/dashboard" className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
-                    <img src={ArrowIcon} alt="Home" className="aside-nav__link-icon" />
+                <NavLink to="/dashboard" className="asideNav__link" activeClassName="asideNav__link--active" onClick={hideAsideNav} exact>
+                    <img src={ArrowIcon} alt="Home" className="asideNav__linkIcon" />
                     Powrót
                 </NavLink>
-                <h2 className="aside-nav__header">{dictionary !== undefined && dictionary.name}</h2>
-                <ul className="aside-nav__list">
+                <h2 className="asideNav__header">{dictionary !== undefined && dictionary.name}</h2>
+                <ul className="asideNav__list">
                     Ucz się
-                    <li className="aside-nav__list-element">
-                        <NavLink to={`/dashboard/dictionary/main/${id}`} className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
+                    <li className="asideNav__listElement">
+                        <NavLink to={`/dashboard/dictionary/main/${id}`} className="asideNav__link" activeClassName="asideNav__link--active" onClick={hideAsideNav} exact>
                             Fiszki
                         </NavLink>
                     </li>
-                    <li className="aside-nav__list-element">
-                        <NavLink to={`/dashboard/dictionary/test/${id}`} className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
+                    <li className="asideNav__listElement">
+                        <NavLink to={`/dashboard/dictionary/test/${id}`} className="asideNav__link" activeClassName="asideNav__link--active" onClick={hideAsideNav} exact>
                             Sprawdź się
                         </NavLink>
                     </li>
-                    <li className="aside-nav__list-element">
-                        <p className="aside-nav__link" onClick={changeLanguage}>
+                    <li className="asideNav__listElement">
+                        <p className="asideNav__link" onClick={changeLanguage}>
                             Przełącz na
                             {
                                 secondLanguage === 'en' ? ' Polski' : ' Angielski'
@@ -75,15 +75,15 @@ class DictionaryAsideNav extends React.Component {
                         </p>
                     </li>
                 </ul>
-                <ul className="aside-nav__list">
+                <ul className="asideNav__list">
                     Edytuj
-                    <li className="aside-nav__list-element">
-                        <p className="aside-nav__link" onClick={this.removeDictionary.bind(this)}>
+                    <li className="asideNav__listElement">
+                        <p className="asideNav__link" onClick={this.removeDictionary.bind(this)}>
                             Usuń zbiór
                         </p>
                     </li>
-                    <li className="aside-nav__list-element">
-                        <NavLink to={`/dashboard/dictionary/edit/${id}`} className="aside-nav__link" activeClassName="aside-nav__link--active" onClick={hideAsideNav} exact>
+                    <li className="asideNav__listElement">
+                        <NavLink to={`/dashboard/dictionary/edit/${id}`} className="asideNav__link" activeClassName="asideNav__link--active" onClick={hideAsideNav} exact>
                             Dodaj pojęcia
                         </NavLink>
                     </li>

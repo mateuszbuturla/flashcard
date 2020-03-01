@@ -7,127 +7,15 @@
     display: block
     justify-content: center
     position: relative
-    .aside-nav
-        width: 100vw
-        height: 100vh
-        padding: 10px
-        box-shadow: 0px 0px 5px 2px #bababa
-        box-sizing: border-box
-        position: fixed
-        z-index: 3
-        background-color: #fff
-        top: 0
-        left: -101vw
-        transition: .5s
-        .aside-nav__container
-            height: 100%
-            display: flex
-            flex-direction: column
-            justify-content: space-between
-            .aside-nav__links-container
-                .aside-nav__link
-                    margin-top: 20px
-                    display: block
-                    text-decoration: none
-                    color: #000
-                    font-size: 20px
-                    transition: .3s
-                    display: flex
-                    align-items: center
-                    justify-content: left
-                    cursor: pointer
-                    &:hover
-                        color: #5C1EDB
-                    .aside-nav__link-icon
-                        width: 30px
-                        margin-right: 10px
-            .aside-nav__footer
-                text-align: center
-        .aside-nav__header
-            margin-top: 20px
-        .aside-nav__list
-            list-style: none
-            font-size: 28px
-            margin-top: 20px
-            .aside-nav__list-element
-                margin-left: 20px
-        .aside-nav__open-button
-            width: 30px
-            height: 100px
-            border: 0
-            position: absolute
-            right: 0
-            top: 50%
-            transform: translate(100%, -50%)
-            transition: .4s
-            @include backgroundGradient
-            &:focus,
-            &:active
-                outline: 0
-            .aside-nav__button-arrow-icon
-                width: 200%
-                position: relative
-                left: 50%
-                transform: translateX(-50%)
-            &::before
-                content: ''
-                position: absolute
-                top: -30px
-                left: 0
-                width: 0
-                height: 0
-                border-style: solid
-                border-width: 30px 0 0 30px
-                border-color: transparent transparent transparent #5C1EDB
-            &::after
-                content: ''
-                position: absolute
-                bottom: -30px
-                left: 0
-                width: 0
-                height: 0
-                border-style: solid
-                border-width: 30px 30px 0 0
-                border-color: #1575BF transparent transparent transparent
-    .aside-nav--active
-        left: 0
-        .aside-nav__open-button
-            transform: translate(0, -50%)
-            .aside-nav__button-arrow-icon
-                left: -50%
-                transform: rotate(180deg)
-            &::before
-                border-color: transparent transparent transparent #5C1EDB
-                transform: rotate(-90deg)
-            &::after
-                transform: rotate(90deg)
-
-
     .dashboard__main
         width: 100%
         max-width: 1000px
-
-.aside-nav__link--active
-    color: #1575BF !important
-    font-weight: bold
 
 @media (orientation: landscape)
     .dashboard
         width: 90vw
         max-width: 1800px
         display: flex
-        .aside-nav
-            width: 40%
-            height: auto
-            min-height: calc(100vh - 70px)
-            max-width: 250px
-            box-sizing: border-box
-            position: relative
-            top: auto
-            left: auto
-            box-shadow: 0px 5px 5px 2px #bababa
-            .aside-nav__open-button
-                display: none
         .dashboard__main
             width: 100%
 
@@ -136,17 +24,3 @@
         width: 90vw
         max-width: 1800px
         display: flex
-        .aside-nav
-            width: 40%
-            height: auto
-            min-height: calc(100vh - 70px)
-            max-width: 250px
-            box-sizing: border-box
-            position: relative
-            top: auto
-            left: auto
-            box-shadow: 0px 5px 5px 2px #bababa
-            .aside-nav__open-button
-                display: none
-        .dashboard__main
-            width: 100%
