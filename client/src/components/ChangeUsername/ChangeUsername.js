@@ -1,46 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import UsernameValidation from '../../validation/UsernameValidation';
 
 import Message from '../../components/Message';
 import ErrorInputValid from '../../components/ErrorInputValid';
-
-const Form = styled.form`
-    margin-top: 20px;
-    width: 90%;
-    max-width: 300px;
-    box-shadow: 0px 0px 5px 2px #bababa;
-    padding: 30px 20px;
-    box-sizing: border-box;
-    margin-bottom: 30px;
-`;
-
-const H2 = styled.h2`
-    font-size: 25px;
-    margin-bottom: 20px
-`;
-
-const Input = styled.input`
-    border: 0;
-    border-bottom: 1px solid #000000;
-    font-size: 20px;
-    width: 90%;
-    margin-bottom: 20px;
-`;
-
-const Button = styled.input`
-    padding: 10px 40px;
-    border: 0;
-    border-radius: 100px;
-    color: #fff;
-    cursor: pointer;
-    background: linear-gradient(165deg, rgba(92, 30, 219, 1),rgba(21, 117, 191, 1));
-    :focus,
-    :active {
-       outline: 0;
-    }
-`;
 
 class ChangeUsername extends React.Component {
 
@@ -116,28 +79,32 @@ class ChangeUsername extends React.Component {
         const { newUsername, password, message, passwordValid, newUsernameValid, newUsernameIsExistValid } = this.state;
 
         return (
-            <Form onSubmit={this.submitChangeUsernameForm.bind(this)}>
-                <H2>Zmiana nazwy użytkownika</H2>
+            <form className="form" onSubmit={this.submitChangeUsernameForm.bind(this)}>
+                <h2 className="form__header">Zmiana nazwy użytkownika</h2>
                 <Message message={message} />
-                <Input type="text"
+                <input type="text"
                     placeholder="Nowa nazwa"
+                    className="form__input"
                     value={newUsername}
                     onChange={this.handleInputChange.bind(this)}
                     id="newUsername"
                 />
                 <ErrorInputValid valid={newUsernameValid} message="Za krótkia nazwa użytkownika" />
                 <ErrorInputValid valid={newUsernameIsExistValid} message="Podana nazwa użytkownika jest zajęta" />
-                <Input type="password"
+                <input type="password"
                     placeholder="Hasło"
+                    className="form__input"
                     value={password}
                     onChange={this.handleInputChange.bind(this)}
                     id="password"
                 />
                 <ErrorInputValid valid={passwordValid} message="To pole nie może być puste" />
-                <Button type="submit"
+                <input
+                    type="submit"
+                    className="form__submit button button--gradient"
                     value="Zapisz zmiany"
                 />
-            </Form>
+            </form>
         );
     }
 }
