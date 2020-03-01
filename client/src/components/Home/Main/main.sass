@@ -1,0 +1,39 @@
+@import '../../../mixins'
+
+.home
+    margin: 20vh auto 0 auto
+    width: 90%
+    display: flex
+    justify-content: space-around
+    flex-wrap: wrap
+    .offer
+        width: 45%
+        border-radius: 6%
+        padding: 15px
+        color: #ffffff
+        font-size: 20px
+        margin-bottom: 20px
+        transform: translateY(0%)
+        transition: .5s
+        @include backgroundGradient
+        .offer__img
+            display: block
+            margin: 0 auto
+            width: 90%
+        .offer__description
+            margin-top: 20px
+        &:hover
+            transform: translateY(-10%)
+    
+@media (orientation: landscape)
+    .home
+        .offer
+            width: 36%
+            font-size: 25px
+
+@media ( min-width: 1366px )
+    .home
+        justify-content: space-between
+        .offer
+            width: 20%
+            font-size: 3vw

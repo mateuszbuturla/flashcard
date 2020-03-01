@@ -1,12 +1,14 @@
 import React from "react"
 
-import flashcardsImg from '../../img/flashcardsImg.png';
-import testsImg from '../../img/testImg.png';
-import grammarImg from '../../img/grammarImg.png';
+import flashcardsImg from '../../../img/flashcardsImg.png';
+import testsImg from '../../../img/testImg.png';
+import grammarImg from '../../../img/grammarImg.png';
+
+import './main.sass';
 
 const Main = () => {
     return (
-        <section className="home-section">
+        <section className="home">
             <div className="offer">
                 <img className="offer__img" src={flashcardsImg} alt="flashcards" />
                 <p className="offer__description">Fiszki</p>

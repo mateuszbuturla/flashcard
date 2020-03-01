@@ -1,0 +1,27 @@
+@import '../../mixins'
+    
+.logoutNav
+    height: 50px
+    display: flex
+    justify-content: space-around
+    align-items: center
+    width: 80vw
+    margin: 0 auto
+    .logoutNav__button
+        cursor: pointer
+        box-sizing: border-box
+        height: 30px
+        padding: 5px 15px
+        border-radius: 100px
+        border: 1px solid #000
+        background-color: #fff
+    .logoutNav__button--gradient
+        border: 1px solid #fff
+        color: #fff
+        @include backgroundGradient
+
+@media (orientation: landscape)
+    .logoutNav
+        justify-content: flex-end
+        .logoutNav__button
+            margin-left: 20px
