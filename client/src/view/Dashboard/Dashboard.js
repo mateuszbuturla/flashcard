@@ -2,14 +2,15 @@ import React from 'react';
 import Cookies from 'universal-cookie';
 import { Switch, Route } from 'react-router-dom';
 
+import DashboardAsideNav from '../../components/DashboardAsideNav/DashboardAsideNav';
+import DictionaryAsideNav from '../../components/DictionaryAsideNav/DictionaryAsideNav';
+
 import DashboardNav from '../../components/DashboardNav/DashboardNav';
 import DashboardMain from '../DashboardMain/DashboardMain';
-import DashboardMainAsideNav from './DashboardMainAsideNav/DashboardMainAsideNav';
 import DictionaryCreate from '../DictionaryCreate/DictionaryCreate';
 import DictionaryMain from '../DictionaryMain/DictionaryMain';
 import DictionaryTest from '../DictionaryTest/DictionaryTest';
 import DictionaryEdit from '../DictionaryEdit/DictionaryEdit';
-import DashboardDictionaryAsideNav from './DashboardDictionaryAsideNav/DashboardDictionaryAsideNav';
 import DashboardSetting from '../DashboardSetting/DashboardSetting';
 
 import ArrowIcon from '../../img/ArrowIcon.png';
@@ -64,7 +65,7 @@ class Dashboard extends React.Component {
                                     <Route
                                         path='/dashboard/dictionary/edit/:id'
                                         component={props =>
-                                            <DashboardDictionaryAsideNav {...props}
+                                            <DictionaryAsideNav {...props}
                                                 config={config}
                                                 hideAsideNav={this.hideAsideNav.bind(this)}
                                                 user={user}
@@ -74,7 +75,7 @@ class Dashboard extends React.Component {
                                         }
                                     />
                                     <Route path='/dashboard/dictionary/main/:id'
-                                        component={props => <DashboardDictionaryAsideNav {...props}
+                                        component={props => <DictionaryAsideNav {...props}
                                             config={config}
                                             hideAsideNav={this.hideAsideNav.bind(this)}
                                             user={user}
@@ -85,7 +86,7 @@ class Dashboard extends React.Component {
                                     />
                                     <Route
                                         path='/dashboard/dictionary/test/:id'
-                                        component={props => <DashboardDictionaryAsideNav {...props}
+                                        component={props => <DictionaryAsideNav {...props}
                                             config={config}
                                             hideAsideNav={this.hideAsideNav.bind(this)}
                                             user={user}
@@ -94,7 +95,7 @@ class Dashboard extends React.Component {
                                         />
                                         }
                                     />
-                                    <Route path='/dashboard' component={props => <DashboardMainAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} />} />
+                                    <Route path='/dashboard' component={props => <DashboardAsideNav {...props} config={config} hideAsideNav={this.hideAsideNav.bind(this)} />} />
                                 </Switch>
                             </div>
                             <p className="aside-nav__footer">Mateusz Buturla 2020</p>

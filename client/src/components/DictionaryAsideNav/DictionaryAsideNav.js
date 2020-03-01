@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import ArrowIcon from '../../../img/arrow_back.png';
+import ArrowIcon from '../../img/arrow_back.png';
 
-class DashboardDictionaryAsideNav extends React.Component {
+class DictionaryAsideNav extends React.Component {
 
     state = {
         dictionary: undefined,
@@ -93,4 +93,4 @@ class DashboardDictionaryAsideNav extends React.Component {
     }
 }
 
-export default DashboardDictionaryAsideNav;
+export default DictionaryAsideNav;
