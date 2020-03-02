@@ -15,8 +15,10 @@ class DictionaryTest extends React.Component {
         answerInput: '',
         showWordResult: false,
         lastAnswerCorrect: false,
-        correctAnswers: 0,
-        incorrectAnswers: 0,
+        vocabulary: [],
+        correctAnswers: [],
+        incorrectAnswers: [],
+        dictionaryIsEmpty: true,
         finishResult: false
     }
 
@@ -32,7 +34,12 @@ class DictionaryTest extends React.Component {
             fetch(`${config.api}/api/dictionary/getone/${id}`, { method: 'POST' })
                 .then(r => r.json())
                 .then(r => {
-                    this.setState({ dictionary: r.dictionary })
+                    this.setState({
+                        dictionary: r.dictionary,
+                        vocabulary: r.dictionary.vocabulary,
+                        dictionaryIsEmpty: r.dictionary.vocabulary.length > 0 ? false : true,
+                        currentVocabulary: Math.floor(Math.random() * r.dictionary.vocabulary.length)
+                    })
                 })
         }
         catch {
@@ -42,30 +49,32 @@ class DictionaryTest extends React.Component {
 
     submitTranslateForm(e) {
         e.preventDefault();
-        const { dictionary, answerInput, currentVocabulary, lastAnswerCorrect } = this.state;
+        const { answerInput, currentVocabulary, lastAnswerCorrect, vocabulary, correctAnswers, incorrectAnswers } = this.state;
         const { secondLanguage } = this.props;
         if (answerInput) {
             if (secondLanguage === 'en') {
-                if (answerInput.toLowerCase() === dictionary.vocabulary[currentVocabulary].pl.toLowerCase()) {
-                    this.setState(prevState => {
-                        return { correctAnswers: prevState.correctAnswers + 1, lastAnswerCorrect: true }
-                    })
+                if (answerInput.toLowerCase() === vocabulary[currentVocabulary].pl.toLowerCase()) {
+                    let newCorrectAnswers = correctAnswers;
+                    newCorrectAnswers.push(vocabulary[currentVocabulary]);
+                    this.setState({ correctAnswers: newCorrectAnswers, lastAnswerCorrect: true })
                 }
                 else {
-                    this.setState(prevState => {
-                        return { incorrectAnswers: prevState.incorrectAnswers + 1, lastAnswerCorrect: false }
-                    })
+                    let newIncorrectAnswers = incorrectAnswers;
+                    newIncorrectAnswers.push(vocabulary[currentVocabulary]);
+                    this.setState({ incorrectAnswers: newIncorrectAnswers, lastAnswerCorrect: false })
                 }
             }
             else if (secondLanguage === 'pl') {
-                if (answerInput.toLowerCase() === dictionary.vocabulary[currentVocabulary].en.toLowerCase()) {
+                if (answerInput.toLowerCase() === vocabulary[currentVocabulary].en.toLowerCase()) {
                     this.setState(prevState => {
-                        return { correctAnswers: prevState.correctAnswers + 1, lastAnswerCorrect: true }
+                        let newCorrectAnswers = prevState.correctAnswers.push(vocabulary[currentVocabulary]);
+                        return { correctAnswers: newCorrectAnswers, lastAnswerCorrect: true }
                     })
                 }
                 else {
                     this.setState(prevState => {
-                        return { incorrectAnswers: prevState.incorrectAnswers + 1, lastAnswerCorrect: false }
+                        let newIncorrectAnswers = prevState.correctAnswers.push(vocabulary[currentVocabulary]);
+                        return { incorrectAnswers: newIncorrectAnswers, lastAnswerCorrect: false }
                     })
                 }
             }
@@ -74,18 +83,19 @@ class DictionaryTest extends React.Component {
     }
 
     nextWord() {
-        this.setState(prevState => {
-            if (prevState.currentVocabulary < prevState.dictionary.vocabulary.length - 1) {
-                return { currentVocabulary: prevState.currentVocabulary + 1, showWordResult: false }
-            }
-            else {
-                return { finishResult: true }
-            }
-        })
+        const { vocabulary, currentVocabulary } = this.state;
+        if (vocabulary.length - 1 > 0) {
+            let newVocavulary = vocabulary;
+            newVocavulary.splice(currentVocabulary, 1);
+            this.setState({ showWordResult: false, vocabulary: newVocavulary, currentVocabulary: Math.floor(Math.random() * newVocavulary.length) })
+        }
+        else {
+            this.setState({ finishResult: true })
+        }
     }
 
     render() {
-        const { dictionary, currentVocabulary, answerInput, showWordResult, lastAnswerCorrect, finishResult, correctAnswers, incorrectAnswers } = this.state;
+        const { dictionary, currentVocabulary, answerInput, showWordResult, lastAnswerCorrect, finishResult, correctAnswers, incorrectAnswers, dictionaryIsEmpty } = this.state;
         const { secondLanguage } = this.props;
         return (
             <>
@@ -93,13 +103,13 @@ class DictionaryTest extends React.Component {
                     dictionary !== undefined ?
                         <div className="dictionaryTestContainer">
                             {
-                                dictionary.vocabulary.length > 0 ?
+                                dictionaryIsEmpty === false ?
                                     <>
                                         {
                                             finishResult === true ?
                                                 <TestResult
-                                                    correctAnswers={correctAnswers}
-                                                    incorrectAnswers={incorrectAnswers}
+                                                    correctAnswers={correctAnswers.length}
+                                                    incorrectAnswers={incorrectAnswers.length}
                                                     dictionary={dictionary}
                                                 />
                                                 :
