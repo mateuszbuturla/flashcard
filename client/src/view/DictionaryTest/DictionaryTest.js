@@ -18,6 +18,7 @@ class DictionaryTest extends React.Component {
         vocabulary: [],
         correctAnswers: [],
         incorrectAnswers: [],
+        dictionaryIsEmpty: true,
         finishResult: false
     }
 
@@ -33,7 +34,12 @@ class DictionaryTest extends React.Component {
             fetch(`${config.api}/api/dictionary/getone/${id}`, { method: 'POST' })
                 .then(r => r.json())
                 .then(r => {
-                    this.setState({ dictionary: r.dictionary, vocabulary: r.dictionary.vocabulary })
+                    this.setState({
+                        dictionary: r.dictionary,
+                        vocabulary: r.dictionary.vocabulary,
+                        dictionaryIsEmpty: r.dictionary.vocabulary.length > 0 ? false : true,
+                        currentVocabulary: Math.floor(Math.random() * r.dictionary.vocabulary.length)
+                    })
                 })
         }
         catch {
@@ -78,7 +84,7 @@ class DictionaryTest extends React.Component {
 
     nextWord() {
         const { vocabulary, currentVocabulary } = this.state;
-        if (vocabulary.length > 0) {
+        if (vocabulary.length - 1 > 0) {
             let newVocavulary = vocabulary;
             newVocavulary.splice(currentVocabulary, 1);
             this.setState({ showWordResult: false, vocabulary: newVocavulary, currentVocabulary: Math.floor(Math.random() * newVocavulary.length) })
@@ -89,7 +95,7 @@ class DictionaryTest extends React.Component {
     }
 
     render() {
-        const { dictionary, currentVocabulary, answerInput, showWordResult, lastAnswerCorrect, finishResult, correctAnswers, incorrectAnswers } = this.state;
+        const { dictionary, currentVocabulary, answerInput, showWordResult, lastAnswerCorrect, finishResult, correctAnswers, incorrectAnswers, dictionaryIsEmpty } = this.state;
         const { secondLanguage } = this.props;
         return (
             <>
@@ -97,7 +103,7 @@ class DictionaryTest extends React.Component {
                     dictionary !== undefined ?
                         <div className="dictionaryTestContainer">
                             {
-                                dictionary.vocabulary.length > 0 ?
+                                dictionaryIsEmpty === false ?
                                     <>
                                         {
                                             finishResult === true ?
