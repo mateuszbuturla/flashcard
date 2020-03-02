@@ -8,7 +8,7 @@ const TestResult = ({ correctAnswers, incorrectAnswers, dictionary }) => {
             <p className="dictionaryResult__header">Wynik:</p>
             <p className="dictionaryResult__result dictionaryResult__result--green">Poprawne: {correctAnswers}</p>
             <p className="dictionaryResult__result dictionaryResult__result--red">Nieprawidłowe: {incorrectAnswers}</p>
-            <p className="dictionaryResult__result">{correctAnswers / dictionary.vocabulary.length * 100}%</p>
+            <p className="dictionaryResult__result">{Math.floor((correctAnswers * 100) / (correctAnswers + incorrectAnswers))}%</p>
         </div>
     )
 }
