@@ -1,5 +1,6 @@
 const usersController = require('../controllers/usersController');
 const dictionaryController = require('../controllers/dictionaryController');
+const testResultController = require('../controllers/testResultController');
 
 module.exports = (app) => {
 
@@ -22,4 +23,6 @@ module.exports = (app) => {
     app.post('/api/dictionary/edit/:id/:newvocabulary/:userid/:login', dictionaryController.editDictionary);
 
     app.post('/api/dictionary/delete/:id/:userid/:login', dictionaryController.deleteDictionary);
+
+    app.post('/api/result/add/:dictionaryid/:correct/:incorrect', testResultController.saveTestResult);
 }

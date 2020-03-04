@@ -91,7 +91,17 @@ class DictionaryTest extends React.Component {
         }
         else {
             this.setState({ finishResult: true })
+            this.saveResult();
         }
+    }
+
+    saveResult() {
+        const { correctAnswers, incorrectAnswers } = this.state;
+        const { config } = this.props;
+        const id = this.props.match.params.id;
+        fetch(`${config.api}/api/result/add/${id}/${JSON.stringify(correctAnswers)}/${JSON.stringify(incorrectAnswers)}`, { method: 'POST' })
+            .then(r => r.json())
+            .then(r => console.log(r))
     }
 
     render() {
