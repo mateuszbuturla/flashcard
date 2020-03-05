@@ -118,8 +118,8 @@ class DictionaryTest extends React.Component {
                                         {
                                             finishResult === true ?
                                                 <TestResult
-                                                    correctAnswers={correctAnswers.length}
-                                                    incorrectAnswers={incorrectAnswers.length}
+                                                    correctAnswers={correctAnswers}
+                                                    incorrectAnswers={incorrectAnswers}
                                                     dictionary={dictionary}
                                                 />
                                                 :
