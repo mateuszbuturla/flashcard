@@ -11,7 +11,8 @@ class DictionaryMain extends React.Component {
 
     state = {
         dictionary: undefined,
-        flashcardsId: 0
+        flashcardsId: 0,
+        latelyResult: null
     }
 
     componentDidMount() {
@@ -23,6 +24,12 @@ class DictionaryMain extends React.Component {
                 .then(r => r.json())
                 .then(r => {
                     this.setState({ dictionary: r.dictionary })
+                })
+
+            fetch(`${config.api}/api/result/getLately/${id}`, { method: 'POST' })
+                .then(r => r.json())
+                .then(r => {
+                    this.setState({ latelyResult: r.result })
                 })
         }
         catch {
@@ -43,7 +50,7 @@ class DictionaryMain extends React.Component {
     }
 
     render() {
-        const { dictionary, flashcardsId } = this.state;
+        const { dictionary, flashcardsId, latelyResult } = this.state;
         const { secondLanguage } = this.props;
         return (
             <>
@@ -66,7 +73,10 @@ class DictionaryMain extends React.Component {
                                                 dictionary={dictionary}
                                             />
                                         </div>
-                                        <LetelyIncorrect words={[{ pl: 'kot', en: 'cat' }, { pl: 'pies', en: 'dog' }, { pl: 'chleb', en: 'bread' }]} />
+                                        {
+                                            latelyResult !== null &&
+                                            <LetelyIncorrect words={latelyResult.incorrect} />
+                                        }
                                     </div>
                                     :
                                     <DashboardAnnouncement message="Nie posiadasz jeszcze rzadnych słówek w tym zbiorze" />

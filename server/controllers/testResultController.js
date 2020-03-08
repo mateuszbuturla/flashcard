@@ -29,7 +29,7 @@ exports.getLatelyTestResult = async (req, res) => {
             if (findLatelyTestResult.length > 0)
                 res.status(200).json({ status: 'correct', result: findLatelyTestResult[0] });
             else if (findLatelyTestResult.length === 0)
-                res.status(200).json({ status: 'correct', result: [] });
+                res.status(200).json({ status: 'correct', result: null });
         }
         else {
             res.status(200).json({ status: 'incorrect' });
