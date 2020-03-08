@@ -20,3 +20,22 @@ exports.saveTestResult = async (req, res) => {
         res.status(500).json({ message: 'error' });
     }
 }
+
+exports.getLatelyTestResult = async (req, res) => {
+    const { dictionaryid } = req.params;
+    try {
+        if (dictionaryid) {
+            const findLatelyTestResult = await testResultModel.find({ dictionaryId: dictionaryid }).sort({ _id: -1 });
+            if (findLatelyTestResult.length > 0)
+                res.status(200).json({ status: 'correct', result: findLatelyTestResult[0] });
+            else if (findLatelyTestResult.length === 0)
+                res.status(200).json({ status: 'correct', result: null });
+        }
+        else {
+            res.status(200).json({ status: 'incorrect' });
+        }
+    }
+    catch {
+        res.status(500).json({ message: 'error' });
+    }
+}

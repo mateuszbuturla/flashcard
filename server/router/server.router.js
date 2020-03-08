@@ -25,4 +25,6 @@ module.exports = (app) => {
     app.post('/api/dictionary/delete/:id/:userid/:login', dictionaryController.deleteDictionary);
 
     app.post('/api/result/add/:dictionaryid/:correct/:incorrect', testResultController.saveTestResult);
+
+    app.post('/api/result/getLately/:dictionaryid', testResultController.getLatelyTestResult);
 }

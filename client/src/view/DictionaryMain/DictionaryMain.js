@@ -3,6 +3,7 @@ import React from 'react';
 import FlashCard from '../../components/DictionaryMain/FlashCard/FlashCard';
 import FlashCardNav from '../../components/DictionaryMain/FlashCardNav/FlashCardNav';
 import DashboardAnnouncement from '../../components/DashboardAnnouncement';
+import LetelyIncorrect from '../../components/DictionaryMain/LatelyIncorrect/LatelyIncorrect';
 
 import './dictionaryMain.sass'
 
@@ -10,7 +11,8 @@ class DictionaryMain extends React.Component {
 
     state = {
         dictionary: undefined,
-        flashcardsId: 0
+        flashcardsId: 0,
+        latelyResult: null
     }
 
     componentDidMount() {
@@ -22,6 +24,12 @@ class DictionaryMain extends React.Component {
                 .then(r => r.json())
                 .then(r => {
                     this.setState({ dictionary: r.dictionary })
+                })
+
+            fetch(`${config.api}/api/result/getLately/${id}`, { method: 'POST' })
+                .then(r => r.json())
+                .then(r => {
+                    this.setState({ latelyResult: r.result })
                 })
         }
         catch {
@@ -42,7 +50,7 @@ class DictionaryMain extends React.Component {
     }
 
     render() {
-        const { dictionary, flashcardsId } = this.state;
+        const { dictionary, flashcardsId, latelyResult } = this.state;
         const { secondLanguage } = this.props;
         return (
             <>
@@ -65,6 +73,11 @@ class DictionaryMain extends React.Component {
                                                 dictionary={dictionary}
                                             />
                                         </div>
+                                        <div class="break"></div>
+                                        {
+                                            latelyResult !== null &&
+                                            <LetelyIncorrect words={latelyResult.incorrect} />
+                                        }
                                     </div>
                                     :
                                     <DashboardAnnouncement message="Nie posiadasz jeszcze rzadnych słówek w tym zbiorze" />
