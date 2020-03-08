@@ -3,6 +3,7 @@ import React from 'react';
 import FlashCard from '../../components/DictionaryMain/FlashCard/FlashCard';
 import FlashCardNav from '../../components/DictionaryMain/FlashCardNav/FlashCardNav';
 import DashboardAnnouncement from '../../components/DashboardAnnouncement';
+import LetelyIncorrect from '../../components/DictionaryMain/LatelyIncorrect/LatelyIncorrect';
 
 import './dictionaryMain.sass'
 
@@ -65,6 +66,7 @@ class DictionaryMain extends React.Component {
                                                 dictionary={dictionary}
                                             />
                                         </div>
+                                        <LetelyIncorrect words={[{ pl: 'kot', en: 'cat' }, { pl: 'pies', en: 'dog' }, { pl: 'chleb', en: 'bread' }]} />
                                     </div>
                                     :
                                     <DashboardAnnouncement message="Nie posiadasz jeszcze rzadnych słówek w tym zbiorze" />
