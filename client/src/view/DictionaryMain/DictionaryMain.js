@@ -73,6 +73,7 @@ class DictionaryMain extends React.Component {
                                                 dictionary={dictionary}
                                             />
                                         </div>
+                                        <div class="break"></div>
                                         {
                                             latelyResult !== null &&
                                             <LetelyIncorrect words={latelyResult.incorrect} />
