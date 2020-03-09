@@ -112,56 +112,56 @@
             margin-top: 20px
             .asideNav__listElement
                 margin-left: 20px
-        .asideNav__openButton
-            width: 30px
-            height: 100px
-            border: 0
+    .asideNav__openButton
+        width: 30px
+        height: 100px
+        border: 0
+        position: absolute
+        right: 0
+        top: 50%
+        transform: translate(100%, -50%)
+        transition: .4s
+        @include backgroundGradient
+        &:focus,
+        &:active
+            outline: 0
+        .asideNav__buttonArrowIcon
+            width: 200%
+            position: relative
+            left: 50%
+            transform: translateX(-50%)
+        &::before
+            content: ''
             position: absolute
-            right: 0
-            top: 50%
-            transform: translate(100%, -50%)
-            transition: .4s
-            @include backgroundGradient
-            &:focus,
-            &:active
-                outline: 0
-            .asideNav__buttonArrowIcon
-                width: 200%
-                position: relative
-                left: 50%
-                transform: translateX(-50%)
-            &::before
-                content: ''
-                position: absolute
-                top: -30px
-                left: 0
-                width: 0
-                height: 0
-                border-style: solid
-                border-width: 30px 0 0 30px
-                border-color: transparent transparent transparent #5C1EDB
-            &::after
-                content: ''
-                position: absolute
-                bottom: -30px
-                left: 0
-                width: 0
-                height: 0
-                border-style: solid
-                border-width: 30px 30px 0 0
-                border-color: #1575BF transparent transparent transparent
-    .asideNav--active
-        left: 0
-        .asideNav__openButton
-            transform: translate(0, -50%)
-            .asideNav__buttonArrowIcon
-                left: -50%
-                transform: rotate(180deg)
-            &::before
-                border-color: transparent transparent transparent #5C1EDB
-                transform: rotate(-90deg)
-            &::after
-                transform: rotate(90deg)
+            top: -30px
+            left: 0
+            width: 0
+            height: 0
+            border-style: solid
+            border-width: 30px 0 0 30px
+            border-color: transparent transparent transparent #5C1EDB
+        &::after
+            content: ''
+            position: absolute
+            bottom: -30px
+            left: 0
+            width: 0
+            height: 0
+            border-style: solid
+            border-width: 30px 30px 0 0
+            border-color: #1575BF transparent transparent transparent
+.asideNav--active
+    left: 0
+    .asideNav__openButton
+        transform: translate(0, -50%)
+        .asideNav__buttonArrowIcon
+            left: -50%
+            transform: rotate(180deg)
+        &::before
+            border-color: transparent transparent transparent #5C1EDB
+            transform: rotate(-90deg)
+        &::after
+            transform: rotate(90deg)
 
 .asideNav__link--active
     color: #1575BF !important
