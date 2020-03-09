@@ -2,6 +2,14 @@ import React from "react";
 import styled from 'styled-components';
 
 const Container = styled.div`
+    width: 100%;
+`;
+
+const Header = styled.h2`
+    text-align: left;
+`;
+
+const IncorrectWordsContainer = styled.div`
     width: 90%;
     margin-top: 30px;
 `;
@@ -20,7 +28,10 @@ const LatelyIncorrect = ({ words }) => {
     return (
         <>
             <Container>
-                {incorrectWords}
+                <Header>Ostatnio niepoprawne:</Header>
+                <IncorrectWordsContainer>
+                    {incorrectWords}
+                </IncorrectWordsContainer>
             </Container>
         </>
     )
