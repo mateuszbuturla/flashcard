@@ -23,21 +23,16 @@ class DictionaryCreate extends React.Component {
         const { config, user } = this.props;
         if (nameValid) {
             this.setState({ nameValid: true })
-            try {
-                fetch(`${config.api}/api/dictionary/create/${name}/${user._id}/${user.login}`, { method: 'POST' })
-                    .then(r => r.json())
-                    .then(r => {
-                        if (r.status === 'correct') {
-                            this.setState({ message: 'Twój zestaw został dodany', name: '' })
-                        }
-                        else if (r.status === 'incorrect') {
-                            this.setState({ message: 'Nie prawidłowa nazwa' })
-                        }
-                    })
-            }
-            catch {
-                this.setState({ message: 'Wystąpił błąd spróbuj ponownie później' })
-            }
+            fetch(`${config.api}/api/dictionary/create/${name}/${user._id}/${user.login}`, { method: 'POST' })
+                .then(r => r.json())
+                .then(r => {
+                    if (r.status === 'correct') {
+                        this.setState({ message: 'Twój zestaw został dodany', name: '' })
+                    }
+                    else if (r.status === 'incorrect') {
+                        this.setState({ message: 'Nie prawidłowa nazwa' })
+                    }
+                })
         }
     }
 

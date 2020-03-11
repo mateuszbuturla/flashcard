@@ -13,34 +13,24 @@ class DictionaryAsideNav extends React.Component {
         const { config } = this.props;
         const id = this.props.match.params.id;
 
-        try {
-            fetch(`${config.api}/api/dictionary/getone/${id}`, { method: 'POST' })
-                .then(r => r.json())
-                .then(r => {
-                    this.setState({ dictionary: r.dictionary })
-                })
-        }
-        catch {
-
-        }
+        fetch(`${config.api}/api/dictionary/getone/${id}`, { method: 'POST' })
+            .then(r => r.json())
+            .then(r => {
+                this.setState({ dictionary: r.dictionary })
+            })
     }
 
     removeDictionary() {
         const { config, hideAsideNav, user } = this.props;
         const id = this.props.match.params.id;
-        try {
-            this.props.history.push('/dashboard');
-            fetch(`${config.api}/api/dictionary/delete/${id}/${user._id}/${user.login}`, { method: 'POST' })
-                .then(r => r.json())
-                .then(r => {
-                    if (r.status === 'correct') {
-                        hideAsideNav();
-                    }
-                })
-        }
-        catch {
-
-        }
+        this.props.history.push('/dashboard');
+        fetch(`${config.api}/api/dictionary/delete/${id}/${user._id}/${user.login}`, { method: 'POST' })
+            .then(r => r.json())
+            .then(r => {
+                if (r.status === 'correct') {
+                    hideAsideNav();
+                }
+            })
     }
 
     render() {

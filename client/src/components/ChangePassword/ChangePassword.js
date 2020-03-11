@@ -48,21 +48,16 @@ class ChangePassword extends React.Component {
         const { config, user } = this.props;
 
         if (newPasswordValid && newPasswordRepeatValid && passwordValid) {
-            try {
-                fetch(`${config.api}/api/user/changepassword/${user._id}/${password}/${newPassword}`, { method: 'POST' })
-                    .then(r => r.json())
-                    .then(r => {
-                        if (r.status === 'correct') {
-                            this.setState({ message: 'Hasło zostało zmienione', newPassword: '', newPasswordRepeat: '', password: '' })
-                        }
-                        else if (r.status === 'incorrect') {
-                            this.setState({ message: 'Nie prawidłowe dane', password: '' })
-                        }
-                    })
-            }
-            catch {
-                this.setState({ message: 'Wystąpił problem po stronie serwera proszę spróbować ponownie później' })
-            }
+            fetch(`${config.api}/api/user/changepassword/${user._id}/${password}/${newPassword}`, { method: 'POST' })
+                .then(r => r.json())
+                .then(r => {
+                    if (r.status === 'correct') {
+                        this.setState({ message: 'Hasło zostało zmienione', newPassword: '', newPasswordRepeat: '', password: '' })
+                    }
+                    else if (r.status === 'incorrect') {
+                        this.setState({ message: 'Nie prawidłowe dane', password: '' })
+                    }
+                })
         }
     }
 

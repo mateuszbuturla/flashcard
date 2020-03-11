@@ -19,22 +19,17 @@ class DictionaryMain extends React.Component {
         const { config } = this.props;
         const id = this.props.match.params.id;
 
-        try {
-            fetch(`${config.api}/api/dictionary/getone/${id}`, { method: 'POST' })
-                .then(r => r.json())
-                .then(r => {
-                    this.setState({ dictionary: r.dictionary })
-                })
+        fetch(`${config.api}/api/dictionary/getone/${id}`, { method: 'POST' })
+            .then(r => r.json())
+            .then(r => {
+                this.setState({ dictionary: r.dictionary })
+            })
 
-            fetch(`${config.api}/api/result/getLately/${id}`, { method: 'POST' })
-                .then(r => r.json())
-                .then(r => {
-                    this.setState({ latelyResult: r.result })
-                })
-        }
-        catch {
-
-        }
+        fetch(`${config.api}/api/result/getLately/${id}`, { method: 'POST' })
+            .then(r => r.json())
+            .then(r => {
+                this.setState({ latelyResult: r.result })
+            })
     }
 
     changeFlashCardId(action) {
