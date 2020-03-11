@@ -32,17 +32,12 @@ class ChangeUsername extends React.Component {
 
     validUserNameIsExist(username) {
         const { config } = this.props;
-        try {
-            if (username) {
-                fetch(`${config.api}/api/user/usernameisexist/${username}`, { method: 'POST' })
-                    .then(r => r.json())
-                    .then(r => {
-                        this.setState({ newUsernameIsExistValid: !r.exist })
-                    })
-            }
-        }
-        catch {
-            this.setState({ message: 'Wystąpił problem po stronie serwera proszę spróbować ponownie później' })
+        if (username) {
+            fetch(`${config.api}/api/user/usernameisexist/${username}`, { method: 'POST' })
+                .then(r => r.json())
+                .then(r => {
+                    this.setState({ newUsernameIsExistValid: !r.exist })
+                })
         }
     }
 
@@ -57,21 +52,16 @@ class ChangeUsername extends React.Component {
         const { config, user } = this.props;
 
         if (newUsernameValid && passwordValid && newUsernameIsExistValid) {
-            try {
-                fetch(`${config.api}/api/user/changeusername/${user._id}/${password}/${newUsername}`, { method: 'POST' })
-                    .then(r => r.json())
-                    .then(r => {
-                        if (r.status === 'correct') {
-                            this.setState({ message: 'Nazwa uytkownika została zmieniona', newUsername: '', password: '' })
-                        }
-                        else if (r.status === 'incorrect') {
-                            this.setState({ message: 'Nie prawidłowe dane', password: '' })
-                        }
-                    })
-            }
-            catch {
-                this.setState({ message: 'Wystąpił problem po stronie serwera proszę spróbować ponownie później' })
-            }
+            fetch(`${config.api}/api/user/changeusername/${user._id}/${password}/${newUsername}`, { method: 'POST' })
+                .then(r => r.json())
+                .then(r => {
+                    if (r.status === 'correct') {
+                        this.setState({ message: 'Nazwa uytkownika została zmieniona', newUsername: '', password: '' })
+                    }
+                    else if (r.status === 'incorrect') {
+                        this.setState({ message: 'Nie prawidłowe dane', password: '' })
+                    }
+                })
         }
     }
 

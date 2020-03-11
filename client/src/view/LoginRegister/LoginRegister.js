@@ -58,22 +58,17 @@ class LoginRegister extends React.Component {
         this.setState({ loginLoginValid: loginValid, loginPasswordValid: passwordValid });
 
         if (loginValid && passwordValid) {
-            try {
-                fetch(`${config.api}/api/user/auth/${loginLogin}/${loginPassword}`, { method: 'POST' })
-                    .then(r => r.json())
-                    .then(r => {
-                        if (r.status === 'correct') {
-                            cookies.set('user', r.user);
-                            getUser();
-                        }
-                        else if (r.status === 'incorrect') {
-                            this.setState({ message: 'Nie prawidłowe dane logowania', loginPassword: '' })
-                        }
-                    })
-            }
-            catch {
-                this.setState({ message: 'Wystąpił błąd spróbuj ponownie później' })
-            }
+            fetch(`${config.api}/api/user/auth/${loginLogin}/${loginPassword}`, { method: 'POST' })
+                .then(r => r.json())
+                .then(r => {
+                    if (r.status === 'correct') {
+                        cookies.set('user', r.user);
+                        getUser();
+                    }
+                    else if (r.status === 'incorrect') {
+                        this.setState({ message: 'Nie prawidłowe dane logowania', loginPassword: '' })
+                    }
+                })
         }
     }
 
@@ -94,21 +89,16 @@ class LoginRegister extends React.Component {
 
         this.setState({ registerLoginValid: loginValid, registerPasswordValid: passwordValid, registerRepeatPasswordValid: passwordRepeatValid })
         if (loginValid && passwordValid && passwordRepeatValid) {
-            try {
-                fetch(`${config.api}/api/user/register/${registerLogin}/${registerPassword}`, { method: 'POST' })
-                    .then(r => r.json())
-                    .then(r => {
-                        if (r.status === 'correct') {
-                            this.setState({ message: 'Twoje konto zostało zarejestrowane', registerLogin: '', registerPassword: '', registerRepeatPassword: '' })
-                        }
-                        else if (r.status === 'incorrect') {
-                            this.setState({ message: 'Nie prawidłowe dane rejestracji' })
-                        }
-                    })
-            }
-            catch {
-                this.setState({ message: 'Wystąpił błąd spróbuj ponownie później' })
-            }
+            fetch(`${config.api}/api/user/register/${registerLogin}/${registerPassword}`, { method: 'POST' })
+                .then(r => r.json())
+                .then(r => {
+                    if (r.status === 'correct') {
+                        this.setState({ message: 'Twoje konto zostało zarejestrowane', registerLogin: '', registerPassword: '', registerRepeatPassword: '' })
+                    }
+                    else if (r.status === 'incorrect') {
+                        this.setState({ message: 'Nie prawidłowe dane rejestracji' })
+                    }
+                })
         }
     }
 

@@ -17,16 +17,11 @@ class DictionaryEdit extends React.Component {
         const { config } = this.props;
         const id = this.props.match.params.id;
 
-        try {
-            fetch(`${config.api}/api/dictionary/getone/${id}`, { method: 'POST' })
-                .then(r => r.json())
-                .then(r => {
-                    this.setState({ dictionary: r.dictionary, words: r.dictionary.vocabulary })
-                })
-        }
-        catch {
-
-        }
+        fetch(`${config.api}/api/dictionary/getone/${id}`, { method: 'POST' })
+            .then(r => r.json())
+            .then(r => {
+                this.setState({ dictionary: r.dictionary, words: r.dictionary.vocabulary })
+            })
     }
 
     handleWordChange(e) {
@@ -59,21 +54,16 @@ class DictionaryEdit extends React.Component {
         const { words } = this.state;
         const id = this.props.match.params.id;
 
-        try {
-            fetch(`${config.api}/api/dictionary/edit/${id}/${JSON.stringify(words)}/${user._id}/${user.login}`, { method: 'POST' })
-                .then(r => r.json())
-                .then(r => {
-                    if (r.status === 'correct') {
-                        this.setState({ message: 'Twój zbiór został zaktualizowany' })
-                    }
-                    else if (r.status === 'incorrect') {
-                        this.setState({ message: 'Wystąpił błąd' })
-                    }
-                })
-        }
-        catch {
-            this.setState({ message: 'Wystąpił błąd proszę spróbować ponownie później' })
-        }
+        fetch(`${config.api}/api/dictionary/edit/${id}/${JSON.stringify(words)}/${user._id}/${user.login}`, { method: 'POST' })
+            .then(r => r.json())
+            .then(r => {
+                if (r.status === 'correct') {
+                    this.setState({ message: 'Twój zbiór został zaktualizowany' })
+                }
+                else if (r.status === 'incorrect') {
+                    this.setState({ message: 'Wystąpił błąd' })
+                }
+            })
     }
 
     render() {

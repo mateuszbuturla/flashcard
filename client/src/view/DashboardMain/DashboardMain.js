@@ -22,16 +22,11 @@ class DashboardMain extends React.Component {
     componentDidMount() {
         const { user, config } = this.props;
 
-        try {
-            fetch(`${config.api}/api/dictionary/get/${user._id}`, { method: 'POST' })
-                .then(r => r.json())
-                .then(r => {
-                    this.setState({ dictionaries: r.dictionaries, userName: r.userName })
-                })
-        }
-        catch {
-
-        }
+        fetch(`${config.api}/api/dictionary/get/${user._id}`, { method: 'POST' })
+            .then(r => r.json())
+            .then(r => {
+                this.setState({ dictionaries: r.dictionaries, userName: r.userName })
+            })
     }
 
     render() {

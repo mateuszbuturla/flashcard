@@ -30,21 +30,16 @@ class DictionaryTest extends React.Component {
         const { config } = this.props;
         const id = this.props.match.params.id;
 
-        try {
-            fetch(`${config.api}/api/dictionary/getone/${id}`, { method: 'POST' })
-                .then(r => r.json())
-                .then(r => {
-                    this.setState({
-                        dictionary: r.dictionary,
-                        vocabulary: r.dictionary.vocabulary,
-                        dictionaryIsEmpty: r.dictionary.vocabulary.length > 0 ? false : true,
-                        currentVocabulary: Math.floor(Math.random() * r.dictionary.vocabulary.length)
-                    })
+        fetch(`${config.api}/api/dictionary/getone/${id}`, { method: 'POST' })
+            .then(r => r.json())
+            .then(r => {
+                this.setState({
+                    dictionary: r.dictionary,
+                    vocabulary: r.dictionary.vocabulary,
+                    dictionaryIsEmpty: r.dictionary.vocabulary.length > 0 ? false : true,
+                    currentVocabulary: Math.floor(Math.random() * r.dictionary.vocabulary.length)
                 })
-        }
-        catch {
-
-        }
+            })
     }
 
     submitTranslateForm(e) {
