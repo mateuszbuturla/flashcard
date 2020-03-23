@@ -25,7 +25,7 @@ const TestResult = ({ correctAnswers, incorrectAnswers, dictionary }) => {
                 {correct}
             </div>
             <div class="break"></div>
-            <div className="dictionaryResult__wordsContainer">
+            <div className="dictionaryResult__wordsContainer dictionaryResult__wordsContainer--marginBottom">
                 {inCorrect}
             </div>
         </>
