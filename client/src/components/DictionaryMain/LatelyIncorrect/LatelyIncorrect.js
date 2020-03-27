@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Container = styled.div`
     width: 100%;
     margin-bottom: 50px;
+    margin-top: 50px;
 `;
 
 const Header = styled.h2`
