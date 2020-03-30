@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const KitContainer = styled.div`
-    border-radius: 10px;
     padding: 10px;
     box-shadow: 0px 0px 5px 2px #bababa;
     width: 90%;
