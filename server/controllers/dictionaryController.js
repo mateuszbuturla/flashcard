@@ -34,7 +34,9 @@ exports.getDictionaries = async (req, res) => {
         if (owner) {
             const findDictionaries = await dictionaryModel.find({ owner: owner });
             const findUser = await userModel.find({ _id: owner });
-            res.status(200).json({ status: 'correct', dictionaries: findDictionaries, userName: findUser[0].login });
+            setTimeout(() => {
+                res.status(200).json({ status: 'correct', dictionaries: findDictionaries, userName: findUser[0].login });
+            }, 1000)
         }
         else {
             res.status(200).json({ status: 'incorrect' });

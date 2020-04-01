@@ -3,13 +3,14 @@ import Cookies from 'universal-cookie';
 
 import Message from '../../components/Message';
 import Kit from '../../components/DashboardKit/DashboardKit';
+import Loading from '../../components/Loading/Loading';
 
 import './dashboardMain.sass';
 
 class DashboardMain extends React.Component {
 
     state = {
-        dictionaries: null,
+        dictionaries: undefined,
         userName: ''
     }
 
@@ -32,24 +33,31 @@ class DashboardMain extends React.Component {
     render() {
         const { dictionaries, userName } = this.state;
         let _dictionaries = null;
-        if (dictionaries !== null)
+        if (dictionaries !== null && dictionaries !== undefined)
             _dictionaries = dictionaries.map(dictionary => <Kit key={dictionary._id} dictionary={dictionary} owner={userName} />)
 
         return (
             <div className="dashboardMain">
-                <h2 className="dashboardMain__header">Twoje zestawy</h2>
                 {
-                    dictionaries !== null &&
-                    <>
-                        {
-                            dictionaries.length === 0 &&
-                            <Message message="Nie posiadasz jeszcze żadnych zbiorów słówek" />
-                        }
-                    </>
+                    dictionaries !== undefined ?
+                        <>
+                            <h2 className="dashboardMain__header">Twoje zestawy</h2>
+                            {
+                                dictionaries !== null &&
+                                <>
+                                    {
+                                        dictionaries.length === 0 &&
+                                        <Message message="Nie posiadasz jeszcze żadnych zbiorów słówek" />
+                                    }
+                                </>
+                            }
+                            <div className="dashboardMain__dictionaryContainer">
+                                {_dictionaries}
+                            </div>
+                        </>
+                        :
+                        <Loading />
                 }
-                <div className="dashboardMain__dictionaryContainer">
-                    {_dictionaries}
-                </div>
             </div>
         );
     }
