@@ -4,6 +4,7 @@ import FlashCard from '../../components/DictionaryMain/FlashCard/FlashCard';
 import FlashCardNav from '../../components/DictionaryMain/FlashCardNav/FlashCardNav';
 import DashboardAnnouncement from '../../components/DashboardAnnouncement';
 import LetelyIncorrect from '../../components/DictionaryMain/LatelyIncorrect/LatelyIncorrect';
+import Loading from '../../components/Loading/Loading';
 
 import './dictionaryMain.sass'
 
@@ -79,7 +80,8 @@ class DictionaryMain extends React.Component {
                             }
                         </>
                         :
-                        <DashboardAnnouncement message="Taki słownik nie istnieje lub nie należy do Ciebie" />
+                        <Loading />
+                    // <DashboardAnnouncement message="Taki słownik nie istnieje lub nie należy do Ciebie" />
                 }
             </>
         );
