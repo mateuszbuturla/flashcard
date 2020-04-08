@@ -14,6 +14,7 @@ class DictionaryEdit extends React.Component {
     }
 
     componentDidMount() {
+        document.title = 'Fiszki - Edytuj słownik'
         const { config } = this.props;
         const id = this.props.match.params.id;
 
