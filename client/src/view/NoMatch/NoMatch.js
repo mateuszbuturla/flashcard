@@ -18,6 +18,7 @@ const P = styled.p`
 class NoMatch extends React.Component {
 
     render() {
+        document.title = 'Fiszki - Nie znaleziono'
         return (
             <>
                 <Section>
