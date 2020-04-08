@@ -100,6 +100,7 @@ class DictionaryTest extends React.Component {
     }
 
     render() {
+        document.title = 'Fiszki - Test'
         const { dictionary, currentVocabulary, answerInput, showWordResult, lastAnswerCorrect, finishResult, correctAnswers, incorrectAnswers, dictionaryIsEmpty } = this.state;
         const { secondLanguage } = this.props;
         return (
