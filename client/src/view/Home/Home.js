@@ -7,6 +7,7 @@ import Footer from '../../components/FullWidthFooter/Footer';
 class Home extends React.Component {
 
     render() {
+        document.title = 'Fiszki - Strona główna'
         return (
             <>
                 <Nav />
