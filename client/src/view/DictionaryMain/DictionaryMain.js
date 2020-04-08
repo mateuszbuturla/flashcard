@@ -17,6 +17,7 @@ class DictionaryMain extends React.Component {
     }
 
     componentDidMount() {
+        document.title = 'Fiszki - Słownik'
         const { config } = this.props;
         const id = this.props.match.params.id;
 
