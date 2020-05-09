@@ -37,6 +37,7 @@ class DictionaryCreate extends React.Component {
     }
 
     render() {
+        document.title = 'Fiszki - Tworzenie słownika'
         const { name, nameValid, message } = this.state;
 
         return (
