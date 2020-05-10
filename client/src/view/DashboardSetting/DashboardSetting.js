@@ -9,6 +9,7 @@ import './dashboardSetting.sass';
 class DashboardSetting extends React.Component {
 
     render() {
+        document.title = 'Fiszki - Ustawienia'
         const { user, config } = this.props;
 
         return (
