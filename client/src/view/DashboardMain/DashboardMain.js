@@ -31,6 +31,7 @@ class DashboardMain extends React.Component {
     }
 
     render() {
+        document.title = 'Fiszki - Dashboard'
         const { dictionaries, userName } = this.state;
         let _dictionaries = null;
         if (dictionaries !== null && dictionaries !== undefined)
