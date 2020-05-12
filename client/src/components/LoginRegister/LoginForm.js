@@ -3,6 +3,7 @@ import React from "react"
 import ErrorInputValid from '../ErrorInputValid';
 
 const LoginForm = ({ submitLoginForm, currentForm, handleInputChange, loginLogin, loginLoginValid, loginPassword, loginPasswordValid }) => {
+    document.title = 'Fiszki - Logowanie'
     return (
         <form onSubmit={submitLoginForm.bind(this)} className={`form form--shadowNone${currentForm === 'login' ? '' : ' form--none'}`}>
             <input
