@@ -6,6 +6,8 @@ import SettingIcon from '../../img/SettingIcon.png';
 
 import './dashboardNav.sass';
 
+import Logo from '../../img/logo.png';
+
 class DashboardNav extends React.Component {
 
     state = {
@@ -23,7 +25,10 @@ class DashboardNav extends React.Component {
         return (
             <>
                 <nav className="dashboard-nav">
-                    <p className="dashboard-nav__logo">Logo</p>
+                    <div className="nav__logo" >
+                        <img src={Logo} alt="logo" />
+                        <p>FlashCards</p>
+                    </div>
                     <p className="dashboard-nav__username" onClick={this.onClickShowUserBoxButton.bind(this)}>
                         {user.login}
                         <div className={`user-box-nav${showUserBox === true ? ' user-box-nav--active' : ''}`}>
