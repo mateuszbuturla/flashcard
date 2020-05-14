@@ -11,9 +11,9 @@ class DashboardNav extends React.Component {
         return (
             <div className="edit-dictionary-field">
                 <div className="edit-citionary-field__content">
-                    <input type="text" value={en} className="edit-dictionary-field__word" onChange={e => handleWordChange(e)} id={id} data-language="en" placeholder="Angielski" />
+                    <input type="text" value={en} className="edit-dictionary-field__word" onChange={e => handleWordChange(e)} id={id} data-language="en" placeholder="Pojęcie" />
                     -
-                    <input type="text" value={pl} className="edit-dictionary-field__word" onChange={e => handleWordChange(e)} id={id} data-language="pl" placeholder="Polski" />
+                    <input type="text" value={pl} className="edit-dictionary-field__word" onChange={e => handleWordChange(e)} id={id} data-language="pl" placeholder="Definicja" />
                 </div>
                 <img src={BinIcon} alt="bin" className="edit-dictionary-field__bin" onClick={removeWord} />
             </div>
