@@ -60,7 +60,7 @@ class DictionaryAsideNav extends React.Component {
                         <p className="asideNav__link" onClick={changeLanguage}>
                             Przełącz na
                             {
-                                secondLanguage === 'en' ? ' Polski' : ' Angielski'
+                                secondLanguage === 'en' ? ' Definicja' : ' Pojęcie'
                             }
                         </p>
                     </li>
