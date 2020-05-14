@@ -3,7 +3,6 @@ import React from "react"
 import ErrorInputValid from '../ErrorInputValid';
 
 const RegisterForm = ({ submitRegisterForm, currentForm, handleInputChange, registerLogin, registerLoginValid, registerPassword, registerPasswordValid, registerRepeatPassword, registerRepeatPasswordValid }) => {
-    document.title = 'Fiszki - Rejestracja'
     return (
         <form onSubmit={submitRegisterForm.bind(this)} className={`form form--shadowNone${currentForm === 'register' ? '' : ' form--none'}`}>
             <input

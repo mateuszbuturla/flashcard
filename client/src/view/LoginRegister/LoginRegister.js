@@ -37,6 +37,17 @@ class LoginRegister extends React.Component {
         this.setState({ currentForm: form })
     }
 
+    componentDidUpdate() {
+        const { currentForm } = this.state;
+
+        if (currentForm === 'login') {
+            document.title = 'Fiszki - Logowanie'
+        }
+        else if (currentForm === 'register') {
+            document.title = 'Fiszki - Rejestracja'
+        }
+    }
+
     changeForm(e) {
         e.preventDefault();
         this.setState({ currentForm: e.target.id })
